@@ -3,36 +3,39 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
-public class NetworkClient extends Observable implements Runnable, Observer {
-	
-	private String host;
+public class NetworkClient implements Runnable {
+
 	private int port;
+	private String host;
 	private Socket socket;
 	private ObjectOutputStream oos;
 	private ObjectInputStream ois;
-	
+	private List<Listener> listeners = new ArrayList<>();
+
 	public NetworkClient(String host, int port)
 	{
 		this.host = host;
 		this.port = port;
 	}
-	
+
+	public void addListener(Listener listener)
+	{
+		this.listeners.add(listener);
+	}
+
 	@Override
 	public void run() {
 		System.out.println("Client up");
 		try {
-			
 			this.socket = new Socket(this.host, this.port);
 			this.oos = new ObjectOutputStream(this.socket.getOutputStream());
 			this.ois = new ObjectInputStream(this.socket.getInputStream());
 			while(true) {
 				try {
 					Action a = (Action)this.ois.readObject();
-					setChanged();
-					notifyObservers(a);
+					notify(a);
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -46,14 +49,10 @@ public class NetworkClient extends Observable implements Runnable, Observer {
 		}
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		try {
-			Action action = new Action("move", arg);
-			this.oos.writeObject(action);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void notify(Action action) {
+		for (Listener listener : listeners) {
+			listener.onNewAction(action);
 		}
 	}
+
 }
