@@ -6,6 +6,7 @@ import java.util.Observable;
 import javax.swing.JButton;
 
 public class Field extends Observable {
+	
 	ChessPiece currentPiece;
 	final Position position;
 	private JButton button;

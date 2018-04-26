@@ -1,6 +1,7 @@
 import java.io.Serializable;
+import java.util.Observable;
 
-public class Action implements Serializable {
+public class Action extends Observable implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private Object payload;
@@ -17,6 +18,11 @@ public class Action implements Serializable {
 		return this.type;
 	}
 	
+	public Object getPayload()
+	{
+		return this.payload;
+	}
+	
 	public Action(Object object, String type, Player player)
 	{
 		this.payload = object;
@@ -24,20 +30,5 @@ public class Action implements Serializable {
 		this.player = player;
 	}
 	
-	public Object getPayloadObject()
-	{
-		switch(this.type) {
-			
-			case("move") : {
-				return (Move)this.payload;
-			}
-			
-			default: {
-				// make a fault object
-				return null;
-			}
-	
-		}
-		
-	}
+
 }

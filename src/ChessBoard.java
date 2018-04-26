@@ -56,7 +56,7 @@ class ChessBoard extends Observable implements Observer {
         }
         return movesString.toString();
     }
-
+    
 	public void update(Observable observable, Object object)
     {
 		switch(observable.getClass().toString().substring(6))
@@ -74,7 +74,12 @@ class ChessBoard extends Observable implements Observer {
 	
 	private void handleAction(Action action)
 	{
-		
+		switch(action.getType()) {
+			case("move") : {
+				Move move = (Move)action.getPayload();
+				this.move(move.getPiece(), move.getFrom(), move.getTo());
+			}
+		}
 	}
 	
 	private void handleFieldChanges(Field field)
@@ -88,7 +93,7 @@ class ChessBoard extends Observable implements Observer {
             this.selectedField = null;
             return;
         }
-
+        
         // move
         if (this.selectedField != null) {
             move(this.selectedField.getCurrentPiece(),this.selectedField, field);
@@ -102,7 +107,7 @@ class ChessBoard extends Observable implements Observer {
             btn.setBorderPainted(true);
             btn.setBorder(new LineBorder(Color.CYAN));
             btn.repaint();
-            this.selectedField = (Field)observable;
+            this.selectedField = field;
         }
 	}
 
