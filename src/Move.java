@@ -12,7 +12,12 @@ class Move implements Serializable {
         this.to = to;
         this.piece = piece;
     }
-    
+
+    public String getType()
+    {
+        return "move";
+    }
+
     public ChessPiece getPiece()
     {
     	return this.piece;
@@ -27,6 +32,7 @@ class Move implements Serializable {
     {
     	return this.to;
     }
+
 
     public String toString(){
         return this.from.toString() + this.to.toString();

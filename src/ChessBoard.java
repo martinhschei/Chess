@@ -2,72 +2,73 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
-class ChessBoard implements Listener {
+class ChessBoard extends HasActionListeners implements IsMover, IsActionListener {
 	
-	private final List<Row> rows = new ArrayList<Row>();
+	private final List<Row> rows = new ArrayList<>();
 	private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };
     private final Stockfish stockFish;
-	private Field selectedField = null;
     private final List<Move> moves;
-    private final List<Player> players;
-    
+    private final Player player;
+    private NetworkServer server;
+    private NetworkClient client;
+
+    private JFrame boardWindow;
+
     private boolean movesAllowed;
     
 	public ChessBoard(Player player)
 	{
-		this.buildBoard();
+        this.player = player;
+		this.movesAllowed = this.player.isHost();
 		
-		this.movesAllowed = player.isHost();
-		
-		this.moves = new ArrayList<Move>();
-		this.players = new ArrayList<Player>();
-		
+		this.moves = new ArrayList<>();
+
 		this.stockFish = new Stockfish();
 		//this.stockFish.connect();
 		//this.stockFish.startGame();
-		
+
+        this.buildBoard();
+
 		if (player.isHost()) {
-			NetworkServer server = new NetworkServer(1337);
+		    this.server = new NetworkServer(1337);
+		    this.server.addListener(this);
+		    this.addListener(server);
 			(new Thread(server)).start();			
 		} else {
-			NetworkClient client = new NetworkClient("localhost",1337);
+		    this.client = new NetworkClient("localhost",1337);
+            this.client.addListener(this);
+            this.addListener(client);
 			(new Thread(client)).start();
 		}
 	}
 
-	public void onNewAction(Action action)
+	public void newAction(Action action)
     {
-
-    }
-
-    public void onNewMove(Field field)
-    {
-
-    }
-
-	private void move(ChessPiece piece, Field from, Field to)
-    {
-        from.setPiece(null);
-        if (to.hasPiece()) {
-            if (to.isCurrentPieceWhite() == piece.isWhite) {
-                return;
-            } else {
-
+        switch(action.getType()) {
+            case("move") : {
+                Move move = (Move)action.getPayload();
+                System.out.println("Avsender:" + action.getPlayer().getName());
+                this.move(move.getPiece(), move.getFrom(), move.getTo());
             }
         }
+    }
+
+	public void move(ChessPiece piece, Field from, Field to)
+    {
+        if (to.hasPiece()) {
+            if (to.isCurrentPieceWhite() == piece.isWhite()) {
+                return;
+            }
+        }
+        from.setPiece(null);
         to.setPiece(piece);
         Move newMove = new Move(from, to, piece);
         this.moves.add(newMove);
         // refactoring => send med move string ved hver kommando til Stockfish
         this.stockFish.setMovesString(this.getMovesString());
-        
-        if (this.movesAllowed) {
-        }
-        
-        this.movesAllowed = !this.movesAllowed;
-        
+        // this.movesAllowed = !this.movesAllowed;
+        this.publishAction(new Action("move", newMove, this.player));
     }
 
     private String getMovesString()
@@ -78,46 +79,6 @@ class ChessBoard implements Listener {
         }
         return movesString.toString();
     }
-
-	private void handleAction(Action action)
-	{
-		switch(action.getType()) {
-			case("move") : {
-				System.out.println(action);
-				Move move = (Move)action.getPayload();
-				this.move(move.getPiece(), move.getFrom(), move.getTo());
-			}
-		}
-	}
-	
-	private void handleFieldChanges(Field field)
-	{
-        JButton btn = field.getButton();
-
-        // deselect
-        if (field == this.selectedField) {
-            btn.setBorderPainted(false);
-            this.selectedField.clearSelection();
-            this.selectedField = null;
-            return;
-        }
-        
-        // move
-        if (this.selectedField != null) {
-            move(this.selectedField.getCurrentPiece(),this.selectedField, field);
-            this.selectedField.clearSelection();
-            this.selectedField = null;
-            return;
-        }
-        
-        // select
-        if (this.selectedField == null && field.hasPiece()) {
-            btn.setBorderPainted(true);
-            btn.setBorder(new LineBorder(Color.CYAN));
-            btn.repaint();
-            this.selectedField = field;
-        }
-	}
 
     private String getCurrentFen()
 	{
@@ -131,9 +92,9 @@ class ChessBoard implements Listener {
 
 	private void buildBoard()
     {
-		JFrame boardWindow = new JFrame("Java Sjakk");
-		boardWindow.setBounds(50,50,1000,1000);
-		boardWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.boardWindow = new JFrame("Java Sjakk - " + this.player.getName());
+        this.boardWindow.setBounds(50,50,1000,1000);
+        this.boardWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridLayout grid = new GridLayout(8, 8, 1, 1);
 		Container content = boardWindow.getContentPane(); 
 		content.setLayout(grid);
@@ -141,7 +102,7 @@ class ChessBoard implements Listener {
 		for(int i = 8; i > 0; i--) {
 			Row newRow = new Row(i);
 			for (char column : columns) {
-				Field field = new Field(new Position(column,i));
+				Field field = new Field(new Position(column,i),this);
 				newRow.addField(field);
 				content.add(field.getButton());
 			}
