@@ -22,6 +22,7 @@ public class HovedMeny extends JFrame {
 		lobbyMeny = new LobbyMeny().main;
 		hovedVindu.setContentPane(startMeny);
 		hovedVindu.setVisible(true);
+		System.out.println("HALLAAAA, dette er en test");
 	}
 	
 	
