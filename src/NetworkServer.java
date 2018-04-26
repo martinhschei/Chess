@@ -4,19 +4,27 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class NetworkServer extends Observable implements Runnable, Observer {
+public class NetworkServer implements Runnable {
 	
 	private ServerSocket serverSocket;
 	private int port;
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
-	
+	private List<Listener> listeners = new ArrayList<>();
+
 	public NetworkServer(int port)
 	{
 		this.port = port;
+	}
+
+	public void addListener(Listener listener)
+	{
+		this.listeners.add(listener);
 	}
 	
 	public void run()
@@ -31,8 +39,6 @@ public class NetworkServer extends Observable implements Runnable, Observer {
 			while(true) {
 				try {
 					action = (Action)ois.readObject();
-					setChanged();
-					notifyObservers(action);
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -44,16 +50,10 @@ public class NetworkServer extends Observable implements Runnable, Observer {
 			e.printStackTrace();
 		}
 	}
-	
-	@Override
-	public void update(Observable o, Object arg) {
-		try {
-			Action action = new Action("move", arg);
-			this.oos.writeObject(action);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+	public void notify(Action action) {
+		for (Listener listener : listeners) {
+			listener.onNewAction(action);
 		}
 	}
-
 }

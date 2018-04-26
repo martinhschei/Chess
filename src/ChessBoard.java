@@ -4,7 +4,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
-class ChessBoard extends Observable implements Observer {
+class ChessBoard implements Listener {
 	
 	private final List<Row> rows = new ArrayList<Row>();
 	private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };
@@ -30,16 +30,22 @@ class ChessBoard extends Observable implements Observer {
 		
 		if (player.isHost()) {
 			NetworkServer server = new NetworkServer(1337);
-			server.addObserver(this);
-			this.addObserver(server);
 			(new Thread(server)).start();			
 		} else {
 			NetworkClient client = new NetworkClient("localhost",1337);
-			client.addObserver(this);
-			this.addObserver(client);
 			(new Thread(client)).start();
 		}
 	}
+
+	public void onNewAction(Action action)
+    {
+
+    }
+
+    public void onNewMove(Field field)
+    {
+
+    }
 
 	private void move(ChessPiece piece, Field from, Field to)
     {
@@ -58,8 +64,6 @@ class ChessBoard extends Observable implements Observer {
         this.stockFish.setMovesString(this.getMovesString());
         
         if (this.movesAllowed) {
-        	setChanged();
-        	notifyObservers(newMove);
         }
         
         this.movesAllowed = !this.movesAllowed;
@@ -74,22 +78,7 @@ class ChessBoard extends Observable implements Observer {
         }
         return movesString.toString();
     }
-    
-	public void update(Observable observable, Object object)
-    {
-		switch(observable.getClass().toString().substring(6))
-		{
-			case("Field"): {
-				this.handleFieldChanges((Field)observable);
-				break;
-			}
-			case("Action"): {
-				this.handleAction((Action)observable);
-				break;
-			}
-		}
-    }
-	
+
 	private void handleAction(Action action)
 	{
 		switch(action.getType()) {
@@ -153,7 +142,6 @@ class ChessBoard extends Observable implements Observer {
 			Row newRow = new Row(i);
 			for (char column : columns) {
 				Field field = new Field(new Position(column,i));
-				field.addObserver(this);
 				newRow.addField(field);
 				content.add(field.getButton());
 			}
