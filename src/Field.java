@@ -76,7 +76,7 @@ public class Field implements Serializable {
 
 		// move
 		if (!this.selected && Field.selectedField != null && Field.selectedField != this) {
-			this.mover.move(Field.selectedField.currentPiece, Field.selectedField, this);
+			this.mover.move(Field.selectedField.currentPiece, Field.selectedField, this, false);
 			this.selected = false;
 			Field.selectedField.clearSelection();
 			Field.selectedField.selected = false;

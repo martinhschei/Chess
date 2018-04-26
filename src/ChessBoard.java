@@ -49,18 +49,24 @@ class ChessBoard extends HasActionListeners implements IsMover, IsActionListener
             case("move") : {
                 Move move = (Move)action.getPayload();
                 System.out.println("Avsender:" + action.getPlayer().getName());
-                this.move(move.getPiece(), move.getFrom(), move.getTo());
+                this.move(move.getPiece(), move.getFrom(), move.getTo(), true);
             }
         }
     }
 
-	public void move(ChessPiece piece, Field from, Field to)
+	public void move(ChessPiece piece, Field from, Field to, boolean otherPlayer)
     {
+        if(otherPlayer) {
+            
+            return;
+        }
+
         if (to.hasPiece()) {
             if (to.isCurrentPieceWhite() == piece.isWhite()) {
                 return;
             }
         }
+
         from.setPiece(null);
         to.setPiece(piece);
         Move newMove = new Move(from, to, piece);
