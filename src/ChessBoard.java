@@ -11,15 +11,24 @@ class ChessBoard extends Observable implements Observer {
     private final Stockfish stockFish;
 	private Field selectedField = null;
     private final List<Move> moves;
+    private final List<Player> players;
     
 	public ChessBoard()
 	{
 		this.buildBoard();
+		
 		this.moves = new ArrayList<Move>();
-		//String f = this.getCurrentFen();
+		this.players = new ArrayList<Player>();
+		
 		this.stockFish = new Stockfish();
-		this.stockFish.connect();
-		this.stockFish.startGame();
+		//this.stockFish.connect();
+		//this.stockFish.startGame();
+		NetworkServer server = new NetworkServer(1337);
+		server.addObserver(this);
+		
+		(new Thread(new NetworkServer(1337))).start();
+		(new Thread(new NetworkClient("localhost",1337))).start();
+		
 	}
 
 	private void move(ChessPiece piece, Field from, Field to)
@@ -50,7 +59,26 @@ class ChessBoard extends Observable implements Observer {
 
 	public void update(Observable observable, Object object)
     {
-        Field field = (Field)observable;
+		switch(observable.getClass().toString().substring(6))
+		{
+			case("Field"): {
+				this.handleFieldChanges((Field)observable);
+				break;
+			}
+			case("Action"): {
+				this.handleAction((Action)observable);
+				break;
+			}
+		}
+    }
+	
+	private void handleAction(Action action)
+	{
+		
+	}
+	
+	private void handleFieldChanges(Field field)
+	{
         JButton btn = field.getButton();
 
         // deselect
@@ -76,7 +104,7 @@ class ChessBoard extends Observable implements Observer {
             btn.repaint();
             this.selectedField = (Field)observable;
         }
-    }
+	}
 
     private String getCurrentFen()
 	{

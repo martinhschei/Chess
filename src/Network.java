@@ -2,26 +2,19 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketAddress;
 import java.net.UnknownHostException;
 
-public class Network {
+public class Network implements Runnable  {
 
-	private Socket connectSocket;
+	private Socket clientSocket;
 	private ServerSocket serverSocket;
+	
+	private ObjectOutputStream outputStream;
+	
 	private String host;
 	private int port;
-	
-	public Network(String host, int port)
-	{
-		this.host = host;
-		this.port = port;
-		   
-	}
 	
 	
 	public Network(int port)
@@ -32,46 +25,39 @@ public class Network {
 	public void connect() 
 	{
 		try {
-			this.connectSocket = new Socket(this.host, this.port);
+			this.clientSocket = new Socket(this.host, this.port);
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void listen()
+	public void send(Action action)
 	{
-		try {
-			this.serverSocket = new ServerSocket(1337);
-			Socket clientSocket = serverSocket.accept();
-			ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
-			while(true) {
-				try {
-					String input = (String)ois.readObject();
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		if (this.clientSocket.isConnected()) {
+			try {
+				this.outputStream = (ObjectOutputStream)this.clientSocket.getOutputStream();
+				this.outputStream.writeObject(action);
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		
 	}
 	
-	public void close()
+	public void closeServer()
 	{
 		try {
-			this.connectSocket.close();
+			this.serverSocket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void run() {
+		
 	}
 	
 }
