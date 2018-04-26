@@ -8,9 +8,10 @@ public class Action extends Observable implements Serializable {
 	private String type;
 	private Player player;
 	
-	public Action(String type)
+	public Action(String type, Object payload)
 	{
 		this.type = type;
+		this.payload = payload;
 	}
 	
 	public String getType()

@@ -13,9 +13,13 @@ class ChessBoard extends Observable implements Observer {
     private final List<Move> moves;
     private final List<Player> players;
     
-	public ChessBoard()
+    private boolean movesAllowed;
+    
+	public ChessBoard(Player player)
 	{
 		this.buildBoard();
+		
+		this.movesAllowed = player.isHost();
 		
 		this.moves = new ArrayList<Move>();
 		this.players = new ArrayList<Player>();
@@ -23,12 +27,18 @@ class ChessBoard extends Observable implements Observer {
 		this.stockFish = new Stockfish();
 		//this.stockFish.connect();
 		//this.stockFish.startGame();
-		NetworkServer server = new NetworkServer(1337);
-		server.addObserver(this);
 		
-		(new Thread(new NetworkServer(1337))).start();
-		(new Thread(new NetworkClient("localhost",1337))).start();
-		
+		if (player.isHost()) {
+			NetworkServer server = new NetworkServer(1337);
+			server.addObserver(this);
+			this.addObserver(server);
+			(new Thread(server)).start();			
+		} else {
+			NetworkClient client = new NetworkClient("localhost",1337);
+			client.addObserver(this);
+			this.addObserver(client);
+			(new Thread(client)).start();
+		}
 	}
 
 	private void move(ChessPiece piece, Field from, Field to)
@@ -46,6 +56,14 @@ class ChessBoard extends Observable implements Observer {
         this.moves.add(newMove);
         // refactoring => send med move string ved hver kommando til Stockfish
         this.stockFish.setMovesString(this.getMovesString());
+        
+        if (this.movesAllowed) {
+        	setChanged();
+        	notifyObservers(newMove);
+        }
+        
+        this.movesAllowed = !this.movesAllowed;
+        
     }
 
     private String getMovesString()
@@ -76,6 +94,7 @@ class ChessBoard extends Observable implements Observer {
 	{
 		switch(action.getType()) {
 			case("move") : {
+				System.out.println(action);
 				Move move = (Move)action.getPayload();
 				this.move(move.getPiece(), move.getFrom(), move.getTo());
 			}
@@ -101,7 +120,7 @@ class ChessBoard extends Observable implements Observer {
             this.selectedField = null;
             return;
         }
-
+        
         // select
         if (this.selectedField == null && field.hasPiece()) {
             btn.setBorderPainted(true);

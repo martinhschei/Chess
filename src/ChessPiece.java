@@ -1,4 +1,6 @@
-public abstract class ChessPiece {
+import java.io.Serializable;
+
+public abstract class ChessPiece implements Serializable {
 	
 	final String name;
 	final boolean isStriking;

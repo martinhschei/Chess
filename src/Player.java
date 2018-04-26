@@ -4,12 +4,14 @@ public class Player {
 	private final String name;
 	private final boolean white;
 	private final int id;
+	private boolean host;
 	
 	public Player(String name, boolean white, int id)
 	{
 		this.name = name;
 		this.white = white;
 		this.id = id;
+		this.host = false;
 	}
 	
 	public boolean isWhite() 
@@ -17,5 +19,16 @@ public class Player {
 		return this.white;
 	}
 	
+	public boolean isHost()
+	{
+		return this.host;
+	}
+	
+	public void setHost()
+	{
+		this.host = true;
+	}
+	
+
 	
 }

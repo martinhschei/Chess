@@ -1,11 +1,12 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.util.Observable;
 
 import javax.swing.JButton;
 
-public class Field extends Observable {
+public class Field extends Observable implements Serializable {
 	
 	ChessPiece currentPiece;
 	final Position position;

@@ -1,4 +1,6 @@
-class Move {
+import java.io.Serializable;
+
+class Move implements Serializable {
 
     private final Field from;
     private final Field to;
