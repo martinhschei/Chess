@@ -36,12 +36,17 @@ public class StartMeny extends JFrame{
 			ipInputField.setEditable(true);
 			}
 		});
+		hostButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ipInputField.setEditable(false);
+			}
+		});
 
 		bg1.add(hostButton);
 		bg1.add(joinButton);
 		rute1.add(joinButton);
 		rute1.add(hostButton);
-		rute2.add(new JLabel("Din ip-adresse"));
+		rute2.add(new JLabel("Skriv IP-adresse du vil connecte mot"));
 		rute2.add(ipInputField);
 		rute3.add(join);
 		rute4.add(ipaddr);
@@ -67,6 +72,10 @@ public class StartMeny extends JFrame{
 		        System.out.println("You clicked the connecto buttono");
 		        if(joinButton.isSelected()) {
 					System.out.println("debug: joinbutton isselected. FUNGERER");
+					// TODO: Åpne vindu for join game
+				}
+				if(hostButton.isSelected()) {
+					System.out.println("debug: hostbutton isselected. FUNGERER");
 					// TODO: Åpne vindu for join game
 				}
 		    }
