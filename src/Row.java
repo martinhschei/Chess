@@ -63,7 +63,7 @@ class Row {
 		String offsetString = "";
 		for(Field field : row) {
 			if (field.hasPiece()) {
-				offsetString += emptyCol == 0 ? field.currentPiece.name +"/" : (emptyCol + field.currentPiece.name) + "/";
+				offsetString += emptyCol == 0 ? field.getCurrentPieceName() +"/" : (emptyCol + field.getCurrentPieceName()) + "/";
 			}
 			emptyCol++;
 		}
