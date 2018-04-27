@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e04b9378-01c4-4eb2-a195-9ae8af47e610" name="Default" comment="" />
+    <list default="true" id="e04b9378-01c4-4eb2-a195-9ae8af47e610" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/StartMeny$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/StartMeny$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/StartMeny$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/StartMeny$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/StartMeny.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/StartMeny.class" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,11 +26,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HovedMeny.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HovedMeny.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/HovedMeny.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
               <caret line="34" column="40" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StartMeny.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/StartMeny.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="30" column="11" lean-forward="true" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
+              <folding>
+                <element signature="e#1022#1023#0" expanded="true" />
+                <element signature="e#1045#1046#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,6 +77,7 @@
         <option value="$PROJECT_DIR$/src/ChessBoard.java" />
         <option value="$PROJECT_DIR$/src/main.java" />
         <option value="$PROJECT_DIR$/src/HovedMeny.java" />
+        <option value="$PROJECT_DIR$/src/StartMeny.java" />
       </list>
     </option>
   </component>
@@ -172,6 +191,14 @@
       <option name="presentableId" value="Default" />
       <updated>1524560127051</updated>
     </task>
+    <task id="LOCAL-00001" summary="Radioknapper og noe logikk">
+      <created>1524828854173</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1524828854173</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -179,18 +206,18 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.491875" weight="0.27640158" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49048316" visible="true" weight="0.2762763" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50732064" side_tool="true" visible="true" weight="0.3183183" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50951684" side_tool="true" visible="true" weight="0.2762763" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49267936" visible="true" weight="0.3183183" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4919473" weight="0.3183183" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15592971" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15592971" />
       <window_info id="Learn" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -209,6 +236,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Radioknapper og noe logikk" />
+    <option name="LAST_COMMIT_MESSAGE" value="Radioknapper og noe logikk" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -248,23 +279,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ChessBoard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="74" column="26" lean-forward="true" selection-start-line="74" selection-start-column="26" selection-end-line="74" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Move.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Field.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2023">
@@ -580,6 +594,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="34" column="40" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LobbyMeny.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-396">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StartMeny.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="30" column="11" lean-forward="true" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
+          <folding>
+            <element signature="e#1022#1023#0" expanded="true" />
+            <element signature="e#1045#1046#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
