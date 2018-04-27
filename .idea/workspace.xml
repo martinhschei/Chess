@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e04b9378-01c4-4eb2-a195-9ae8af47e610" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/StartMeny$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/StartMeny$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/StartMeny$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/StartMeny$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Eksamen/StartMeny.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/StartMeny.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StartMeny.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StartMeny.java" afterDir="false" />
     </list>
@@ -39,9 +37,10 @@
       <file leaf-file-name="StartMeny.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/StartMeny.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="76" column="48" selection-start-line="76" selection-start-column="48" selection-end-line="76" selection-end-column="48" />
+            <state relative-caret-position="259">
+              <caret line="82" column="4" selection-start-line="82" selection-start-column="4" selection-end-line="82" selection-end-column="4" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="e#976#977#0" expanded="true" />
                 <element signature="e#1017#1018#0" expanded="true" />
                 <element signature="e#1171#1172#0" expanded="true" />
@@ -215,7 +214,14 @@
       <option name="project" value="LOCAL" />
       <updated>1524831310724</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Mer Radioknapp-logikk">
+      <created>1524831534814</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1524831534814</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -625,9 +631,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/StartMeny.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="76" column="48" selection-start-line="76" selection-start-column="48" selection-end-line="76" selection-end-column="48" />
+        <state relative-caret-position="259">
+          <caret line="82" column="4" selection-start-line="82" selection-start-column="4" selection-end-line="82" selection-end-column="4" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="e#976#977#0" expanded="true" />
             <element signature="e#1017#1018#0" expanded="true" />
             <element signature="e#1171#1172#0" expanded="true" />
