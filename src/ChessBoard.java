@@ -49,6 +49,7 @@ class ChessBoard extends HasActionListeners implements IsMover, IsActionListener
             case("move") : {
                 Move move = (Move)action.getPayload();
                 System.out.println("Avsender:" + action.getPlayer().getName());
+                System.out.println("Mottaker:" + this.player.getName());
                 this.move(move.getPiece(), move.getFrom(), move.getTo(), true);
             }
         }
@@ -56,17 +57,6 @@ class ChessBoard extends HasActionListeners implements IsMover, IsActionListener
 
 	public void move(ChessPiece piece, Field from, Field to, boolean otherPlayer)
     {
-        if(otherPlayer) {
-            
-            return;
-        }
-
-        if (to.hasPiece()) {
-            if (to.isCurrentPieceWhite() == piece.isWhite()) {
-                return;
-            }
-        }
-
         from.setPiece(null);
         to.setPiece(piece);
         Move newMove = new Move(from, to, piece);
@@ -74,7 +64,8 @@ class ChessBoard extends HasActionListeners implements IsMover, IsActionListener
         // refactoring => send med move string ved hver kommando til Stockfish
         this.stockFish.setMovesString(this.getMovesString());
         // this.movesAllowed = !this.movesAllowed;
-        this.publishAction(new Action("move", newMove, this.player));
+        //this.publishAction(new Action("move", newMove, this.player));
+        this.boardWindow.revalidate();
     }
 
     private String getMovesString()
