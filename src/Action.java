@@ -1,17 +1,17 @@
 import java.io.Serializable;
-import java.util.Observable;
 
-public class Action extends Observable implements Serializable {
+public class Action implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private Object payload;
 	private String type;
 	private Player player;
 	
-	public Action(String type, Object payload)
+	public Action(String type, Object payload, Player player)
 	{
 		this.type = type;
 		this.payload = payload;
+		this.player = player;
 	}
 	
 	public String getType()
@@ -23,12 +23,10 @@ public class Action extends Observable implements Serializable {
 	{
 		return this.payload;
 	}
-	
-	public Action(Object object, String type, Player player)
+
+	public Player getPlayer()
 	{
-		this.payload = object;
-		this.type = type;
-		this.player = player;
+		return this.player;
 	}
 	
 

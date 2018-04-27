@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Player {
+public class Player implements Serializable {
 
 	private final String name;
 	private final boolean white;
@@ -27,6 +28,11 @@ public class Player {
 	public void setHost()
 	{
 		this.host = true;
+	}
+
+	public String getName()
+	{
+		return this.name;
 	}
 	
 

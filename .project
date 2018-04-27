@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Eksamen</name>
+	<name>eksamen</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,4 +14,56 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>.classpath</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Dropbox/OBJ2100V-Eksamen/eksamen-OOP-V2018/.classpath</locationURI>
+		</link>
+		<link>
+			<name>.git</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Dropbox/OBJ2100V-Eksamen/eksamen-OOP-V2018/.git</locationURI>
+		</link>
+		<link>
+			<name>.idea</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Dropbox/OBJ2100V-Eksamen/eksamen-OOP-V2018/.idea</locationURI>
+		</link>
+		<link>
+			<name>.project</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Dropbox/OBJ2100V-Eksamen/eksamen-OOP-V2018/.project</locationURI>
+		</link>
+		<link>
+			<name>.settings</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Dropbox/OBJ2100V-Eksamen/eksamen-OOP-V2018/.settings</locationURI>
+		</link>
+		<link>
+			<name>Eksamen.iml</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Dropbox/OBJ2100V-Eksamen/eksamen-OOP-V2018/Eksamen.iml</locationURI>
+		</link>
+		<link>
+			<name>bin</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Dropbox/OBJ2100V-Eksamen/eksamen-OOP-V2018/bin</locationURI>
+		</link>
+		<link>
+			<name>out</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Dropbox/OBJ2100V-Eksamen/eksamen-OOP-V2018/out</locationURI>
+		</link>
+		<link>
+			<name>src</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Dropbox/OBJ2100V-Eksamen/eksamen-OOP-V2018/src</locationURI>
+		</link>
+		<link>
+			<name>stockfish-9-win</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Dropbox/OBJ2100V-Eksamen/eksamen-OOP-V2018/stockfish-9-win</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
