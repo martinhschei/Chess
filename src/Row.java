@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+
 
 class Row {
 
@@ -29,6 +31,12 @@ class Row {
 			}
 		}
 		return null;
+	}
+
+	public void replace(Field field)
+	{
+		Field toBeReplaced = getField(field.getColumn());
+		Collections.replaceAll(this.fields,toBeReplaced,field);
 	}
 
 	public String getFen()
