@@ -29,6 +29,7 @@ public class HovedMeny extends JFrame {
 		JFrame frame = new JFrame("Startmeny");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(500, 500, 500, 500);
+		frame.setLocationRelativeTo(null);
 		//frame.pack();
 		return frame;
 	}
