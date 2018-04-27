@@ -2,13 +2,12 @@ class main
 {
 	public static void main(String[] args)
 	{
-		Player playerA = new Player("Player A", true, 1);
-		playerA.setHost();
-
-		Player playerB = new Player("Player B", false, 2);
-
+		PlayerObservable player1 = new PlayerObservable();
+		PlayerObserver observer = new PlayerObserver();
+		player1.addObserver(observer);
+		new HovedMeny(player1);
+		Player playerA = new Player("Player B", false, 1);
+			
 		new ChessBoard(playerA);
-		new ChessBoard(playerB);
-
 	}
 }
