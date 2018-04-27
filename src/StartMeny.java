@@ -1,15 +1,13 @@
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class StartMeny extends JFrame{
 	public JPanel main = null;
-	
+	private JRadioButton hostButton;
+	private JRadioButton joinButton;
 	
 	public StartMeny() 
 	{
@@ -24,12 +22,28 @@ public class StartMeny extends JFrame{
 		JPanel rute2 = new JPanel();
 		JPanel rute3 = new JPanel();
 		JPanel rute4 = new JPanel();
-		JButton host = LagHostButton();
-		JButton join = LagJoinButton();
+		JButton join = MonitorConnectButton();
 		JLabel ipaddr = LagIpAddr();
 		rute1.setLayout(new GridLayout(2,0));
-		rute1.add(host);
-		rute1.add(join);
+		//Textfield for IP input. Changes when joinButton isSelected();
+		JTextField ipInputField = new JTextField(10);
+		ipInputField.setEditable(false);
+		ButtonGroup bg1 = new ButtonGroup();
+		hostButton = new JRadioButton("Host Game");
+		joinButton = new JRadioButton("Join Game");
+		joinButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			ipInputField.setEditable(true);
+			}
+		});
+
+		bg1.add(hostButton);
+		bg1.add(joinButton);
+		rute1.add(joinButton);
+		rute1.add(hostButton);
+		rute2.add(new JLabel("Din ip-adresse"));
+		rute2.add(ipInputField);
+		rute3.add(join);
 		rute4.add(ipaddr);
 		main.add(rute1);
 		main.add(rute2);
@@ -43,31 +57,20 @@ public class StartMeny extends JFrame{
 		return new JLabel("Din IpAdresse: Localhost");
 	}
 	
-	private JButton LagJoinButton() {
-		JButton retur = new JButton("Join Game");
+	private JButton MonitorConnectButton() {
+		JButton retur = new JButton("Connect to Game");
 		retur.addActionListener(new ActionListener() 
 		{
 		    public void actionPerformed(ActionEvent e)            
 		    {
 		        //Here goes the action (method) you want to execute when clicked
-		        System.out.println("You clicked the button join");
+		        System.out.println("You clicked the connecto buttono");
+		        if(joinButton.isSelected()) {
+					System.out.println("debug: joinbutton isselected. FUNGERER");
+					// TODO: Åpne vindu for join game
+				}
 		    }
 		});
 		return retur;
 	}
-	
-	private JButton LagHostButton() {
-		JButton retur = new JButton("Host Game");
-		retur.addActionListener(new ActionListener() 
-		{
-		    public void actionPerformed(ActionEvent e)            
-		    {
-		        //Here goes the action (method) you want to execute when clicked
-		        System.out.println("You clicked the button host");
-		    }
-		});
-		return retur;
-	}
-	
-	
 }
