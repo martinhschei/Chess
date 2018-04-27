@@ -71,8 +71,10 @@ public class StartMeny extends JFrame{
 		        //Here goes the action (method) you want to execute when clicked
 		        System.out.println("You clicked the connecto buttono");
 		        if(joinButton.isSelected()) {
-					System.out.println("debug: joinbutton isselected. FUNGERER");
-					// TODO: Åpne vindu for join game
+					// TODO: Videre logikk for joining av game
+				}
+				if(hostButton.isSelected()) {
+		        	// TODO: Videre logikk for hosting av game
 				}
 		    }
 		});
