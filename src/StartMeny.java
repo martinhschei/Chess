@@ -30,6 +30,11 @@ public class StartMeny extends JFrame{
 		ipInputField.setEditable(false);
 		ButtonGroup bg1 = new ButtonGroup();
 		hostButton = new JRadioButton("Host Game");
+		hostButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ipInputField.setEditable(false);
+			}
+		});
 		joinButton = new JRadioButton("Join Game");
 		joinButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
