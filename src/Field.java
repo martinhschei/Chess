@@ -27,20 +27,15 @@ public class Field implements Serializable {
 	public JLabel Image() {
 		
 	    BufferedImage img = null;
-		
-		
 		try {
 			img = ImageIO.read(new File(this.currentPiece.imgString));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		JLabel imgLabel = new JLabel(new ImageIcon(img));
-		
 		return imgLabel;
-		
-		}
+	}
 
 	public Field(Position position, IsMover mover)
 	{
@@ -62,15 +57,20 @@ public class Field implements Serializable {
 
 	public void clearSelection()
     {
-        this.button.setBorderPainted(false);
-        this.button.setText(this.position.getColumn() + String.valueOf(this.position.getRow()));
-        this.button.getComponent(0).setVisible(false);
-        
+		this.button.removeAll();
+        if(this.isFieldWhite()) {
+			this.button.setBackground(Color.white);
+		} else {
+        	this.button.setBackground(Color.gray);
+		}
     }
 
 	private void createFieldButton()
 	{
-		this.button = this.currentPiece == null ? new JButton(this.position.getColumn() + String.valueOf(this.position.getRow())) : new JButton(this.currentPiece.name);
+		this.button = new JButton();
+		if (this.currentPiece != null) {
+			this.button.add(this.Image());
+		}
 		this.button.setBorderPainted(false);
 		this.button.setFocusPainted(false);
 		this.button.setContentAreaFilled(true);
@@ -91,16 +91,19 @@ public class Field implements Serializable {
 	{
 		// deselect
 		if (Field.selectedField == this) {
-			this.button.setBorderPainted(false);
 			this.selected = false;
+			if (this.isFieldWhite()) {
+				this.button.setBackground(Color.white);
+			} else {
+				this.button.setBackground(Color.gray);
+			}
 			Field.selectedField = null;
 			return;
 		}
 
 		// select
 		if (!this.selected && this.currentPiece != null && Field.selectedField == null) {
-			this.button.setBorderPainted(true);
-			this.button.setBorder(new LineBorder(Color.CYAN));
+			this.button.setBackground(Color.green);
 			this.button.repaint();
 			this.selected = true;
 			Field.selectedField = this;
@@ -111,7 +114,6 @@ public class Field implements Serializable {
 		if (!this.selected && Field.selectedField != null && Field.selectedField != this) {
 			this.mover.move(Field.selectedField.currentPiece, Field.selectedField, this, false);
 			this.selected = false;
-			Field.selectedField.clearSelection();
 			Field.selectedField.selected = false;
 			Field.selectedField = null;
 			return;
@@ -133,16 +135,12 @@ public class Field implements Serializable {
 	
 	public void setPiece(ChessPiece piece)
 	{
-		
 		this.currentPiece = piece;
 		if (piece == null) {
-		    this.button.setText(this.position.getColumn() + String.valueOf(this.position.getRow()));
+			this.clearSelection();
         } else {
-            this.button.setText(piece.name);
     		this.button.add(Image());;
         }
-
-		this.button.repaint();
 	}
 
 	public String getCurrentPieceName()
@@ -157,7 +155,7 @@ public class Field implements Serializable {
 		return this.currentPiece != null;
 	}
 
-	private int getRow()
+	public int getRow()
 	{
 		return this.position.getRow();
 	}
