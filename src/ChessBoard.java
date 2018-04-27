@@ -2,41 +2,79 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
-class ChessBoard extends Observable implements Observer {
+class ChessBoard extends HasActionListeners implements IsMover, IsActionListener {
 	
-	private final List<Row> rows = new ArrayList<Row>();
+	private final List<Row> rows = new ArrayList<>();
 	private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };
     private final Stockfish stockFish;
-	private Field selectedField = null;
     private final List<Move> moves;
+    private final Player player;
+    private NetworkServer server;
+    private NetworkClient client;
+
+    private JFrame boardWindow;
+
+    private boolean movesAllowed;
     
-	public ChessBoard()
+	public ChessBoard(Player player)
 	{
-		this.buildBoard();
-		this.moves = new ArrayList<Move>();
-		//String f = this.getCurrentFen();
+        this.player = player;
+		this.movesAllowed = this.player.isHost();
+		
+		this.moves = new ArrayList<>();
+
 		this.stockFish = new Stockfish();
-		this.stockFish.connect();
-		this.stockFish.startGame();
+		//this.stockFish.connect();
+		//this.stockFish.startGame();
+
+        this.buildBoard();
+
+		if (player.isHost()) {
+		    this.server = new NetworkServer(1337);
+		    this.server.addListener(this);
+		    this.addListener(server);
+			(new Thread(server)).start();			
+		} else {
+		    this.client = new NetworkClient("localhost",1337);
+            this.client.addListener(this);
+            this.addListener(client);
+			(new Thread(client)).start();
+		}
 	}
 
-	private void move(ChessPiece piece, Field from, Field to)
+	public void newAction(Action action)
     {
-        from.setPiece(null);
-        if (to.hasPiece()) {
-            if (to.isCurrentPieceWhite() == piece.isWhite) {
-                return;
-            } else {
-
+        switch(action.getType()) {
+            case("move") : {
+                Move move = (Move)action.getPayload();
+                System.out.println("Avsender:" + action.getPlayer().getName());
+                this.move(move.getPiece(), move.getFrom(), move.getTo(), true);
             }
         }
+    }
+
+	public void move(ChessPiece piece, Field from, Field to, boolean otherPlayer)
+    {
+        if(otherPlayer) {
+            
+            return;
+        }
+
+        if (to.hasPiece()) {
+            if (to.isCurrentPieceWhite() == piece.isWhite()) {
+                return;
+            }
+        }
+
+        from.setPiece(null);
         to.setPiece(piece);
         Move newMove = new Move(from, to, piece);
         this.moves.add(newMove);
         // refactoring => send med move string ved hver kommando til Stockfish
         this.stockFish.setMovesString(this.getMovesString());
+        // this.movesAllowed = !this.movesAllowed;
+        this.publishAction(new Action("move", newMove, this.player));
     }
 
     private String getMovesString()
@@ -46,36 +84,6 @@ class ChessBoard extends Observable implements Observer {
             movesString.append(move.toString()).append(" ");
         }
         return movesString.toString();
-    }
-
-	public void update(Observable observable, Object object)
-    {
-        Field field = (Field)observable;
-        JButton btn = field.getButton();
-
-        // deselect
-        if (field == this.selectedField) {
-            btn.setBorderPainted(false);
-            this.selectedField.clearSelection();
-            this.selectedField = null;
-            return;
-        }
-
-        // move
-        if (this.selectedField != null) {
-            move(this.selectedField.getCurrentPiece(),this.selectedField, field);
-            this.selectedField.clearSelection();
-            this.selectedField = null;
-            return;
-        }
-
-        // select
-        if (this.selectedField == null && field.hasPiece()) {
-            btn.setBorderPainted(true);
-            btn.setBorder(new LineBorder(Color.CYAN));
-            btn.repaint();
-            this.selectedField = (Field)observable;
-        }
     }
 
     private String getCurrentFen()
@@ -90,9 +98,9 @@ class ChessBoard extends Observable implements Observer {
 
 	private void buildBoard()
     {
-		JFrame boardWindow = new JFrame("Java Sjakk");
-		boardWindow.setBounds(50,50,1000,1000);
-		boardWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.boardWindow = new JFrame("Java Sjakk - " + this.player.getName());
+        this.boardWindow.setBounds(50,50,1000,1000);
+        this.boardWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridLayout grid = new GridLayout(8, 8, 1, 1);
 		Container content = boardWindow.getContentPane(); 
 		content.setLayout(grid);
@@ -100,8 +108,7 @@ class ChessBoard extends Observable implements Observer {
 		for(int i = 8; i > 0; i--) {
 			Row newRow = new Row(i);
 			for (char column : columns) {
-				Field field = new Field(new Position(column,i));
-				field.addObserver(this);
+				Field field = new Field(new Position(column,i),this);
 				newRow.addField(field);
 				content.add(field.getButton());
 			}

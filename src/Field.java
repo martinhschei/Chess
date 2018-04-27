@@ -1,4 +1,5 @@
 import java.awt.*;
+<<<<<<< HEAD
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -11,11 +12,17 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+=======
+import java.io.Serializable;
+import javax.swing.JButton;
+import javax.swing.border.LineBorder;
+>>>>>>> 5c538fc0de88080c91ab526ef81ffc8755f2b678
 
-public class Field extends Observable {
-	ChessPiece currentPiece;
-	final Position position;
+public class Field implements Serializable {
+	
+	private ChessPiece currentPiece;
 	private JButton button;
+<<<<<<< HEAD
 	
 	
 	public JLabel Image() {
@@ -36,11 +43,19 @@ public class Field extends Observable {
 	
 	}
 	
+=======
+	final Position position;
+	private boolean selected;
+	private transient IsMover mover;
+	public static Field selectedField;
+>>>>>>> 5c538fc0de88080c91ab526ef81ffc8755f2b678
 
-	public Field(Position position)
+	public Field(Position position, IsMover mover)
 	{
 		this.position = position;
 		this.currentPiece = null;
+		this.selected = false;
+		this.mover = mover;
 		this.createFieldButton();
 	}
 	
@@ -63,7 +78,6 @@ public class Field extends Observable {
 
 	private void createFieldButton()
 	{
-		JButton button = new JButton();
 		this.button = this.currentPiece == null ? new JButton(this.position.getColumn() + String.valueOf(this.position.getRow())) : new JButton(this.currentPiece.name);
 		this.button.setBorderPainted(false);
 		this.button.setFocusPainted(false);
@@ -77,24 +91,45 @@ public class Field extends Observable {
 			this.button.setBackground(Color.GRAY);
 			this.button.setForeground(Color.WHITE);
 		}
-		this.button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                setChanged();
-                notifyObservers(actionEvent.getSource());
-            }
-        });
+
+		this.button.addActionListener(e -> this.fieldClick() );
     }
-	
-	public boolean hasPiece()
+
+	private void fieldClick()
 	{
-		return this.currentPiece != null;
+		// deselect
+		if (Field.selectedField == this) {
+			this.button.setBorderPainted(false);
+			this.selected = false;
+			Field.selectedField = null;
+			return;
+		}
+
+		// select
+		if (!this.selected && this.currentPiece != null && Field.selectedField == null) {
+			this.button.setBorderPainted(true);
+			this.button.setBorder(new LineBorder(Color.CYAN));
+			this.button.repaint();
+			this.selected = true;
+			Field.selectedField = this;
+			return;
+		}
+
+		// move
+		if (!this.selected && Field.selectedField != null && Field.selectedField != this) {
+			this.mover.move(Field.selectedField.currentPiece, Field.selectedField, this, false);
+			this.selected = false;
+			Field.selectedField.clearSelection();
+			Field.selectedField.selected = false;
+			Field.selectedField = null;
+			return;
+		}
 	}
 	
 	public boolean isCurrentPieceWhite()
 	{
-		if (this.hasPiece()) {
-			return this.currentPiece.isWhite;
+		if (this.currentPiece != null) {
+			return this.currentPiece.isWhite();
 		}
 		return false;
 	}
@@ -124,6 +159,10 @@ public class Field extends Observable {
 			return this.currentPiece.name;
 		}
 		return null;
+	}
+
+	public boolean hasPiece() {
+		return this.currentPiece != null;
 	}
 
 	private int getRow()
