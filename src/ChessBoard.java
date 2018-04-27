@@ -50,6 +50,8 @@ class ChessBoard extends HasActionListeners implements IsMover, IsActionListener
                 Move move = (Move)action.getPayload();
                 System.out.println("Avsender:" + action.getPlayer().getName());
                 System.out.println("Mottaker:" + this.player.getName());
+                System.out.println("Host:" + this.player.isHost());
+                System.out.println("---");
                 this.move(move.getPiece(), move.getFrom(), move.getTo(), true);
             }
         }
@@ -64,8 +66,10 @@ class ChessBoard extends HasActionListeners implements IsMover, IsActionListener
         // refactoring => send med move string ved hver kommando til Stockfish
         this.stockFish.setMovesString(this.getMovesString());
         // this.movesAllowed = !this.movesAllowed;
-        //this.publishAction(new Action("move", newMove, this.player));
-        this.boardWindow.revalidate();
+        if (!otherPlayer) {
+            this.publishAction(new Action("move", newMove, this.player));
+        }
+        //this.boardWindow.revalidate();
     }
 
     private String getMovesString()

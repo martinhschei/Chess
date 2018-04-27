@@ -5,10 +5,10 @@ class main
 		Player playerA = new Player("Player A", true, 1);
 		playerA.setHost();
 
-		//Player playerB = new Player("Player B", false, 2);
+		Player playerB = new Player("Player B", false, 2);
 
 		new ChessBoard(playerA);
-		//new ChessBoard(playerB);
+		new ChessBoard(playerB);
 
 	}
 }

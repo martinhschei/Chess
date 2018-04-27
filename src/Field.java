@@ -141,7 +141,6 @@ public class Field implements Serializable {
         } else {
     		this.button.add(Image());;
         }
-		this.button.repaint();
 	}
 
 	public String getCurrentPieceName()
