@@ -1,5 +1,5 @@
 import java.awt.*;
-<<<<<<< HEAD
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -7,48 +7,40 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Observable;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-=======
 import java.io.Serializable;
-import javax.swing.JButton;
 import javax.swing.border.LineBorder;
->>>>>>> 5c538fc0de88080c91ab526ef81ffc8755f2b678
+
 
 public class Field implements Serializable {
 	
 	private ChessPiece currentPiece;
 	private JButton button;
-<<<<<<< HEAD
-	
-	
-	public JLabel Image() {
-	
-    BufferedImage img = null;
-	
-	
-	try {
-		img = ImageIO.read(new File(this.currentPiece.imgString));
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-	JLabel imgLabel = new JLabel(new ImageIcon(img));
-	
-	return imgLabel;
-	
-	}
-	
-=======
 	final Position position;
 	private boolean selected;
 	private transient IsMover mover;
 	public static Field selectedField;
->>>>>>> 5c538fc0de88080c91ab526ef81ffc8755f2b678
+	
+	public JLabel Image() {
+		
+	    BufferedImage img = null;
+		
+		
+		try {
+			img = ImageIO.read(new File(this.currentPiece.imgString));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		JLabel imgLabel = new JLabel(new ImageIcon(img));
+		
+		return imgLabel;
+		
+		}
 
 	public Field(Position position, IsMover mover)
 	{
