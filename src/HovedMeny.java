@@ -9,17 +9,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class HovedMeny extends JFrame {
-	
-	private JFrame hovedVindu = null;
-	private JPanel startMeny = null;
-	private JPanel lobbyMeny = null;
-	private JPanel tilkoblingsMeny = null;
+
+    private JPanel tilkoblingsMeny = null;
 	
 	public HovedMeny() 
 	{
-		hovedVindu = BuildWindow();
-		startMeny= new StartMeny().main;
-		lobbyMeny = new LobbyMeny().main;
+        JFrame hovedVindu = BuildWindow();
+        JPanel startMeny = new StartMeny().main;
+        JPanel lobbyMeny = new LobbyMeny().main;
 		hovedVindu.setContentPane(startMeny);
 		hovedVindu.setVisible(true);
 	}
