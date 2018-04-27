@@ -1,7 +1,19 @@
 import java.awt.*;
-import java.io.Serializable;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Observable;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.io.Serializable;
 import javax.swing.border.LineBorder;
+
 
 public class Field implements Serializable {
 	
@@ -11,6 +23,24 @@ public class Field implements Serializable {
 	private boolean selected;
 	private transient IsMover mover;
 	public static Field selectedField;
+	
+	public JLabel Image() {
+		
+	    BufferedImage img = null;
+		
+		
+		try {
+			img = ImageIO.read(new File(this.currentPiece.imgString));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		JLabel imgLabel = new JLabel(new ImageIcon(img));
+		
+		return imgLabel;
+		
+		}
 
 	public Field(Position position, IsMover mover)
 	{
@@ -34,6 +64,8 @@ public class Field implements Serializable {
     {
         this.button.setBorderPainted(false);
         this.button.setText(this.position.getColumn() + String.valueOf(this.position.getRow()));
+        this.button.getComponent(0).setVisible(false);
+        
     }
 
 	private void createFieldButton()
@@ -42,12 +74,13 @@ public class Field implements Serializable {
 		this.button.setBorderPainted(false);
 		this.button.setFocusPainted(false);
 		this.button.setContentAreaFilled(true);
+		
 		if (this.isFieldWhite()) {
 			this.button.setBackground(Color.WHITE);
-			this.button.setForeground(Color.BLACK);
+			this.button.setForeground(Color.GRAY);
 		}
 		else {
-			this.button.setBackground(Color.BLACK);
+			this.button.setBackground(Color.GRAY);
 			this.button.setForeground(Color.WHITE);
 		}
 
@@ -100,12 +133,15 @@ public class Field implements Serializable {
 	
 	public void setPiece(ChessPiece piece)
 	{
+		
 		this.currentPiece = piece;
 		if (piece == null) {
 		    this.button.setText(this.position.getColumn() + String.valueOf(this.position.getRow()));
         } else {
             this.button.setText(piece.name);
+    		this.button.add(Image());;
         }
+
 		this.button.repaint();
 	}
 

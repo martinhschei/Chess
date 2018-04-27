@@ -3,6 +3,7 @@ public class Tower extends ChessPiece {
 
 	public Tower(boolean white) {
 		super("t", white);
+		this.imgString += this.isWhite() ? "Chess_rlt60.png" : "Chess_rdt60.png";
 	}
 
 	@Override
