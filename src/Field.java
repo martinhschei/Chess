@@ -1,14 +1,41 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Observable;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 public class Field extends Observable {
 	ChessPiece currentPiece;
 	final Position position;
 	private JButton button;
+	
+	
+	public JLabel Image() {
+	
+    BufferedImage img = null;
+	
+	
+	try {
+		img = ImageIO.read(new File(this.currentPiece.imgString));
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	JLabel imgLabel = new JLabel(new ImageIcon(img));
+	
+	return imgLabel;
+	
+	}
+	
 
 	public Field(Position position)
 	{
@@ -30,6 +57,8 @@ public class Field extends Observable {
     {
         this.button.setBorderPainted(false);
         this.button.setText(this.position.getColumn() + String.valueOf(this.position.getRow()));
+        this.button.getComponent(0).setVisible(false);
+        
     }
 
 	private void createFieldButton()
@@ -39,12 +68,13 @@ public class Field extends Observable {
 		this.button.setBorderPainted(false);
 		this.button.setFocusPainted(false);
 		this.button.setContentAreaFilled(true);
+		
 		if (this.isFieldWhite()) {
 			this.button.setBackground(Color.WHITE);
-			this.button.setForeground(Color.BLACK);
+			this.button.setForeground(Color.GRAY);
 		}
 		else {
-			this.button.setBackground(Color.BLACK);
+			this.button.setBackground(Color.GRAY);
 			this.button.setForeground(Color.WHITE);
 		}
 		this.button.addActionListener(new ActionListener() {
@@ -76,12 +106,15 @@ public class Field extends Observable {
 	
 	public void setPiece(ChessPiece piece)
 	{
+		
 		this.currentPiece = piece;
 		if (piece == null) {
 		    this.button.setText(this.position.getColumn() + String.valueOf(this.position.getRow()));
         } else {
             this.button.setText(piece.name);
+    		this.button.add(Image());;
         }
+
 		this.button.repaint();
 	}
 
