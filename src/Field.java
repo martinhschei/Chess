@@ -155,7 +155,7 @@ public class Field implements Serializable {
 		return this.currentPiece != null;
 	}
 
-	private int getRow()
+	public int getRow()
 	{
 		return this.position.getRow();
 	}
