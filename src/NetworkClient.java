@@ -3,16 +3,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.*;
 
-public class NetworkClient implements Runnable {
+public class NetworkClient extends HasActionListeners implements Runnable, IsActionListener {
 
 	private int port;
 	private String host;
 	private Socket socket;
-	private ObjectOutputStream oos;
 	private ObjectInputStream ois;
-	private List<Listener> listeners = new ArrayList<>();
+	private ObjectOutputStream oos;
 
 	public NetworkClient(String host, int port)
 	{
@@ -20,9 +18,13 @@ public class NetworkClient implements Runnable {
 		this.port = port;
 	}
 
-	public void addListener(Listener listener)
+	public void newAction(Action action)
 	{
-		this.listeners.add(listener);
+		try {
+			this.oos.writeObject(action);
+		} catch (Exception e) {
+
+		}
 	}
 
 	@Override
@@ -34,25 +36,16 @@ public class NetworkClient implements Runnable {
 			this.ois = new ObjectInputStream(this.socket.getInputStream());
 			while(true) {
 				try {
-					Action a = (Action)this.ois.readObject();
-					notify(a);
+					Action action = (Action)this.ois.readObject();
+					this.publishAction(action);
 				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-			
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
-	public void notify(Action action) {
-		for (Listener listener : listeners) {
-			listener.onNewAction(action);
-		}
-	}
-
 }

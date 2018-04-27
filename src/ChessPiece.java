@@ -4,22 +4,20 @@ public abstract class ChessPiece implements Serializable {
 	
 	final String name;
 	final boolean isStriking;
-	final boolean isWhite;
+	final boolean white;
 	
 	ChessPiece(String name, boolean white)
 	{
 		this.name = white ? name.toUpperCase() : name;
-		this.isWhite = white;
+		this.white = white;
 		this.isStriking = false;
 	}
 	
-	public boolean white()
+	public boolean isWhite()
 	{
-		return this.isWhite;
+		return this.white;
 	}
-	
-	
-	
+
 	public abstract boolean isLegalMove(Field oldField, Field newField);
 
 }
