@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class HovedMeny extends JFrame {
-	
+
 	private JFrame hovedVindu = null;
 	private StartMeny startMeny = null;
 	//private JPanel lobbyMeny = null;
@@ -21,12 +21,14 @@ public class HovedMeny extends JFrame {
 	
 	public HovedMeny(PlayerObservable player1)
 	{
+        JFrame hovedVindu = BuildWindow();
+        JPanel startMeny = new StartMeny().main;
+        JPanel lobbyMeny = new LobbyMeny().main;
+		hovedVindu.setContentPane(startMeny);
 		player = player1;
 		hovedVindu = BuildWindow();
 		//startMeny= new StartMeny();
 		//lobbyMeny = new LobbyMeny().main;
-		startMeny = buildStartMeny();
-		hovedVindu.setContentPane(startMeny.main);
 		hovedVindu.setVisible(true);
 	}
 

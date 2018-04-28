@@ -7,9 +7,7 @@ import java.net.Socket;
 public class NetworkServer extends HasActionListeners implements Runnable, IsActionListener {
 
     private int port;
-	private ServerSocket serverSocket;
-	private ObjectInputStream ois;
-	private ObjectOutputStream oos;
+    private ObjectOutputStream oos;
 
 	public NetworkServer(int port)
 	{
@@ -29,9 +27,9 @@ public class NetworkServer extends HasActionListeners implements Runnable, IsAct
 	{
 		System.out.println("Server up");
 		try {
-			this.serverSocket = new ServerSocket(this.port);
+            ServerSocket serverSocket = new ServerSocket(this.port);
 			Socket clientSocket = serverSocket.accept();
-			this.ois = new ObjectInputStream(clientSocket.getInputStream());
+            ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
 			this.oos = new ObjectOutputStream(clientSocket.getOutputStream());
 			while(true) {
 				try {

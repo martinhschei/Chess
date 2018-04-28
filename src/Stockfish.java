@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.*;
 
-class Stockfish  {
+class Stockfish implements Runnable {
 
 	private final String stockfishPath = System.getProperty("user.dir") + "\\stockfish-9-win\\Windows\\stockfish_9_x32.exe";
 	private final Stack<String> commandHistory;
@@ -22,20 +22,24 @@ class Stockfish  {
 	    this.movesString = "";
 	    this.commandHistory = new Stack<>();
 	}
-	
-	public void connect()
+
+	public void run()
 	{
 		Runtime rt = Runtime.getRuntime();
-		Process proc = null;
 		try {
-			proc = rt.exec(this.stockfishPath);
+			Process proc = rt.exec(this.stockfishPath);
 			this.stockFishWriter = new OutputStreamWriter(proc.getOutputStream());
 			this.stockFishReader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-			this.setUci();
+			System.out.println("Stockfish waiting for work");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
+	public Move getBestmove(String moveHistory)
+    {
+        return null;
+    }
 
 	public void setMovesString(String moves)
     {
