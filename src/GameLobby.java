@@ -11,8 +11,6 @@ public class GameLobby implements Observer {
         settings = new GameSettings();
         settings.addObserver(this);
         menu = new HovedMeny(settings);
-
-
     }
     public void update(Observable obj, Object arg)
     {

@@ -49,9 +49,9 @@ public class HovedMeny extends JFrame {
 
 	private JFrame BuildWindow()
 	{
-		JFrame frame = new JFrame("Startmeny");
+		JFrame frame = new JFrame("Startmeny for LotionChess");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(500, 500, 500, 500);
+		frame.setBounds(500, 500, 400, 300);
 		frame.setLocationRelativeTo(null);
 		//frame.pack();
 		return frame;
