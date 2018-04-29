@@ -10,11 +10,10 @@ public class StartMeny extends JFrame{
 	private JRadioButton joinButton;
 	private JTextField NameInputField = new JTextField(10);
 	private boolean White = true;
-	PlayerObservable player = null;
 	
-	public StartMeny(PlayerObservable player1)
+	public StartMeny(GameSettings settings)
 	{
-		player = player1;
+
 		main = new JPanel();
 		FyllPanel(main);
 		
@@ -78,14 +77,14 @@ public class StartMeny extends JFrame{
 		        System.out.println("You clicked the connecto buttono");
 		        if(joinButton.isSelected()) {
 					System.out.println("debug: joinbutton isselected. FUNGERER");
-					player.setPlayer(new Player(NameInputField.getText(), false, 2));
+
 
 					// TODO: Åpne vindu for join game
 				}
 				if(hostButton.isSelected()) {
 					System.out.println("debug: hostbutton isselected. FUNGERER");
 					// TODO: Åpne vindu for join game
-					player.setPlayer(new Player(NameInputField.getText(), true, 1));
+
 
 				}
 		    }

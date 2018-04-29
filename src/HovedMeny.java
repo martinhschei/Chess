@@ -4,6 +4,7 @@ import java.awt.Label;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.EventListener;
+import java.util.Observable;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
@@ -17,35 +18,20 @@ public class HovedMeny extends JFrame {
 	private StartMeny startMeny = null;
 	//private JPanel lobbyMeny = null;
 	//private JPanel tilkoblingsMeny = null;
-	PlayerObservable player = null;
 	
-	public HovedMeny(PlayerObservable player1)
+	public HovedMeny(GameSettings settings)
 	{
         JFrame hovedVindu = BuildWindow();
-        //JPanel startMeny = new StartMeny().main;
-        JPanel lobbyMeny = new LobbyMeny().main;
-		//hovedVindu.setContentPane(startMeny);
-		player = player1;
-		hovedVindu = BuildWindow();
+        JPanel startMeny = new StartMeny(settings).main;
+
+		hovedVindu.setContentPane(startMeny);
+
 		//startMeny= new StartMeny();
 		//lobbyMeny = new LobbyMeny().main;
 		hovedVindu.setVisible(true);
 	}
 
-	private StartMeny buildStartMeny() {
-		StartMeny retur = new StartMeny(player);
-		retur.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				System.out.println("debug: propertychangeevent"+evt.getPropertyName());
-				if (evt.getPropertyName()=="playerReady")
-				{
-					System.out.println("debug: Player READY!!!");
-				}
-			}
-		});
-		return retur;
-	}
+
 
 
 	private JFrame BuildWindow()

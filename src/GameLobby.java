@@ -3,17 +3,20 @@ import java.util.Observer;
 
 public class GameLobby implements Observer {
 
-    public GameLobby()
-    {
-        // menu logikk
-        // menu = new Menu();
-        // menu.addObserver(this);
-    }
+    HovedMeny menu = null;
+    Player player = null;
+    GameSettings settings = null;
 
-    public void update(Observable observable, Object obj)
+    public GameLobby(){
+        settings = new GameSettings();
+        settings.addObserver(this);
+        menu = new HovedMeny(settings);
+
+
+    }
+    public void update(Observable obj, Object arg)
     {
-        // obj = player
-        // new Game(player);
+
     }
 
 }
