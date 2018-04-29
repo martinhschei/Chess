@@ -38,8 +38,9 @@ public class Field implements Serializable {
 		this.currentPiece = null;
 		this.selected = false;
 		this.mover = mover;
-		this.createFieldButton();
 		imgPath = System.getProperty("user.dir") + "\\img\\";
+		this.createFieldButton();
+
 	}
 	
 	private boolean isFieldWhite()
