@@ -5,13 +5,14 @@ public class Player implements Serializable {
 	private final String name;
 	private final boolean white;
     private boolean host;
+    private boolean ready;
 	
-	public Player(String name, boolean white, int id)
+	public Player(String name, boolean white)
 	{
 		this.name = name;
 		this.white = white;
-        int id1 = id;
 		this.host = false;
+		ready = false;
 	}
 	
 	public boolean isWhite() 

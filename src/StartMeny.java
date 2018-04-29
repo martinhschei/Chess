@@ -12,9 +12,9 @@ public class StartMeny extends JFrame{
 	private boolean White = true;
 	PlayerObservable player = null;
 	
-	public StartMeny(PlayerObservable player1)
+	public StartMeny()
 	{
-		player = player1;
+
 		main = new JPanel();
 		FyllPanel(main);
 		
@@ -78,14 +78,14 @@ public class StartMeny extends JFrame{
 		        System.out.println("You clicked the connecto buttono");
 		        if(joinButton.isSelected()) {
 					System.out.println("debug: joinbutton isselected. FUNGERER");
-					player.setPlayer(new Player(NameInputField.getText(), false, 2));
+					player.setPlayer(new Player(NameInputField.getText(), false));
 
 					// TODO: Åpne vindu for join game
 				}
 				if(hostButton.isSelected()) {
 					System.out.println("debug: hostbutton isselected. FUNGERER");
 					// TODO: Åpne vindu for join game
-					player.setPlayer(new Player(NameInputField.getText(), true, 1));
+					player.setPlayer(new Player(NameInputField.getText(), true));
 
 				}
 		    }
