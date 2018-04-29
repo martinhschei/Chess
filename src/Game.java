@@ -47,7 +47,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
 
 	public boolean myTurn()
     {
-        return true;
+        return movesAllowed;
     }
 
     public boolean amIWhite()
