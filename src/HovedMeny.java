@@ -23,7 +23,7 @@ public class HovedMeny extends JFrame {
 	{
         JFrame hovedVindu = BuildWindow();
         JPanel startMeny = new StartMeny(settings).main;
-        JPanel lobbyMeny = new LobbyMeny().main;
+        //JPanel lobbyMeny = new LobbyMeny().main;
 		hovedVindu.setContentPane(startMeny);
 
 		//startMeny= new StartMeny();

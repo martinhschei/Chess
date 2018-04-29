@@ -6,6 +6,6 @@ class main
 
 		Player playerA = new Player("Player B", false);
 			
-		new ChessBoard(playerA);
+		//new ChessBoard(playerA);
 	}
 }
