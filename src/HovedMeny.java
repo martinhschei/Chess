@@ -22,17 +22,16 @@ public class HovedMeny extends JFrame {
 	public HovedMeny(PlayerObservable player1)
 	{
         JFrame hovedVindu = BuildWindow();
-        JPanel startMeny = new StartMeny().main;
+        JPanel startMeny = new StartMeny(player1).main;
         JPanel lobbyMeny = new LobbyMeny().main;
 		hovedVindu.setContentPane(startMeny);
 		player = player1;
-		hovedVindu = BuildWindow();
 		//startMeny= new StartMeny();
 		//lobbyMeny = new LobbyMeny().main;
 		hovedVindu.setVisible(true);
 	}
 
-	private StartMeny buildStartMeny() {
+	/*private StartMeny buildStartMeny() {
 		StartMeny retur = new StartMeny(player);
 		retur.addPropertyChangeListener(new PropertyChangeListener() {
 			@Override
@@ -45,7 +44,7 @@ public class HovedMeny extends JFrame {
 			}
 		});
 		return retur;
-	}
+	}*/
 
 
 	private JFrame BuildWindow()

@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class StartMeny extends JFrame{
+public class StartMeny extends JFrame {
 	public JPanel main = null;
 	private JRadioButton hostButton;
 	private JRadioButton joinButton;
