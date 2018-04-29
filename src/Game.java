@@ -3,13 +3,11 @@ import java.util.List;
 
 class Game extends HasListeners implements IsListener, IsActionListener, IsMoveListener, IsGame {
 
-    private Player player;
-    private Player opponent;
-
+    private final Player player;
     private boolean movesAllowed;
     private List<Move> moves;
-
     private ChessBoard board;
+    private Stockfish stockFish;
     
 	public Game(Player player)
 	{
@@ -22,7 +20,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
 		
 		this.moves = new ArrayList<>();
 
-        Stockfish stockFish = new Stockfish();
+		stockFish = new Stockfish();
         (new Thread(stockFish)).start();
 
         if (player.isHost()) {
@@ -73,44 +71,12 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
                 System.out.println("---");
                 this.movesAllowed = true;
                 this.board.movePiece(move.getPiece(), move.getFrom(), move.getTo(), true);
-                break;
-            }
-            case("hereiam") : {
-                // add to log, new player present.
-
-                // server replies
-                this.publishAction(new Action("whoareyou", null));
-                break;
-            }
-            case("whoareyou") : {
-
-                // client replies
-                this.publishAction(new Action("thisisme", this.player));
-                break;
-            }
-
-            case("thisisme") : {
-                if (this.opponent == null) {
-                    this.opponent = (Player)action.getPayload();
-                    if (this.player.isHost()) {
-                        this.publishAction(new Action("thisisme", this.player));
-                    }
+                String moveHistory ="";
+                for(Move m : moves)
+                {
+                    moveHistory += m.toString();
                 }
-
-                // for debugging
-                if(this.player.isHost()) {
-                    System.out.println("Host::" + this.opponent);
-                }
-                if(!this.player.isHost()) {
-                    System.out.println("Client:" + this.opponent);
-                }
-
-                break;
-            }
-            case("chat") : {
-                // addToLog(action.gePayload());
-                break;
-
+                stockFish.getBestmove(moveHistory);
             }
         }
     }

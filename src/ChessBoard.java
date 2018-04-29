@@ -19,8 +19,8 @@ public class ChessBoard extends HasListeners implements IsMover {
         this.buildBoard();
         this.setStartUpPosition();
 
-        Stockfish stockFish = new Stockfish();
-        (new Thread(stockFish)).start();
+        /*Stockfish stockFish = new Stockfish();
+        (new Thread(stockFish)).start();*/
 
     }
 
@@ -68,17 +68,38 @@ public class ChessBoard extends HasListeners implements IsMover {
         JPanel boardPanel = new JPanel();
         boardPanel.setLayout(board);
 
-        JPanel logPanel = new JPanel();
+        JPanel leftPanel = new JPanel();
         GridLayout logLayout = new GridLayout(0,1);
         JTextArea logArea = new JTextArea("Her vil loggen printes");
-        logPanel.setLayout(logLayout);
-        logPanel.add(logArea);
+        logArea.setEditable(false);
 
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, boardPanel, logPanel);
-        splitPane.setOneTouchExpandable(true);
-        splitPane.setDividerLocation(735);
+        JPanel chatArea = new JPanel();
+        JPanel chatTextAreaPanel = new JPanel();
+        JPanel chatTextFieldPanel = new JPanel();
+        JTextArea chatTextArea = new JTextArea("Chat chat chat chat chat chat chat chat");
+        JTextField chatTextField = new JTextField(20);
+        chatTextAreaPanel.add(chatTextArea);
+        chatTextAreaPanel.setLayout(new FlowLayout());
+        chatTextFieldPanel.add(chatTextField);
+        chatTextFieldPanel.setLayout(new FlowLayout());
+        JSplitPane chatAreaSplitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, chatTextAreaPanel, chatTextFieldPanel);
+        chatAreaSplitpane.setDividerLocation(200);
+        chatArea.add(chatAreaSplitpane);
+
+        leftPanel.setLayout(logLayout);
+        leftPanel.add(logArea);
+        JSplitPane leftBoxSplitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, logArea, chatArea);
+        leftBoxSplitpane.setDividerLocation(400);
+        leftBoxSplitpane.setDividerSize(2);
+
+        leftPanel.add(leftBoxSplitpane);
+
+
+        JSplitPane containerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, boardPanel, leftPanel);
+        containerSplitPane.setOneTouchExpandable(true);
+        containerSplitPane.setDividerLocation(735);
         Container content = this.board.getContentPane();
-        content.add(splitPane);
+        content.add(containerSplitPane);
 
         for(int i = 8; i > 0; i--) {
             Row newRow = new Row(i);
@@ -172,7 +193,7 @@ public class ChessBoard extends HasListeners implements IsMover {
         field.setPiece(piece);
     }
 
-    private String getCurrentFen()
+    protected String getCurrentFen()
     {
         StringBuilder fen = new StringBuilder();
         for(Row row : rows)
