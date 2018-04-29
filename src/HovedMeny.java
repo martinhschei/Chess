@@ -17,15 +17,15 @@ public class HovedMeny extends JFrame {
 	private StartMeny startMeny = null;
 	//private JPanel lobbyMeny = null;
 	//private JPanel tilkoblingsMeny = null;
-	PlayerObservable player = null;
+	//PlayerObservable player = null;
 	
-	public HovedMeny(PlayerObservable player1)
+	public HovedMeny(GameSettings settings)
 	{
         JFrame hovedVindu = BuildWindow();
-        JPanel startMeny = new StartMeny(player1).main;
+        JPanel startMeny = new StartMeny(settings).main;
         JPanel lobbyMeny = new LobbyMeny().main;
 		hovedVindu.setContentPane(startMeny);
-		player = player1;
+
 		//startMeny= new StartMeny();
 		//lobbyMeny = new LobbyMeny().main;
 		hovedVindu.setVisible(true);

@@ -1,3 +1,5 @@
+import com.sun.scenario.Settings;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,17 +11,17 @@ public class StartMeny extends JFrame {
 	private JRadioButton hostButton;
 	private JRadioButton joinButton;
 	private JTextField NameInputField = new JTextField(10);
-	private boolean White = true;
-	PlayerObservable player = null;
-	
-	public StartMeny(PlayerObservable player1)
+	private GameSettings gSettings;
+	JTextField nickNameField;
+
+	public StartMeny(GameSettings settings)
 	{
-		player = player1;
+		gSettings = settings;
 		main = new JPanel();
 		FyllPanel(main);
-		
+
 	}
-	
+
 	private void FyllPanel(JPanel main2) {
 		main.setLayout(new GridLayout(2,2));
 		JPanel rute1 = new JPanel();
@@ -31,6 +33,8 @@ public class StartMeny extends JFrame {
 		rute1.setLayout(new GridLayout(2,0));
 		//Textfield for IP input. Changes when joinButton isSelected();
 		JTextField ipInputField = new JTextField(10);
+		nickNameField = new JTextField(10);
+
 		ipInputField.setEditable(false);
 		NameInputField.setEditable(true);
 		ButtonGroup bg1 = new ButtonGroup();
@@ -53,40 +57,42 @@ public class StartMeny extends JFrame {
 		rute1.add(hostButton);
 		rute2.add(new JLabel("Skriv IP-adresse du vil connecte mot"));
 		rute2.add(ipInputField);
+		rute3.add(new JLabel("Skriv ditt nickname"));
+		rute3.add(nickNameField);
 		rute3.add(join);
 		rute4.add(ipaddr);
 		main.add(rute1);
 		main.add(rute2);
 		main.add(rute3);
 		main.add(rute4);
-		
+
 	}
-	
+
 	private JLabel LagIpAddr() {
 		// TODO Auto-generated method stub
 		return new JLabel("Din IpAdresse: Localhost");
 	}
-	
+
 	private JButton MonitorConnectButton() {
 		JButton retur = new JButton("Connect to Game");
-		retur.addActionListener(new ActionListener() 
+		retur.addActionListener(new ActionListener()
 		{
-		    public void actionPerformed(ActionEvent e)            
+		    public void actionPerformed(ActionEvent e)
 		    {
 		    	NameInputField.setText("playaaaa");
 		        //Here goes the action (method) you want to execute when clicked
 		        System.out.println("You clicked the connecto buttono");
 		        if(joinButton.isSelected()) {
 					System.out.println("debug: joinbutton isselected. FUNGERER");
-					player.setPlayer(new Player(NameInputField.getText(), false, 2));
+
 
 					// TODO: Åpne vindu for join game
 				}
 				if(hostButton.isSelected()) {
 					System.out.println("debug: hostbutton isselected. FUNGERER");
-					// TODO: Åpne vindu for join game
-					player.setPlayer(new Player(NameInputField.getText(), true, 1));
-
+					gSettings.setPlayer(new Player(nickNameField.toString(), true));
+					gSettings.setHost();
+					gSettings.setReady(true);
 				}
 		    }
 		});
