@@ -3,74 +3,83 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChessBoard extends JFrame implements IsMover {
+public class ChessBoard extends HasListeners implements IsMover {
 
     private IsGame game;
     private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };
     private List<Row> rows;
+
+    private JFrame board;
 
     public ChessBoard(IsGame game)
     {
         this.game = game;
         this.rows = new ArrayList();
 
-        this.build(this);
+        this.buildBoard();
         this.setStartUpPosition();
 
-        this.repaint();
-        this.revalidate();
-
-        this.setVisible(true);
+        Stockfish stockFish = new Stockfish();
+        (new Thread(stockFish)).start();
 
     }
 
     private void updateBoardStatus()
     {
         if (this.game.myTurn()) {
-            this.setTitle("Ditt trekk");
+            this.board.setTitle("Ditt trekk");
         } else {
-            this.setTitle("Venter på den andre spilleren...");
+            this.board.setTitle("Venter på den andre spilleren...");
         }
     }
 
     public void movePiece(ChessPiece piece, Field from, Field to, boolean otherPlayer)
     {
+        if(otherPlayer)
+        {
+            from = translateToLocalField(from);
+            to = translateToLocalField(to);
+        }
         from.setPiece(null);
         to.setPiece(piece);
         Move newMove = new Move(from, to, piece);
 
-        //if(!otherPlayer) {
-        //    this.publishAction(new Action("move", newMove, this.player));
-        //}
+        if(!otherPlayer) {
+            this.publishNewMove(newMove);
+        }
 
         this.updateBoardStatus();
 
         // refactoring => send med move string ved hver kommando til Stockfish
         // this.stockFish.setMovesString(this.getMovesString());
 
-        this.repaint();
-        this.revalidate();
+        this.board.repaint();
+        this.board.revalidate();
     }
 
-    public void build(IsMover mover)
+    public void buildBoard()
     {
-        this.setMinimumSize(new Dimension(650,650));
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.board = new JFrame();
+        this.board.setSize(800,800);
+        this.board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GridLayout grid = new GridLayout(8, 8, 1, 1);
-        Container content = this.getContentPane();
+        Container content = this.board.getContentPane();
         content.setLayout(grid);
 
         for(int i = 8; i > 0; i--) {
             Row newRow = new Row(i);
             for (char column : columns) {
-                Field field = new Field(new Position(column,i), mover);
+                Field field = new Field(new Position(column,i), this);
                 newRow.addField(field);
                 content.add(field.getButton());
             }
             this.rows.add(newRow);
         }
 
-        this.pack();
+        //this.board.pack();
+        this.board.repaint();
+        this.board.revalidate();
+        this.board.setVisible(true);
 
     }
 

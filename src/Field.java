@@ -8,7 +8,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.io.Serializable;
-import java.awt.event.*;
 
 public class Field implements Serializable {
 	

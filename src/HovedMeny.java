@@ -1,3 +1,4 @@
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Label;
@@ -8,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class HovedMeny extends JFrame {
@@ -30,22 +30,6 @@ public class HovedMeny extends JFrame {
 		//lobbyMeny = new LobbyMeny().main;
 		hovedVindu.setVisible(true);
 	}
-
-	/*private StartMeny buildStartMeny() {
-		StartMeny retur = new StartMeny(player);
-		retur.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				System.out.println("debug: propertychangeevent"+evt.getPropertyName());
-				if (evt.getPropertyName()=="playerReady")
-				{
-					System.out.println("debug: Player READY!!!");
-				}
-			}
-		});
-		return retur;
-	}*/
-
 
 	private JFrame BuildWindow()
 	{
