@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChessBoard implements IsMover {
+public class ChessBoard extends HasListeners implements IsMover {
 
     private IsGame game;
     private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };
@@ -19,6 +19,9 @@ public class ChessBoard implements IsMover {
         this.buildBoard();
         this.setStartUpPosition();
 
+        Stockfish stockFish = new Stockfish();
+        (new Thread(stockFish)).start();
+
     }
 
     private void updateBoardStatus()
@@ -32,12 +35,17 @@ public class ChessBoard implements IsMover {
 
     public void movePiece(ChessPiece piece, Field from, Field to, boolean otherPlayer)
     {
+        if(otherPlayer)
+        {
+            from = translateToLocalField(from);
+            to = translateToLocalField(to);
+        }
         from.setPiece(null);
         to.setPiece(piece);
         Move newMove = new Move(from, to, piece);
 
         if(!otherPlayer) {
-
+            this.publishNewMove(newMove);
         }
 
         this.updateBoardStatus();
@@ -52,7 +60,7 @@ public class ChessBoard implements IsMover {
     public void buildBoard()
     {
         this.board = new JFrame();
-        this.board.setSize(1000,1000);
+        this.board.setSize(800,800);
         this.board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GridLayout grid = new GridLayout(8, 8, 1, 1);
         Container content = this.board.getContentPane();
@@ -68,7 +76,7 @@ public class ChessBoard implements IsMover {
             this.rows.add(newRow);
         }
 
-        this.board.pack();
+        //this.board.pack();
         this.board.repaint();
         this.board.revalidate();
         this.board.setVisible(true);

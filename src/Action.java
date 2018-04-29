@@ -5,13 +5,11 @@ public class Action implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Object payload;
 	private String type;
-	private Player player;
 	
-	public Action(String type, Object payload, Player player)
+	public Action(String type, Object payload)
 	{
 		this.type = type;
 		this.payload = payload;
-		this.player = player;
 	}
 	
 	public String getType()
@@ -22,11 +20,6 @@ public class Action implements Serializable {
 	public Object getPayload()
 	{
 		return this.payload;
-	}
-
-	public Player getPlayer()
-	{
-		return this.player;
 	}
 
 }

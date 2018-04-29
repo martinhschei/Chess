@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Label;
@@ -9,7 +8,6 @@ import java.util.EventListener;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
->>>>>>> 7a338654aad47baa77048c8465bb860c36da7cfb
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 

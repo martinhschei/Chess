@@ -12,6 +12,7 @@ public class StartMeny extends JFrame {
 	private JRadioButton joinButton;
 	private JTextField NameInputField = new JTextField(10);
 	private GameSettings gSettings;
+	private JTextField ipInputField;
 	JTextField nickNameField;
 
 	public StartMeny(GameSettings settings)
@@ -32,7 +33,7 @@ public class StartMeny extends JFrame {
 		JLabel ipaddr = LagIpAddr();
 		rute1.setLayout(new GridLayout(2,0));
 		//Textfield for IP input. Changes when joinButton isSelected();
-		JTextField ipInputField = new JTextField(10);
+		ipInputField = new JTextField(10);
 		nickNameField = new JTextField(10);
 
 		ipInputField.setEditable(false);
@@ -55,9 +56,9 @@ public class StartMeny extends JFrame {
 		bg1.add(joinButton);
 		rute1.add(joinButton);
 		rute1.add(hostButton);
-		rute2.add(new JLabel("Skriv IP-adresse du vil connecte mot"));
+		rute2.add(new JLabel("Skriv IP-adresse du vil koble til"));
 		rute2.add(ipInputField);
-		rute3.add(new JLabel("Skriv ditt nickname"));
+		rute3.add(new JLabel("Skriv ditt kallenavn"));
 		rute3.add(nickNameField);
 		rute3.add(join);
 		rute4.add(ipaddr);
@@ -83,14 +84,14 @@ public class StartMeny extends JFrame {
 		        //Here goes the action (method) you want to execute when clicked
 		        System.out.println("You clicked the connecto buttono");
 		        if(joinButton.isSelected()) {
-					System.out.println("debug: joinbutton isselected. FUNGERER");
-
-
-					// TODO: Åpne vindu for join game
+					System.out.println("debug: hostbutton isselected. FUNGERER");
+					gSettings.setPlayer(new Player(nickNameField.getText(), false));
+					gSettings.setIp(ipInputField.getText());
+					gSettings.setReady(true);
 				}
 				if(hostButton.isSelected()) {
 					System.out.println("debug: hostbutton isselected. FUNGERER");
-					gSettings.setPlayer(new Player(nickNameField.toString(), true));
+					gSettings.setPlayer(new Player(nickNameField.getText(), true));
 					gSettings.setHost();
 					gSettings.setReady(true);
 				}

@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.List;
 
-class Game extends HasActionListeners implements IsActionListener, IsGame {
+class Game extends HasListeners implements IsListener, IsActionListener, IsMoveListener, IsGame {
 
     private final Player player;
     private boolean movesAllowed;
@@ -12,6 +12,7 @@ class Game extends HasActionListeners implements IsActionListener, IsGame {
 	public Game(Player player)
 	{
 	    this.board = new ChessBoard(this);
+        this.board.addListener(this);
 
         this.player = player;
 
@@ -22,17 +23,17 @@ class Game extends HasActionListeners implements IsActionListener, IsGame {
         Stockfish stockFish = new Stockfish();
         (new Thread(stockFish)).start();
 
-		if (player.isHost()) {
+        if (player.isHost()) {
             NetworkServer server = new NetworkServer(1337);
-		    server.addActionListener(this);
-		    this.addActionListener(server);
-			(new Thread(server)).start();			
-		} else {
-            NetworkClient client = new NetworkClient("localhost", 1337);
-            client.addActionListener(this);
-            this.addActionListener(client);
-			(new Thread(client)).start();
-		}
+            server.addListener(this);
+            this.addListener(server);
+            (new Thread(server)).start();
+        } else {
+            NetworkClient client = new NetworkClient(player.getIp(), 1337);
+            client.addListener(this);
+            this.addListener(client);
+            (new Thread(client)).start();
+        }
 	}
 
     private String getMovesString()
@@ -46,7 +47,7 @@ class Game extends HasActionListeners implements IsActionListener, IsGame {
 
 	public boolean myTurn()
     {
-        return true;
+        return movesAllowed;
     }
 
     public boolean amIWhite()
@@ -54,18 +55,24 @@ class Game extends HasActionListeners implements IsActionListener, IsGame {
         return this.player.isWhite();
     }
 
+    public void newMove(Move move)
+    {
+        this.movesAllowed = false;
+        this.publishAction(new Action("move", move));
+    }
+
 	public void newAction(Action action)
     {
         switch(action.getType()) {
             case("move") : {
                 Move move = (Move)action.getPayload();
-                System.out.println("Avsender:" + action.getPlayer().getName());
                 System.out.println("Mottaker:" + this.player.getName());
                 System.out.println("Host:" + this.player.isHost());
                 System.out.println("---");
+                this.movesAllowed = true;
                 this.board.movePiece(move.getPiece(), move.getFrom(), move.getTo(), true);
+
             }
         }
     }
-
 }

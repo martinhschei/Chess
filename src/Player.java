@@ -6,13 +6,13 @@ public class Player implements Serializable {
 	private final boolean white;
     private boolean host;
     private boolean ready;
+    private String ip;
 	
 	public Player(String name, boolean white)
 	{
 		this.name = name;
 		this.white = white;
 		this.ready = false;
-
 		this.host = false;
 	}
 	
@@ -25,7 +25,17 @@ public class Player implements Serializable {
 	{
 		return this.host;
 	}
-	
+
+	public void setIp(String ip)
+	{
+		this.ip = ip;
+	}
+
+	public String getIp()
+	{
+		return this.ip;
+	}
+
 	public void setHost()
 	{
 		this.host = true;
@@ -35,6 +45,7 @@ public class Player implements Serializable {
 	{
 		return this.name;
 	}
+
 	public void setReady(boolean ready)
     {
         this.ready = ready;

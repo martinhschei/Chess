@@ -4,7 +4,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class NetworkClient extends HasActionListeners implements Runnable, IsActionListener {
+public class NetworkClient extends HasListeners implements Runnable, IsListener, IsActionListener {
 
 	private int port;
 	private String host;

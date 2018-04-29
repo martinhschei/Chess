@@ -4,7 +4,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class NetworkServer extends HasActionListeners implements Runnable, IsActionListener {
+public class NetworkServer extends HasListeners implements Runnable, IsActionListener, IsListener {
 
     private int port;
     private ObjectOutputStream oos;

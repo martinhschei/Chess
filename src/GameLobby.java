@@ -4,7 +4,6 @@ import java.util.Observer;
 public class GameLobby implements Observer {
 
     HovedMeny menu = null;
-    Player player = null;
     GameSettings settings = null;
 
     public GameLobby()
@@ -16,6 +15,7 @@ public class GameLobby implements Observer {
 
     public void update(Observable obj, Object arg)
     {
+        new Game((Player)arg);
     }
 
 }
