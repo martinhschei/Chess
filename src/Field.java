@@ -17,17 +17,20 @@ public class Field implements Serializable {
 	private boolean selected;
 	private transient IsMover mover;
 	public static Field selectedField;
+	private static String imgPath = System.getProperty("user.dir") + "\\img\\";
 	
 	public JLabel Image() {
 		
 	    BufferedImage img = null;
 		try {
-			img = ImageIO.read(new File(this.currentPiece.imgString));
+			String imgString = imgPath + this.currentPiece.imgString;
+			img = ImageIO.read(new File(imgString));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return new JLabel(new ImageIcon(img));
 	}
+
 
 	public Field(Position position, IsMover mover)
 	{

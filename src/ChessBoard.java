@@ -63,7 +63,7 @@ public class ChessBoard extends HasListeners implements IsMover {
         this.board.setSize(1000,800);
         this.board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        GridLayout main = new GridBagLayout();
+        GridLayout main = new GridLayout(1,2);
 
 
         GridLayout board = new GridLayout(8, 8, 1, 1);

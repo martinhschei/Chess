@@ -14,6 +14,7 @@ public class StartMeny extends JFrame {
 	private JRadioButton joinButton;
 	private JTextField NameInputField = new JTextField(10);
 	private JTextField nickNameField;
+	private JTextField ipInputField;
 
 	public StartMeny(GameSettings settings)
 	{
@@ -33,7 +34,7 @@ public class StartMeny extends JFrame {
 		JButton join = MonitorConnectButton();
 		JLabel ipAddr = LagIpAddr();
 		//Textfield for IP input. Changes when joinButton isSelected();
-		JTextField ipInputField = new JTextField(10);
+		ipInputField = new JTextField(10);
 		nickNameField = new JTextField(10);
 
 		ipInputField.setEditable(false);
@@ -86,9 +87,9 @@ public class StartMeny extends JFrame {
 		        System.out.println("You clicked the connecto buttono");
 		        if(joinButton.isSelected()) {
 					System.out.println("debug: joinbutton isselected. FUNGERER");
-
-
-					// TODO: Åpne vindu for join game
+					gSettings.setPlayer(new Player(nickNameField.toString(), false));
+					gSettings.setIp(ipInputField.getText());
+					gSettings.setReady(true);
 				}
 				if(hostButton.isSelected()) {
 					System.out.println("debug: hostbutton isselected. FUNGERER");
