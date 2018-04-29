@@ -60,24 +60,25 @@ public class ChessBoard extends HasListeners implements IsMover {
     public void buildBoard()
     {
         this.board = new JFrame();
-        this.board.setSize(1000,800);
+        this.board.setSize(1000,750);
         this.board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        GridLayout main = new GridBagLayout();
-
+        this.board.setTitle("LotionChess: Din smootheste sjakk-opplevelse!");
 
         GridLayout board = new GridLayout(8, 8, 1, 1);
         JPanel boardPanel = new JPanel();
-        boardPanel.setSize(800,800);
         boardPanel.setLayout(board);
 
         JPanel logPanel = new JPanel();
-        logPanel.setSize(200,800);
+        GridLayout logLayout = new GridLayout(0,1);
+        JTextArea logArea = new JTextArea("Her vil loggen printes");
+        logPanel.setLayout(logLayout);
+        logPanel.add(logArea);
 
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, boardPanel, logPanel);
+        splitPane.setOneTouchExpandable(true);
+        splitPane.setDividerLocation(735);
         Container content = this.board.getContentPane();
-        content.setLayout(main);
-        content.add(boardPanel);
-        content.add(logPanel);
+        content.add(splitPane);
 
         for(int i = 8; i > 0; i--) {
             Row newRow = new Row(i);
@@ -88,7 +89,6 @@ public class ChessBoard extends HasListeners implements IsMover {
             }
             this.rows.add(newRow);
         }
-
         //this.board.pack();
         this.board.repaint();
         this.board.revalidate();
