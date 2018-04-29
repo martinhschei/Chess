@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e04b9378-01c4-4eb2-a195-9ae8af47e610" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/ChessBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/ChessBoard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChessBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Field.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HasActionListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HasActionListeners.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameLobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameLobby.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameSettings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/HovedMeny.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HovedMeny.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StartMeny.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StartMeny.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -23,7 +19,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ChessBoard.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ChessBoard.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ChessBoard.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="81">
@@ -31,6 +27,15 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HovedMeny.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/HovedMeny.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="181">
+              <caret line="34" selection-start-line="34" selection-end-line="34" />
             </state>
           </provider>
         </entry>
@@ -81,14 +86,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
-              <folding>
-                <element signature="e#87#88#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="216">
+              <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -119,19 +121,19 @@
         <option value="$PROJECT_DIR$/src/Move.java" />
         <option value="$PROJECT_DIR$/src/Stockfish.java" />
         <option value="$PROJECT_DIR$/src/Action.java" />
-        <option value="$PROJECT_DIR$/src/HovedMeny.java" />
-        <option value="$PROJECT_DIR$/src/main.java" />
         <option value="$PROJECT_DIR$/src/Field.java" />
         <option value="$PROJECT_DIR$/src/HasActionListeners.java" />
         <option value="$PROJECT_DIR$/src/Game.java" />
         <option value="$PROJECT_DIR$/src/ChessBoard.java" />
+        <option value="$PROJECT_DIR$/src/HovedMeny.java" />
+        <option value="$PROJECT_DIR$/src/main.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="814" />
+    <option name="width" value="816" />
     <option name="height" value="867" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -255,11 +257,11 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2750978" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.028683182" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info id="Capture Tool" />
       <window_info id="Designer" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.143125" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.143125" />
       <window_info anchor="bottom" id="Inspection Results" order="7" sideWeight="0.6363281" weight="0.20208605" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -567,15 +569,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HovedMeny.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/NetworkServer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
@@ -679,16 +672,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-          <folding>
-            <element signature="e#87#88#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="99">
@@ -710,6 +693,20 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HovedMeny.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
         </state>
       </provider>
     </entry>

@@ -2,6 +2,10 @@ class main
 {
 	public static void main(String[] args)
 	{
-		new ChessBoard(new Game(new Player("foobar", true)));
+
+		GameLobby game = new GameLobby();
+
+		Player playerA = new Player("Player B", false);
+		
 	}
 }

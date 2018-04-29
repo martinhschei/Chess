@@ -16,7 +16,6 @@ public class GameLobby implements Observer {
 
     public void update(Observable obj, Object arg)
     {
-
     }
 
 }

@@ -11,8 +11,9 @@ public class Player implements Serializable {
 	{
 		this.name = name;
 		this.white = white;
+		this.ready = false;
+
 		this.host = false;
-		ready = false;
 	}
 	
 	public boolean isWhite() 
@@ -34,8 +35,8 @@ public class Player implements Serializable {
 	{
 		return this.name;
 	}
-
-	public void setReady(boolean ready) { this.ready = ready;}
-
-	public boolean isReady() {return this.ready;}
+	public void setReady(boolean ready)
+    {
+        this.ready = ready;
+    }
 }
