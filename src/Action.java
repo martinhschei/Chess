@@ -28,6 +28,5 @@ public class Action implements Serializable {
 	{
 		return this.player;
 	}
-	
 
 }

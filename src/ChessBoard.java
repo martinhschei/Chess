@@ -49,32 +49,42 @@ class ChessBoard extends HasActionListeners implements IsMover, IsActionListener
             case("move") : {
                 Move move = (Move)action.getPayload();
                 System.out.println("Avsender:" + action.getPlayer().getName());
+                System.out.println("Mottaker:" + this.player.getName());
+                System.out.println("Host:" + this.player.isHost());
+                System.out.println("---");
                 this.move(move.getPiece(), move.getFrom(), move.getTo(), true);
             }
         }
     }
 
+    private void swapFields(Field[] fields)
+    {
+        for(Field field : fields) {
+            Row row = this.getRowByIndex(field.getRow());
+            row.replace(field);
+        }
+    }
+
 	public void move(ChessPiece piece, Field from, Field to, boolean otherPlayer)
     {
+        if (!otherPlayer) {
+            from.setPiece(null);
+            to.setPiece(piece);
+            Move newMove = new Move(from, to, piece);
+            this.moves.add(newMove);
+            this.publishAction(new Action("move", newMove, this.player));
+        }
+
         if(otherPlayer) {
-            
-            return;
+            this.swapFields(new Field[] { from, to });
         }
 
-        if (to.hasPiece()) {
-            if (to.isCurrentPieceWhite() == piece.isWhite()) {
-                return;
-            }
-        }
-
-        from.setPiece(null);
-        to.setPiece(piece);
-        Move newMove = new Move(from, to, piece);
-        this.moves.add(newMove);
         // refactoring => send med move string ved hver kommando til Stockfish
         this.stockFish.setMovesString(this.getMovesString());
-        // this.movesAllowed = !this.movesAllowed;
-        this.publishAction(new Action("move", newMove, this.player));
+
+        this.movesAllowed = !this.movesAllowed;
+
+        this.boardWindow.revalidate();
     }
 
     private String getMovesString()
