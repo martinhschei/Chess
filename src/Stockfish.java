@@ -58,7 +58,9 @@ class Stockfish implements Runnable {
 
 	public void getComputerMove()
     {
-        this.sendCommand(StockfishCommands.NEXT_MOVE + " " + this.getMovesHistory(), StockfishReturns.BESTMOVE);
+        this.sendCommand(
+        		StockfishCommands.NEXT_MOVE + " " + this.getMovesHistory(),
+				StockfishReturns.BESTMOVE);
     }
 
 	private void readResponse(String stopMark)

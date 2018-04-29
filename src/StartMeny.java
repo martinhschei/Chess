@@ -87,7 +87,7 @@ public class StartMeny extends JFrame {
 		        System.out.println("You clicked the connecto buttono");
 		        if(joinButton.isSelected()) {
 					System.out.println("debug: joinbutton isselected. FUNGERER");
-					gSettings.setPlayer(new Player(nickNameField.toString(), false));
+					gSettings.setPlayer(new Player(nickNameField.getText(), false));
 					gSettings.setIp(ipInputField.getText());
 					gSettings.setReady(true);
 				}

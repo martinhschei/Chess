@@ -33,7 +33,8 @@ class Move implements Serializable {
     	return this.to;
     }
 
-    public String toString(){
+    public String toString()
+    {
         return this.from.toString() + this.to.toString();
     }
 }

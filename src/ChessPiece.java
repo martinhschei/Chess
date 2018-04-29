@@ -1,6 +1,6 @@
 import javax.swing.JPanel;
 
-public abstract class ChessPiece extends JPanel{
+public abstract class ChessPiece extends JPanel {
 	
 	final String name;
 	final boolean isStriking;

@@ -25,12 +25,18 @@ public class NetworkClient extends HasListeners implements Runnable, IsListener,
 		}
 	}
 
+	private void onConnect()
+	{
+		this.newAction(new Action("hereiam", null));
+	}
+
 	@Override
 	public void run() {
 		System.out.println("Client up");
 		try {
 			Socket socket = new Socket(this.host, this.port);
 			this.oos = new ObjectOutputStream(socket.getOutputStream());
+			this.onConnect();
 			ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 			while(true) {
 				try {
