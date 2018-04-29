@@ -7,37 +7,33 @@ class ChessBoard extends HasActionListeners implements IsMover, IsActionListener
 	
 	private final List<Row> rows = new ArrayList<>();
 	private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };
-    private final Stockfish stockFish;
     private final List<Move> moves;
     private final Player player;
-    private NetworkServer server;
-    private NetworkClient client;
-
     private JFrame boardWindow;
-
     private boolean movesAllowed;
     
 	public ChessBoard(Player player)
 	{
         this.player = player;
+
 		this.movesAllowed = this.player.isHost();
 		
 		this.moves = new ArrayList<>();
 
-		this.stockFish = new Stockfish();
-		//this.stockFish.connect();
-		//this.stockFish.startGame();
+        Stockfish stockFish = new Stockfish();
+        (new Thread(stockFish)).start();
 
         this.buildBoard();
+        this.updateBoardStatus();
 
 		if (player.isHost()) {
-		    this.server = new NetworkServer(1337);
-		    this.server.addListener(this);
+            NetworkServer server = new NetworkServer(1337);
+		    server.addListener(this);
 		    this.addListener(server);
 			(new Thread(server)).start();			
 		} else {
-		    this.client = new NetworkClient("localhost",1337);
-            this.client.addListener(this);
+            NetworkClient client = new NetworkClient("localhost", 1337);
+            client.addListener(this);
             this.addListener(client);
 			(new Thread(client)).start();
 		}
@@ -52,38 +48,52 @@ class ChessBoard extends HasActionListeners implements IsMover, IsActionListener
                 System.out.println("Mottaker:" + this.player.getName());
                 System.out.println("Host:" + this.player.isHost());
                 System.out.println("---");
-                this.move(move.getPiece(), move.getFrom(), move.getTo(), true);
+                this.move(move.getPiece(), this.translateToLocalField(move.getFrom()), this.translateToLocalField(move.getTo()), true);
             }
         }
     }
 
-    private void swapFields(Field[] fields)
+    private Field translateToLocalField(Field field)
     {
-        for(Field field : fields) {
-            Row row = this.getRowByIndex(field.getRow());
-            row.replace(field);
+        Row rowTo = this.getRowByIndex(field.getRow());
+        return rowTo.getField(field.getColumn());
+    }
+
+    public boolean clickAllowed(Field field) {
+	    if (field.hasPiece()) {
+            return (this.movesAllowed && (field.getCurrentPiece().isWhite() == this.player.isWhite()));
+        } else {
+	        return this.movesAllowed;
         }
     }
 
-	public void move(ChessPiece piece, Field from, Field to, boolean otherPlayer)
+    private void updateBoardStatus()
     {
-        if (!otherPlayer) {
-            from.setPiece(null);
-            to.setPiece(piece);
-            Move newMove = new Move(from, to, piece);
-            this.moves.add(newMove);
+        if (this.movesAllowed) {
+            this.boardWindow.setTitle("Ditt trekk");
+        } else {
+            this.boardWindow.setTitle("Venter på den andre spilleren...");
+        }
+    }
+
+    public void move(ChessPiece piece, Field from, Field to, boolean otherPlayer)
+    {
+        from.setPiece(null);
+        to.setPiece(piece);
+        Move newMove = new Move(from, to, piece);
+        this.moves.add(newMove);
+
+        if(!otherPlayer) {
             this.publishAction(new Action("move", newMove, this.player));
         }
 
-        if(otherPlayer) {
-            this.swapFields(new Field[] { from, to });
-        }
+        this.movesAllowed = !this.movesAllowed;
+        this.updateBoardStatus();
 
         // refactoring => send med move string ved hver kommando til Stockfish
-        this.stockFish.setMovesString(this.getMovesString());
+        // this.stockFish.setMovesString(this.getMovesString());
 
-        this.movesAllowed = !this.movesAllowed;
-
+        this.boardWindow.repaint();
         this.boardWindow.revalidate();
     }
 
