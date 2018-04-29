@@ -74,7 +74,7 @@ public class StartMeny extends JFrame{
 					// TODO: Videre logikk for joining av game
 				}
 				if(hostButton.isSelected()) {
-		        	// TODO: Videre logikk for hosting av game
+		        	// TODO: Videre logikk for hosting
 				}
 		    }
 		});
