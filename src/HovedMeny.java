@@ -1,15 +1,4 @@
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.Label;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.EventListener;
-import java.util.Observable;
-import java.util.concurrent.TimeUnit;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class HovedMeny extends JFrame {
@@ -30,8 +19,6 @@ public class HovedMeny extends JFrame {
 		//lobbyMeny = new LobbyMeny().main;
 		hovedVindu.setVisible(true);
 	}
-
-
 
 
 	private JFrame BuildWindow()

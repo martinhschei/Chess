@@ -5,7 +5,7 @@ public abstract class HasActionListeners {
 
     private List<IsActionListener> listeners = new ArrayList<>();
 
-    public void addListener(IsActionListener listener)
+    public void addActionListener(IsActionListener listener)
     {
         this.listeners.add(listener);
     }

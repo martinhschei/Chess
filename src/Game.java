@@ -1,7 +1,5 @@
-import java.awt.*;
 import java.util.*;
 import java.util.List;
-import javax.swing.*;
 
 class Game extends HasActionListeners implements IsActionListener, IsGame {
 
@@ -26,13 +24,13 @@ class Game extends HasActionListeners implements IsActionListener, IsGame {
 
 		if (player.isHost()) {
             NetworkServer server = new NetworkServer(1337);
-		    server.addListener(this);
-		    this.addListener(server);
+		    server.addActionListener(this);
+		    this.addActionListener(server);
 			(new Thread(server)).start();			
 		} else {
             NetworkClient client = new NetworkClient("localhost", 1337);
-            client.addListener(this);
-            this.addListener(client);
+            client.addActionListener(this);
+            this.addActionListener(client);
 			(new Thread(client)).start();
 		}
 	}

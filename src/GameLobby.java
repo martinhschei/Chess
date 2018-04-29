@@ -7,13 +7,13 @@ public class GameLobby implements Observer {
     Player player = null;
     GameSettings settings = null;
 
-    public GameLobby(){
+    public GameLobby()
+    {
         settings = new GameSettings();
         settings.addObserver(this);
         menu = new HovedMeny(settings);
-
-
     }
+
     public void update(Observable obj, Object arg)
     {
 
