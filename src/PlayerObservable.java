@@ -1,4 +1,5 @@
 import java.util.Observable;
+
 public class PlayerObservable extends Observable{
     private Player player=null;
 

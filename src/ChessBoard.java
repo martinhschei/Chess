@@ -1,170 +1,81 @@
-import java.awt.*;
-import java.util.*;
-import java.util.List;
 import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
-class ChessBoard extends HasActionListeners implements IsMover, IsActionListener {
-	
-	private final List<Row> rows = new ArrayList<>();
-	private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };
-    private final List<Move> moves;
-    private final Player player;
-    private JFrame boardWindow;
-    private boolean movesAllowed;
-    
-	public ChessBoard(Player player)
-	{
-        this.player = player;
+public class ChessBoard extends JFrame implements IsMover {
 
-		this.movesAllowed = this.player.isHost();
-		
-		this.moves = new ArrayList<>();
+    private IsGame game;
+    private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };
+    private List<Row> rows;
 
-        Stockfish stockFish = new Stockfish();
-        (new Thread(stockFish)).start();
-
-        this.buildBoard();
-        this.updateBoardStatus();
-
-		if (player.isHost()) {
-            NetworkServer server = new NetworkServer(1337);
-		    server.addListener(this);
-		    this.addListener(server);
-			(new Thread(server)).start();			
-		} else {
-            NetworkClient client = new NetworkClient("localhost", 1337);
-            client.addListener(this);
-            this.addListener(client);
-			(new Thread(client)).start();
-		}
-	}
-
-	public void newAction(Action action)
+    public ChessBoard(IsGame game)
     {
-        switch(action.getType()) {
-            case("move") : {
-                Move move = (Move)action.getPayload();
-                System.out.println("Avsender:" + action.getPlayer().getName());
-                System.out.println("Mottaker:" + this.player.getName());
-                System.out.println("Host:" + this.player.isHost());
-                System.out.println("---");
-                this.move(move.getPiece(), this.translateToLocalField(move.getFrom()), this.translateToLocalField(move.getTo()), true);
-            }
-        }
-    }
+        this.game = game;
+        this.rows = new ArrayList();
 
-    private Field translateToLocalField(Field field)
-    {
-        Row rowTo = this.getRowByIndex(field.getRow());
-        return rowTo.getField(field.getColumn());
-    }
+        this.build(this);
+        this.setStartUpPosition();
 
-    public boolean clickAllowed(Field field) {
-	    if (field.hasPiece()) {
-            return (this.movesAllowed && (field.getCurrentPiece().isWhite() == this.player.isWhite()));
-        } else {
-	        return this.movesAllowed;
-        }
+        this.repaint();
+        this.revalidate();
+
+        this.setVisible(true);
+
     }
 
     private void updateBoardStatus()
     {
-        if (this.movesAllowed) {
-            this.boardWindow.setTitle("Ditt trekk");
+        if (this.game.myTurn()) {
+            this.setTitle("Ditt trekk");
         } else {
-            this.boardWindow.setTitle("Venter på den andre spilleren...");
+            this.setTitle("Venter på den andre spilleren...");
         }
     }
 
-    public void move(ChessPiece piece, Field from, Field to, boolean otherPlayer)
+    public void movePiece(ChessPiece piece, Field from, Field to, boolean otherPlayer)
     {
         from.setPiece(null);
         to.setPiece(piece);
         Move newMove = new Move(from, to, piece);
-        this.moves.add(newMove);
 
-        if(!otherPlayer) {
-            this.publishAction(new Action("move", newMove, this.player));
-        }
+        //if(!otherPlayer) {
+        //    this.publishAction(new Action("move", newMove, this.player));
+        //}
 
-        this.movesAllowed = !this.movesAllowed;
         this.updateBoardStatus();
 
         // refactoring => send med move string ved hver kommando til Stockfish
         // this.stockFish.setMovesString(this.getMovesString());
 
-        this.boardWindow.repaint();
-        this.boardWindow.revalidate();
+        this.repaint();
+        this.revalidate();
     }
 
-    private String getMovesString()
+    public void build(IsMover mover)
     {
-        StringBuilder movesString = new StringBuilder();
-        for(Move move : moves) {
-            movesString.append(move.toString()).append(" ");
-        }
-        return movesString.toString();
-    }
+        this.setMinimumSize(new Dimension(650,650));
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        GridLayout grid = new GridLayout(8, 8, 1, 1);
+        Container content = this.getContentPane();
+        content.setLayout(grid);
 
-    private String getCurrentFen()
-	{
-		StringBuilder fen = new StringBuilder();
-		for(Row row : rows)
-		{
-			fen.append(row.getFen());
-		}
-		return fen.toString();
-	}
-
-	private void buildBoard()
-    {
-		this.boardWindow = new JFrame("Java Sjakk - " + this.player.getName());
-        this.boardWindow.setBounds(50,50,1000,1000);
-        this.boardWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GridLayout grid = new GridLayout(8, 8, 1, 1);
-		Container content = boardWindow.getContentPane(); 
-		content.setLayout(grid);
-
-		for(int i = 8; i > 0; i--) {
-			Row newRow = new Row(i);
-			for (char column : columns) {
-				Field field = new Field(new Position(column,i),this);
-				newRow.addField(field);
-				content.add(field.getButton());
-			}
-			this.rows.add(newRow);
-		}
-
-        this.setStartUpPosition();
-
-		boardWindow.pack();
-		boardWindow.setVisible(true);
-	}
-
-	private Field getFieldOnPosition(Position pos)
-    {
-        Row row = this.getRowByIndex(pos.getRow());
-        return row.getField(pos.getColumn());
-    }
-
-    private Row getRowByIndex(int index)
-    {
-        for(Row row: rows) {
-            if (row.getIndex() == index) {
-                return row;
+        for(int i = 8; i > 0; i--) {
+            Row newRow = new Row(i);
+            for (char column : columns) {
+                Field field = new Field(new Position(column,i), mover);
+                newRow.addField(field);
+                content.add(field.getButton());
             }
+            this.rows.add(newRow);
         }
-        return null;
+
+        this.pack();
+
     }
 
-	private void placePieceOnPosition(ChessPiece piece, Position pos)
-	{
-        Field field = getFieldOnPosition(pos);
-        field.setPiece(piece);
-	}
-
-	private void setStartUpPosition()
-	{
+    private void setStartUpPosition()
+    {
         for(char column : columns) {
             this.placePieceOnPosition(new Pawn(true), new Position(column, 2));
             this.placePieceOnPosition(new Pawn(false), new Position(column, 7));
@@ -200,5 +111,55 @@ class ChessBoard extends HasActionListeners implements IsMover, IsActionListener
                 }
             }
         }
-	}
+    }
+
+    private Field translateToLocalField(Field field)
+    {
+        Row rowTo = this.getRowByIndex(field.getRow());
+        return rowTo.getField(field.getColumn());
+    }
+
+    public boolean clickAllowed(Field field)
+    {
+        if (field.hasPiece()) {
+            return (this.game.myTurn() && (field.getCurrentPiece().isWhite() == this.game.amIWhite()));
+        } else {
+            return this.game.myTurn();
+        }
+    }
+
+    private Field getFieldOnPosition(Position pos)
+    {
+        Row row = this.getRowByIndex(pos.getRow());
+        return row.getField(pos.getColumn());
+    }
+
+    private Row getRowByIndex(int index)
+    {
+        for(Row row: rows) {
+            if (row.getIndex() == index) {
+                return row;
+            }
+        }
+        return null;
+    }
+
+    private void placePieceOnPosition(ChessPiece piece, Position pos)
+    {
+        Field field = getFieldOnPosition(pos);
+        field.setPiece(piece);
+    }
+
+    private String getCurrentFen()
+    {
+        StringBuilder fen = new StringBuilder();
+        for(Row row : rows)
+        {
+            fen.append(row.getFen());
+        }
+        return fen.toString();
+    }
+
+
+
 }

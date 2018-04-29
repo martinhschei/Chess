@@ -22,9 +22,9 @@ public class HovedMeny extends JFrame {
 	public HovedMeny(PlayerObservable player1)
 	{
         JFrame hovedVindu = BuildWindow();
-        JPanel startMeny = new StartMeny().main;
+        //JPanel startMeny = new StartMeny().main;
         JPanel lobbyMeny = new LobbyMeny().main;
-		hovedVindu.setContentPane(startMeny);
+		//hovedVindu.setContentPane(startMeny);
 		player = player1;
 		hovedVindu = BuildWindow();
 		//startMeny= new StartMeny();
