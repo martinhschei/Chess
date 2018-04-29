@@ -4,14 +4,13 @@ public class Player implements Serializable {
 
 	private final String name;
 	private final boolean white;
-	private final int id;
-	private boolean host;
+    private boolean host;
 	
 	public Player(String name, boolean white, int id)
 	{
 		this.name = name;
 		this.white = white;
-		this.id = id;
+        int id1 = id;
 		this.host = false;
 	}
 	
@@ -34,7 +33,4 @@ public class Player implements Serializable {
 	{
 		return this.name;
 	}
-	
-
-	
 }

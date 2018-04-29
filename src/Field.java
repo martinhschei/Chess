@@ -1,19 +1,14 @@
 import java.awt.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Observable;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.io.Serializable;
-import javax.swing.border.LineBorder;
-
+import java.awt.event.*;
 
 public class Field implements Serializable {
 	
@@ -30,11 +25,9 @@ public class Field implements Serializable {
 		try {
 			img = ImageIO.read(new File(this.currentPiece.imgString));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		JLabel imgLabel = new JLabel(new ImageIcon(img));
-		return imgLabel;
+		return new JLabel(new ImageIcon(img));
 	}
 
 	public Field(Position position, IsMover mover)
@@ -83,12 +76,21 @@ public class Field implements Serializable {
 			this.button.setBackground(Color.GRAY);
 			this.button.setForeground(Color.WHITE);
 		}
-
 		this.button.addActionListener(e -> this.fieldClick() );
     }
 
+    private void handleClickNotAllowed()
+	{
+
+	}
+
 	private void fieldClick()
 	{
+		if (!this.mover.clickAllowed(this)) {
+			this.handleClickNotAllowed();
+			return;
+		}
+
 		// deselect
 		if (Field.selectedField == this) {
 			this.selected = false;
@@ -139,8 +141,8 @@ public class Field implements Serializable {
 		if (piece == null) {
 			this.clearSelection();
         } else {
-    		this.button.add(Image());;
-        }
+    		this.button.add(Image());
+		}
 	}
 
 	public String getCurrentPieceName()

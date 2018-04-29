@@ -8,9 +8,13 @@ public class StartMeny extends JFrame{
 	public JPanel main = null;
 	private JRadioButton hostButton;
 	private JRadioButton joinButton;
+	private JTextField NameInputField = new JTextField(10);
+	private boolean White = true;
+	PlayerObservable player = null;
 	
-	public StartMeny() 
+	public StartMeny(PlayerObservable player1)
 	{
+		player = player1;
 		main = new JPanel();
 		FyllPanel(main);
 		
@@ -28,17 +32,18 @@ public class StartMeny extends JFrame{
 		//Textfield for IP input. Changes when joinButton isSelected();
 		JTextField ipInputField = new JTextField(10);
 		ipInputField.setEditable(false);
+		NameInputField.setEditable(true);
 		ButtonGroup bg1 = new ButtonGroup();
 		hostButton = new JRadioButton("Host Game");
-		hostButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ipInputField.setEditable(false);
-			}
-		});
 		joinButton = new JRadioButton("Join Game");
 		joinButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			ipInputField.setEditable(true);
+			}
+		});
+		hostButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ipInputField.setEditable(false);
 			}
 		});
 
@@ -46,7 +51,7 @@ public class StartMeny extends JFrame{
 		bg1.add(joinButton);
 		rute1.add(joinButton);
 		rute1.add(hostButton);
-		rute2.add(new JLabel("Din ip-adresse"));
+		rute2.add(new JLabel("Skriv IP-adresse du vil connecte mot"));
 		rute2.add(ipInputField);
 		rute3.add(join);
 		rute4.add(ipaddr);
@@ -68,17 +73,23 @@ public class StartMeny extends JFrame{
 		{
 		    public void actionPerformed(ActionEvent e)            
 		    {
+		    	NameInputField.setText("playaaaa");
 		        //Here goes the action (method) you want to execute when clicked
 		        System.out.println("You clicked the connecto buttono");
 		        if(joinButton.isSelected()) {
-					// TODO: Videre logikk for joining av game
+					System.out.println("debug: joinbutton isselected. FUNGERER");
+					player.setPlayer(new Player(NameInputField.getText(), false, 2));
+
+					// TODO: Åpne vindu for join game
 				}
 				if(hostButton.isSelected()) {
-		        	// TODO: Videre logikk for hosting
+					System.out.println("debug: hostbutton isselected. FUNGERER");
+					// TODO: Åpne vindu for join game
+					player.setPlayer(new Player(NameInputField.getText(), true, 1));
+
 				}
 		    }
 		});
 		return retur;
 	}
-
 }
