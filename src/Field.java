@@ -17,7 +17,7 @@ public class Field implements Serializable {
 	private boolean selected;
 	private transient IsMover mover;
 	public static Field selectedField;
-	private static String imgPath = System.getProperty("user.dir") + "\\img\\";
+	private static String imgPath;
 	
 	public JLabel Image() {
 		
@@ -39,6 +39,7 @@ public class Field implements Serializable {
 		this.selected = false;
 		this.mover = mover;
 		this.createFieldButton();
+		imgPath = System.getProperty("user.dir") + "\\img\\";
 	}
 	
 	private boolean isFieldWhite()
