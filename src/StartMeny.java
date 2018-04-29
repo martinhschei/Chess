@@ -35,7 +35,7 @@ public class StartMeny extends JFrame {
 		//Textfield for IP input. Changes when joinButton isSelected();
 		JTextField ipInputField = new JTextField(10);
 		nickNameField = new JTextField(10);
-		
+
 		ipInputField.setEditable(false);
 		NameInputField.setEditable(true);
 		ButtonGroup bg1 = new ButtonGroup();
