@@ -6,14 +6,14 @@ public abstract class ChessPiece extends JPanel{
 	final boolean isStriking;
 	final boolean white;
 	protected String imgString;
-	protected String imgPath = System.getProperty("user.dir") + "\\img\\";
+	//protected String imgPath = System.getProperty("user.dir") + "\\img\\";
 
 	ChessPiece(String name, boolean white)
 	{
 		this.name = white ? name.toUpperCase() : name;
 		this.white = white;
 		this.isStriking = false;
-		this.imgString = imgPath;
+		this.imgString = "";
 	}
 
 	public boolean isWhite()
