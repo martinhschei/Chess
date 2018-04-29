@@ -24,21 +24,18 @@ public class StartMeny extends JFrame {
 	}
 
 	private void FyllPanel(JPanel main2) {
-		JPanel emptyPanel = new JPanel();
 		main.setLayout(new GridLayout(2,2));
 		JPanel rute1 = new JPanel();
 		rute1.setLayout(new GridLayout(4,0));
 		JPanel rute2 = new JPanel();
 		JPanel rute3 = new JPanel();
-
 		JPanel rute4 = new JPanel();
 		JButton join = MonitorConnectButton();
 		JLabel ipAddr = LagIpAddr();
 		//Textfield for IP input. Changes when joinButton isSelected();
 		JTextField ipInputField = new JTextField(10);
 		nickNameField = new JTextField(10);
-
-
+		
 		ipInputField.setEditable(false);
 		NameInputField.setEditable(true);
 		ButtonGroup bg1 = new ButtonGroup();
