@@ -11,7 +11,6 @@ class Stockfish implements Runnable {
 	private String movesString;
 	private OutputStreamWriter stockFishWriter;
 	private BufferedReader stockFishReader;
-
     private String currentFen;
     private int fullMoveCount = 0;
     private char turn = 'w';
@@ -36,12 +35,6 @@ class Stockfish implements Runnable {
 		}
 	}
 
-	public Move getBestmove(String moveHistory)
-    {
-        Move retur = null;
-
-    	return retur;
-    }
 
 	public void setMovesString(String moves)
     {
@@ -58,14 +51,23 @@ class Stockfish implements Runnable {
 		this.sendCommand(StockfishCommands.START_NEW_GAME, StockfishReturns.READY_OK);
 	}
 
-	public void getComputerMove()
+	public String getComputerMove()
     {
-        this.sendCommand(
-        		StockfishCommands.NEXT_MOVE + " " + this.getMovesHistory(),
+    	try{
+			this.stockFishWriter.write(StockfishCommands.SET_POSITION + this.getMovesHistory() + "\n");
+			this.stockFishWriter.flush();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Sender kommando: " + StockfishCommands.SET_POSITION + this.getMovesHistory() + "\n");
+		System.out.println("Sender kommando: " + StockfishCommands.NEXT_MOVE + "\n");
+    	return this.sendCommand(
+        		StockfishCommands.NEXT_MOVE +"\n",
 				StockfishReturns.BESTMOVE);
     }
 
-	private void readResponse(String stopMark)
+	private String readResponse(String stopMark)
 	{
 		String temp = "";
 		try {
@@ -76,24 +78,25 @@ class Stockfish implements Runnable {
 		catch(Exception e) {
             e.printStackTrace();
 		}
+		return temp;
 	}
 
-	private void sendCommand(String command, String stopMark)
+	private String sendCommand(String command, String stopMark)
 	{
 		try 
 		{
 		    this.commandHistory.push(command);
 			this.stockFishWriter.write(command);
 			this.stockFishWriter.flush();
-			this.readResponse(stopMark);
+			return this.readResponse(stopMark);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return "Error: Something went wrong with sendCommand";
 	}
 
 	private String getMovesHistory()
     {
-        String moves = "";
-        return moves;
+        return movesString;
     }
 }
