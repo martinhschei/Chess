@@ -172,7 +172,7 @@ public class ChessBoard extends HasListeners implements IsMover {
         field.setPiece(piece);
     }
 
-    private String getCurrentFen()
+    protected String getCurrentFen()
     {
         StringBuilder fen = new StringBuilder();
         for(Row row : rows)

@@ -38,7 +38,9 @@ class Stockfish implements Runnable {
 
 	public Move getBestmove(String moveHistory)
     {
-        return null;
+        Move retur = null;
+
+    	return retur;
     }
 
 	public void setMovesString(String moves)

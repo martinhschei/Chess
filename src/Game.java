@@ -6,8 +6,8 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
     private final Player player;
     private boolean movesAllowed;
     private List<Move> moves;
-
     private ChessBoard board;
+    private Stockfish stockFish;
     
 	public Game(Player player)
 	{
@@ -20,7 +20,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
 		
 		this.moves = new ArrayList<>();
 
-        Stockfish stockFish = new Stockfish();
+		stockFish = new Stockfish();
         (new Thread(stockFish)).start();
 
         if (player.isHost()) {
@@ -71,7 +71,12 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
                 System.out.println("---");
                 this.movesAllowed = true;
                 this.board.movePiece(move.getPiece(), move.getFrom(), move.getTo(), true);
-
+                String moveHistory ="";
+                for(Move m : moves)
+                {
+                    moveHistory += m.toString();
+                }
+                stockFish.getBestmove(moveHistory);
             }
         }
     }
