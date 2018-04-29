@@ -19,33 +19,19 @@ public class HovedMeny extends JFrame {
 	//private JPanel tilkoblingsMeny = null;
 	PlayerObservable player = null;
 	
-	public HovedMeny(PlayerObservable player1)
+	public HovedMeny()
 	{
         JFrame hovedVindu = BuildWindow();
         JPanel startMeny = new StartMeny().main;
         JPanel lobbyMeny = new LobbyMeny().main;
 		hovedVindu.setContentPane(startMeny);
-		player = player1;
-		hovedVindu = BuildWindow();
+
 		//startMeny= new StartMeny();
 		//lobbyMeny = new LobbyMeny().main;
 		hovedVindu.setVisible(true);
 	}
 
-	private StartMeny buildStartMeny() {
-		StartMeny retur = new StartMeny(player);
-		retur.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				System.out.println("debug: propertychangeevent"+evt.getPropertyName());
-				if (evt.getPropertyName()=="playerReady")
-				{
-					System.out.println("debug: Player READY!!!");
-				}
-			}
-		});
-		return retur;
-	}
+
 
 
 	private JFrame BuildWindow()
