@@ -3,12 +3,14 @@ import java.util.List;
 
 class Game extends HasListeners implements IsListener, IsActionListener, IsMoveListener, IsGame {
 
-    private final Player player;
+    private Player player;
+    private Player opponent;
+
     private boolean movesAllowed;
     private List<Move> moves;
     private ChessBoard board;
     private Stockfish stockFish;
-    
+
 	public Game(Player player)
 	{
 	    this.board = new ChessBoard(this);
@@ -17,7 +19,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         this.player = player;
 
 		this.movesAllowed = this.player.isHost();
-		
+
 		this.moves = new ArrayList<>();
 
 		stockFish = new Stockfish();
@@ -61,6 +63,16 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         this.publishAction(new Action("move", move));
     }
 
+    public Move getBestMove()
+    {
+        String moveHistory ="";
+        for(Move m : moves) {
+            moveHistory += m.toString();
+        }
+        
+        return this.stockFish.getBestmove(moveHistory);
+    }
+
 	public void newAction(Action action)
     {
         switch(action.getType()) {
@@ -71,12 +83,43 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
                 System.out.println("---");
                 this.movesAllowed = true;
                 this.board.movePiece(move.getPiece(), move.getFrom(), move.getTo(), true);
-                String moveHistory ="";
-                for(Move m : moves)
-                {
-                    moveHistory += m.toString();
+                break;
+            }
+            case("hereiam") : {
+                // add to log, new player present.
+
+                // server replies
+                this.publishAction(new Action("whoareyou", null));
+                break;
+            }
+            case("whoareyou") : {
+
+                // client replies
+                this.publishAction(new Action("thisisme", this.player));
+                break;
+            }
+
+            case("thisisme") : {
+                if (this.opponent == null) {
+                    this.opponent = (Player)action.getPayload();
+                    if (this.player.isHost()) {
+                        this.publishAction(new Action("thisisme", this.player));
+                    }
                 }
-                stockFish.getBestmove(moveHistory);
+
+                // for debugging
+                if(this.player.isHost()) {
+                    System.out.println("Host::" + this.opponent);
+                }
+                if(!this.player.isHost()) {
+                    System.out.println("Client:" + this.opponent);
+                }
+
+                break;
+            }
+            case("chat") : {
+                // addToLog(action.gePayload());
+                break;
             }
         }
     }
