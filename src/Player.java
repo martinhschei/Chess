@@ -34,4 +34,8 @@ public class Player implements Serializable {
 	{
 		return this.name;
 	}
+
+	public void setReady(boolean ready) { this.ready = ready;}
+
+	public boolean isReady() {return this.ready;}
 }
