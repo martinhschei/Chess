@@ -28,7 +28,9 @@ public class NetworkServer extends HasListeners implements Runnable, IsActionLis
 		System.out.println("Server up");
 		try {
             ServerSocket serverSocket = new ServerSocket(this.port);
+            System.out.println(serverSocket);
 			Socket clientSocket = serverSocket.accept();
+			System.out.println("new player");
             ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
 			this.oos = new ObjectOutputStream(clientSocket.getOutputStream());
 			while(true) {

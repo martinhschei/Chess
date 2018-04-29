@@ -60,18 +60,31 @@ public class ChessBoard extends HasListeners implements IsMover {
     public void buildBoard()
     {
         this.board = new JFrame();
-        this.board.setSize(800,800);
+        this.board.setSize(1000,800);
         this.board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        GridLayout grid = new GridLayout(8, 8, 1, 1);
+
+        GridLayout main = new GridBagLayout();
+
+
+        GridLayout board = new GridLayout(8, 8, 1, 1);
+        JPanel boardPanel = new JPanel();
+        boardPanel.setSize(800,800);
+        boardPanel.setLayout(board);
+
+        JPanel logPanel = new JPanel();
+        logPanel.setSize(200,800);
+
         Container content = this.board.getContentPane();
-        content.setLayout(grid);
+        content.setLayout(main);
+        content.add(boardPanel);
+        content.add(logPanel);
 
         for(int i = 8; i > 0; i--) {
             Row newRow = new Row(i);
             for (char column : columns) {
                 Field field = new Field(new Position(column,i), this);
                 newRow.addField(field);
-                content.add(field.getButton());
+                boardPanel.add(field.getButton());
             }
             this.rows.add(newRow);
         }
