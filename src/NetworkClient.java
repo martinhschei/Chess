@@ -8,8 +8,6 @@ public class NetworkClient extends HasActionListeners implements Runnable, IsAct
 
 	private int port;
 	private String host;
-	private Socket socket;
-	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
 
 	public NetworkClient(String host, int port)
@@ -31,12 +29,12 @@ public class NetworkClient extends HasActionListeners implements Runnable, IsAct
 	public void run() {
 		System.out.println("Client up");
 		try {
-			this.socket = new Socket(this.host, this.port);
-			this.oos = new ObjectOutputStream(this.socket.getOutputStream());
-			this.ois = new ObjectInputStream(this.socket.getInputStream());
+			Socket socket = new Socket(this.host, this.port);
+			this.oos = new ObjectOutputStream(socket.getOutputStream());
+			ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 			while(true) {
 				try {
-					Action action = (Action)this.ois.readObject();
+					Action action = (Action) ois.readObject();
 					this.publishAction(action);
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();

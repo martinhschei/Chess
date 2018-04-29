@@ -36,7 +36,7 @@ class Row {
 	public void replace(Field field)
 	{
 		Field toBeReplaced = getField(field.getColumn());
-		Collections.replaceAll(this.fields,toBeReplaced,field);
+		Collections.replaceAll(this.fields, toBeReplaced, field);
 	}
 
 	public String getFen()
@@ -68,13 +68,13 @@ class Row {
 	private String getOffsets(List<Field> row)
 	{
 		int emptyCol = 0;
-		String offsetString = "";
+		StringBuilder offsetString = new StringBuilder();
 		for(Field field : row) {
 			if (field.hasPiece()) {
-				offsetString += emptyCol == 0 ? field.getCurrentPieceName() +"/" : (emptyCol + field.getCurrentPieceName()) + "/";
+				offsetString.append(emptyCol == 0 ? field.getCurrentPieceName() + "/" : (emptyCol + field.getCurrentPieceName()) + "/");
 			}
 			emptyCol++;
 		}
-		return offsetString;
+		return offsetString.toString();
 	}
 }
