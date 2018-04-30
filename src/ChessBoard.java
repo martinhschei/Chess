@@ -20,10 +20,7 @@ public class ChessBoard extends HasListeners implements IsMover {
 
         this.buildBoard();
         this.setStartUpPosition();
-
-        /*Stockfish stockFish = new Stockfish();
-        (new Thread(stockFish)).start();*/
-
+        this.updateBoardStatus();
     }
 
     private void updateBoardStatus()
