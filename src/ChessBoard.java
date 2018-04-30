@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChessBoard extends HasListeners implements IsMover {
+public class ChessBoard extends HasListeners implements IsMover, IsActionListener {
 
     private Logger logger;
     private LogType logType;
@@ -13,7 +13,6 @@ public class ChessBoard extends HasListeners implements IsMover {
     private IsGame game;
     private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };
     private List<Row> rows;
-
     private JFrame board;
 
     public ChessBoard(IsGame game)
@@ -23,10 +22,7 @@ public class ChessBoard extends HasListeners implements IsMover {
 
         this.buildBoard();
         this.setStartUpPosition();
-
-        /*Stockfish stockFish = new Stockfish();
-        (new Thread(stockFish)).start();*/
-
+        this.updateBoardStatus();
     }
 
     private void updateBoardStatus()
@@ -36,6 +32,11 @@ public class ChessBoard extends HasListeners implements IsMover {
         } else {
             this.board.setTitle("Venter på den andre spilleren...");
         }
+    }
+    
+    public void newAction(Action action)
+    {
+
     }
 
     public void movePiece(ChessPiece piece, Field from, Field to, boolean otherPlayer)
@@ -111,6 +112,7 @@ public class ChessBoard extends HasListeners implements IsMover {
                 chatTextField.setText("");
             }
         });
+
         chatTextField.setPreferredSize(new Dimension(30, 10));
         JScrollPane chatTextFieldScrollPane = new JScrollPane(chatTextField);
         chatArea.setLayout(chatAreaLayout);
@@ -131,6 +133,7 @@ public class ChessBoard extends HasListeners implements IsMover {
                 chatTextField.setText("");
             }
         });
+
         JButton emptyLogButton = new JButton("Empty log");
         //Empty button actionlistener
         emptyLogButton.addActionListener(new ActionListener() {
@@ -138,6 +141,7 @@ public class ChessBoard extends HasListeners implements IsMover {
                 logArea.setText("");
             }
         });
+
         chatButtonsPanel.add(sendChatButton);
         chatButtonsPanel.add(emptyLogButton);
         chatArea.add(chatLabel);
@@ -167,7 +171,9 @@ public class ChessBoard extends HasListeners implements IsMover {
             }
             this.rows.add(newRow);
         }
+
         //this.board.pack();
+
         this.board.repaint();
         this.board.revalidate();
         this.board.setVisible(true);

@@ -3,7 +3,8 @@ class StockfishCommands {
 	public static final String SET_UCI = "uci \n";
 	public static final String SET_POSITION = "position startpos moves ";
 	public static final String SET_FEN_POSITION = "position fen ";
-	public static final String NEXT_MOVE = "go";
+	public static final String NEXT_MOVE = "go \n";
+	public static final String GET_POSITION = "d \n";
 	public static String ENGINE_READY = "isready \n";
 	public static final String START_NEW_GAME = "ucinewgame \n";
 }
