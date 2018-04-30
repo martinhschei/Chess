@@ -4,6 +4,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
     
     private Player player;
     private Player opponent;
+
     private boolean movesAllowed;
     private List<Move> moves;
     private ChessBoard board;
@@ -122,7 +123,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         answer.append(getMoveCount());
         return answer.toString();
     }
-    
+
     private String getPlayerColorForUserWhoHaveTurn()
     {
         if(this.myTurn()) {
