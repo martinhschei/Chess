@@ -202,7 +202,4 @@ public class ChessBoard extends HasListeners implements IsMover {
         }
         return fen.toString();
     }
-
-
-
 }

@@ -62,18 +62,18 @@ class Row {
 		}
 
 		StringBuilder fen = new StringBuilder();
-		int empty = 0;
+		int emptyField = 0;
 		for(Field field : fields) {
 			if(field.hasPiece()) {
-				fen.append(empty == 0 ? field.getCurrentPieceName() : empty + field.getCurrentPieceName());
-				empty = 0;
+				fen.append(emptyField == 0 ? field.getCurrentPieceName() : emptyField + field.getCurrentPieceName());
+				emptyField = 0;
 			}
 			else {
-				empty++;
+				emptyField++;
 			}
 		}
-		if (empty != 0){
-			fen.append(empty);
+		if (emptyField != 0){
+			fen.append(emptyField);
 		}
 		return fen + "/";
 	}

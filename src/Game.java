@@ -67,9 +67,9 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
 
     public void getBestMove()
     {
-        String answer = BuildCurrentFen();
+        String answer = buildCurrentFen();
         System.out.println("FEN position: " + answer);
-        stockFish.setFentPos(answer);
+        stockFish.setFEN(answer);
         String moveHistory = getMovesString();
         System.out.println("Spør stockfish om bestmove");
         stockFish.setMovesString(moveHistory);
@@ -78,13 +78,13 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
 
     }
 
-    private String BuildCurrentFen(){
-        String answer = "";
-        answer = this.board.getCurrentFen();
-        answer += " "+getCurrentPlayerColor();
-        answer += " - - 0 ";
-        answer += getMoveNo();
-        return answer;
+    private String buildCurrentFen(){
+        StringBuilder answer = new StringBuilder();
+        answer.append(this.board.getCurrentFen());
+        answer.append(" " + getCurrentPlayerColor());
+        answer.append(" - - 0 ");
+        answer.append(getMoveCount());
+        return answer.toString();
     }
 
     private String getCurrentPlayerColor()
@@ -101,7 +101,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         return temp;
     }
 
-    private String getMoveNo(){
+    private String getMoveCount(){
 	    String temp = "";
 	    int no = 0;
 	    no = (moves.size()/2)+1;

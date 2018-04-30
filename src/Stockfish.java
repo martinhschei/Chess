@@ -40,7 +40,8 @@ class Stockfish implements Runnable {
     {
         this.movesString = moves;
     }
-	public void setFentPos(String fen)
+
+	public void setFEN(String fen)
 	{
 		this.currentFen = fen;
 	}
@@ -57,7 +58,7 @@ class Stockfish implements Runnable {
 
 	public String getComputerMove()
 	{
-		try{
+		try {
 			this.stockFishWriter.write(StockfishCommands.SET_POSITION + this.getMovesHistory() + "\n");
 			this.stockFishWriter.flush();
 		}
@@ -72,7 +73,7 @@ class Stockfish implements Runnable {
 	}
 	public String getComputerMoveByFen()
 	{
-		try{
+		try {
 			this.stockFishWriter.write(StockfishCommands.START_NEW_GAME);
 			this.stockFishWriter.flush();
 			this.stockFishWriter.write(StockfishCommands.SET_FEN_POSITION + this.currentFen + "\n");
@@ -84,7 +85,7 @@ class Stockfish implements Runnable {
 		System.out.println("Sender kommando: " + StockfishCommands.SET_FEN_POSITION + this.currentFen + "\n");
 		System.out.println("Sender kommando: " + StockfishCommands.NEXT_MOVE + "\n");
 		return this.sendCommand(
-				StockfishCommands.NEXT_MOVE +"\n",
+				StockfishCommands.NEXT_MOVE + "\n",
 				StockfishReturns.BESTMOVE);
 	}
 

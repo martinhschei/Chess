@@ -93,7 +93,7 @@ public class StartMeny extends JFrame {
 				}
 				if(hostButton.isSelected() && !nickNameField.getText().equals("")) {
 					System.out.println("debug: hostbutton isselected. FUNGERER");
-					gSettings.setPlayer(new Player(nickNameField.toString(), true));
+					gSettings.setPlayer(new Player(nickNameField.getText(), true));
 					gSettings.setHost();
 					gSettings.setReady(true);
 				}
