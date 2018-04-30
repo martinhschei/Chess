@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public final class Logger {
     static private List<Log> logList = new ArrayList<>();
@@ -14,4 +12,13 @@ public final class Logger {
         return logList;
     }
 
+    public List<String> getLogOfType(LogType logType) {
+        ArrayList logItems = new ArrayList();
+        for (Log logItem : logList) {
+            if (logItem.getType() == logType) {
+                logItems.add(logItem.getMessage());
+            }
+        }
+        return logItems;
+    }
 }
