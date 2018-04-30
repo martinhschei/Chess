@@ -60,6 +60,7 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
             from = translateToLocalField(from);
             to = translateToLocalField(to);
             from.setPiece(null);
+            to.setPiece(null);
             to.setPiece(piece);
         }
 
@@ -69,6 +70,7 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
                 if(this.game.isMoveLegal(newMove)) {
                     clearHighlights();
                     from.setPiece(null);
+                    to.setPiece(null);
                     to.setPiece(piece);
                     this.publishNewMove(newMove);
                 }
@@ -252,10 +254,22 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
     public boolean clickAllowed(Field field)
     {
         if (field.hasPiece()) {
-            return (this.game.myTurn() && (field.getCurrentPiece().isWhite() == this.game.amIWhite()));
-        } else {
+            // Gammel kode, incase jeg tuller det til
+            //return (this.game.myTurn() && (field.getCurrentPiece().isWhite() == this.game.amIWhite()));
+            if (this.game.myTurn() && (field.getCurrentPiece().isWhite() == this.game.amIWhite()))
+            {
+                return true;
+            }
+            if (this.game.myTurn() && (field.getCurrentPiece().isWhite() != this.game.amIWhite()) && Field.selectedField != null)
+            {
+                return true;
+            }
+
+        }
+        else {
             return this.game.myTurn();
         }
+        return false;
     }
 
     protected Field getFieldOnPosition(Position pos)
