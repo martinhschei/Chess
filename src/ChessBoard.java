@@ -38,14 +38,23 @@ public class ChessBoard extends HasListeners implements IsMover {
         {
             from = translateToLocalField(from);
             to = translateToLocalField(to);
+            from.setPiece(null);
+            to.setPiece(piece);
         }
-        from.setPiece(null);
-        to.setPiece(piece);
         Move newMove = new Move(from, to, piece);
-
         if(!otherPlayer) {
-            this.publishNewMove(newMove);
+                if(this.game.isMoveLegal(newMove))
+                {
+                from.setPiece(null);
+                to.setPiece(piece);
+                this.publishNewMove(newMove);
+                }
+                else{
+                    from.reset();
+                    System.out.println("DEBUG: Illegal Move!!! \n");
+                }
         }
+
 
         this.updateBoardStatus();
 

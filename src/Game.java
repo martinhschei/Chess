@@ -55,21 +55,18 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         return this.player.isWhite();
     }
 
+    public boolean isMoveLegal(Move move)
+    {
+        String moveString = getMovesString();
+        return stockFish.isMoveLegal(moveString, move);
+    }
+
+
     public void newMove(Move move)
     {
-        String fen = buildCurrentFen();
-        String moveString = getMovesString();
-        if(stockFish.isMoveLegal(moveString, move))
-        {
             moves.add(move);
             this.movesAllowed = false;
             this.publishAction(new Action("move", move));
-        }
-        else
-        {
-            System.out.println("DEBUG: ILLEGAL MOVE, TRY AGAIN \n");
-        }
-
     }
 
     private void highlightMove(Move move)

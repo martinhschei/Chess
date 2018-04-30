@@ -61,7 +61,7 @@ class Stockfish implements Runnable {
 		newFen = translateAnswerToFen(newFen);
 		if(newFen.equals(fen))
 		{
-			System.out.println("DEBUG: " + newFen + " samsvarer med" + fen + "\n");
+			System.out.println("DEBUG: " + newFen + " samsvarer med " + fen + "\n");
 			answer = false;
 		}
 		else
