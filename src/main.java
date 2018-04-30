@@ -1,0 +1,9 @@
+class main 
+{
+	public static void main(String[] args)
+	{
+		new GameLobby();
+		new GameLobby();
+
+	}
+}
