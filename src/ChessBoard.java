@@ -126,8 +126,8 @@ public class ChessBoard extends HasListeners implements IsMover {
             switch (column) {
                 case ('a'):
                 case ('h'): {
-                    this.placePieceOnPosition(new Tower(false), new Position(column, 8));
-                    this.placePieceOnPosition(new Tower(true), new Position(column, 1));
+                    this.placePieceOnPosition(new Rook(false), new Position(column, 8));
+                    this.placePieceOnPosition(new Rook(true), new Position(column, 1));
                     break;
                 }
                 case ('b'):

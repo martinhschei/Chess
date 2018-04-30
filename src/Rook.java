@@ -1,8 +1,8 @@
 
-public class Tower extends ChessPiece {
+public class Rook extends ChessPiece {
 
-	public Tower(boolean white) {
-		super("t", white);
+	public Rook(boolean white) {
+		super("r", white);
 		this.imgString += this.isWhite() ? "Chess_rlt60.png" : "Chess_rdt60.png";
 	}
 
