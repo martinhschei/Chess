@@ -8,15 +8,15 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
     private boolean movesAllowed;
 
     private List<Move> moves;
-    private ChessGui board;
+    private ChessGui chessGui;
     private Stockfish stockFish;
 
 	public Game(Player player)
 	{
         Logger logger = new Logger();
 
-	    this.board = new ChessGui(this);
-        this.board.addListener(this);
+	    this.chessGui = new ChessGui(this);
+        this.chessGui.addListener(this);
 
         this.player = player;
 
@@ -121,12 +121,12 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
     {
         char c = this.translatePositionToChar(position);
         int i = this.translatePositionToInt(position);
-        Field field = this.board.getFieldOnPosition(new Position(c,i));
+        Field field = this.chessGui.getFieldOnPosition(new Position(c,i));
         return field;
     }
 
     private String buildCurrentFen(){
-        String answer = this.board.getCurrentFen() +
+        String answer = this.chessGui.getCurrentFen() +
                 " " + this.getPlayerColorForUserWhoHaveTurn() +
                 " - - 0 " +
                 getMoveCount();
@@ -149,7 +149,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
     private void onNewOpponentMove(Move move)
     {
         this.movesAllowed = true;
-        this.board.movePiece(move.getPiece(), move.getFrom(), move.getTo(), true);
+        this.chessGui.movePiece(move.getPiece(), move.getFrom(), move.getTo(), true);
         Move bestMove = getBestMove();
         this.highlightMove(bestMove);
     }
@@ -189,19 +189,11 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
                     }
                 }
 
-                // for debugging
-                if(this.player.isHost()) {
-                    System.out.println("Host::" + this.opponent);
-                }
-
-                if(!this.player.isHost()) {
-                    System.out.println("Client:" + this.opponent);
-                }
-
                 break;
             }
+            
             case("chat") : {
-                this.board.writeLogToScreen((Log)action.getPayload());
+                this.chessGui.writeLogToScreen((Log)action.getPayload());
                 break;
             }
         }
