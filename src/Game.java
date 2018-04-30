@@ -66,9 +66,9 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
 
     public void newMove(Move move)
     {
-            moves.add(move);
-            this.movesAllowed = false;
-            this.publishAction(new Action("move", move));
+        moves.add(move);
+        this.movesAllowed = false;
+        this.publishAction(new Action("move", move));
     }
 
     private void highlightMove(Move move)
@@ -86,6 +86,11 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         String moveString = this.stockFish.getComputerMoveByFen();
         System.out.println("Stockfish svarte: " + moveString);
         return this.translateFromMoveString(moveString);
+    }
+
+    public void onBoardAction(Action action)
+    {
+
     }
 
     private Move translateFromMoveString(String moveString)
@@ -140,7 +145,8 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         return this.amIWhite() ? "b" : "w" ;
     }
 
-    private String getMoveCount(){
+    private String getMoveCount()
+    {
 	    String temp = "";
 	    int no = 0;
 	    no = (moves.size()/2)+1;
