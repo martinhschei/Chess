@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,10 +72,10 @@ public class ChessBoard extends HasListeners implements IsMover {
         GridLayout boardLayout = new GridLayout(8, 8, 1, 1);
         boardPanel.setLayout(boardLayout);
 
-        //Container for the rightbox
+        //Container for the right-box
         JPanel rightPanel = new JPanel();
         GridLayout logLayout = new GridLayout(0,1);
-        JTextArea logArea = new JTextArea("Her vil loggen printes");
+        JTextArea logArea = new JTextArea("Her vil loggen printes", 0, 20);
         logArea.setEditable(false);
 
         //Scrollpane for logArea. Currently logArea-text is hidden?
@@ -81,23 +83,38 @@ public class ChessBoard extends HasListeners implements IsMover {
         logScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         logScrollPane.add(logArea);
         rightPanel.setLayout(logLayout);
-        rightPanel.add(logScrollPane);
+        rightPanel.add(logArea);
 
         //Container for chat box
         JPanel chatArea = new JPanel();
         GridLayout chatAreaLayout = new GridLayout(3,0);
         JTextField chatLabel = new JTextField("Chat med din motspiller!");
         chatLabel.setEditable(false);
-        JTextField chatTextField = new JTextField(20);
+        JTextField chatTextField = new JTextField();
+        chatTextField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                logArea.append("\n" + chatTextField.getText());
+                chatTextField.setText("");
+            }
+        });
+        chatTextField.setPreferredSize(new Dimension(30, 10));
         JScrollPane chatTextFieldScrollPane = new JScrollPane(chatTextField);
         chatArea.setLayout(chatAreaLayout);
         JButton sendChatButton = new JButton("Send");
+
+        //Send.button actionlistener
+        sendChatButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                logArea.append("\n" + chatTextField.getText());
+                chatTextField.setText("");
+            }
+        });
         chatArea.add(chatLabel);
         chatArea.add(chatTextFieldScrollPane);
         chatArea.add(sendChatButton);
 
         //Splitpane for the right-box
-        JSplitPane leftBoxSplitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, logScrollPane, chatArea);
+        JSplitPane leftBoxSplitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, logArea, chatArea);
         leftBoxSplitpane.setEnabled(false);
         leftBoxSplitpane.setDividerLocation(570);
         leftBoxSplitpane.setDividerSize(10);
