@@ -4,8 +4,8 @@ public abstract class ChessPiece extends JPanel {
 	
 	final String name;
 	final boolean isStriking;
-	final boolean white;
-	protected String imgString;
+	private final boolean white;
+	String imgString;
 	//protected String imgPath = System.getProperty("user.dir") + "\\img\\";
 
 	ChessPiece(String name, boolean white)
@@ -21,8 +21,6 @@ public abstract class ChessPiece extends JPanel {
 	{
 		return this.white;
 	}
-
-	public abstract boolean isLegalMove(Field oldField, Field newField);
 
 }
 

@@ -19,9 +19,9 @@ public class Field implements Serializable {
 	public static Field selectedField;
 	private boolean isHighlighted;
 
-	private static String imgPath = System.getProperty("user.dir") + "\\img\\";;
-	
-	public JLabel Image() {
+	private static String imgPath = System.getProperty("user.dir") + "\\img\\";
+
+	private JLabel Image() {
 		
 	    BufferedImage img = null;
 		try {
@@ -68,7 +68,7 @@ public class Field implements Serializable {
         this.reset();
     }
 
-	public void clearSelection()
+	private void clearSelection()
     {
 		this.button.removeAll();
        	this.reset();
@@ -146,8 +146,7 @@ public class Field implements Serializable {
 			this.selected = false;
 			Field.selectedField.selected = false;
 			Field.selectedField = null;
-			return;
-		}
+        }
 	}
 	
 	public boolean isCurrentPieceWhite()

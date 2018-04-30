@@ -5,10 +5,5 @@ public class Knight extends ChessPiece {
 		super("n", white);
 		this.imgString += this.isWhite() ? "Chess_nlt60.png" : "Chess_ndt60.png";
 	}
-	
-	@Override
-	public boolean isLegalMove(Field newField, Field oldField) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 }

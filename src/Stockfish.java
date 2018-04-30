@@ -12,9 +12,6 @@ class Stockfish implements Runnable {
 	private OutputStreamWriter stockFishWriter;
 	private BufferedReader stockFishReader;
     private String currentFen;
-    private int fullMoveCount = 0;
-    private char turn = 'w';
-    private String castling = "KQkq";
 	
 	public Stockfish()
 	{
@@ -73,7 +70,7 @@ class Stockfish implements Runnable {
 		return answer;
 	}
 
-	public String translateAnswerToFen(String answer)
+	private String translateAnswerToFen(String answer)
 	{
 		String fen = null;
 		int length = answer.length();

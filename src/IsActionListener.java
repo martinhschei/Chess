@@ -1,3 +1,3 @@
 interface IsActionListener {
-    void newAction(Action action);
+    void onNewAction(Action action);
 }

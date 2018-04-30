@@ -4,6 +4,5 @@ class Chess
 	{
 		new GameLobby();
 		new GameLobby();
-
 	}
 }

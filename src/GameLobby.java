@@ -1,7 +1,7 @@
 import java.util.Observable;
 import java.util.Observer;
 
-public class GameLobby implements Observer {
+class GameLobby implements Observer {
 
     HovedMeny menu = null;
     GameSettings settings = null;

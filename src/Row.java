@@ -1,10 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Collections;
 
 class Row {
 
-	private final List<Field> fields = new ArrayList<Field>();
+	private final List<Field> fields = new ArrayList<>();
 	private final int index;
 	
 	public Row(int index)

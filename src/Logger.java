@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-public class Logger extends Observable {
+class Logger extends Observable {
     private List<Log> logList = new ArrayList<>();
 
     public Log setChatLog(String message) {

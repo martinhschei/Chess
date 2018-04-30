@@ -7,11 +7,5 @@ public class Bishop extends ChessPiece {
 		
 	}
 
-	@Override
-	public boolean isLegalMove(Field newField, Field oldField) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
 
 }

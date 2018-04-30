@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChessBoard extends HasListeners implements IsMover, IsActionListener {
+public class ChessGui extends HasListeners implements IsMover {
 
     private JTextArea logArea;
     private IsGame game;
@@ -13,7 +13,7 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
     private List<Row> rows;
     private JFrame board;
 
-    public ChessBoard(IsGame game)
+    public ChessGui(IsGame game)
     {
         this.game = game;
         this.rows = new ArrayList();
@@ -32,12 +32,7 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
         }
     }
 
-    public void newAction(Action action)
-    {
-
-    }
-
-    public void clearHighlights()
+    private void clearHighlights()
     {
         for(Row row : rows)
         {
@@ -89,7 +84,7 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
         this.board.revalidate();
     }
 
-    public void buildBoard()
+    private void buildBoard()
     {
         //Container for sjakkbrett og høyrepanel
         this.board = new JFrame();
@@ -126,12 +121,9 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
         chatLabel.setEditable(false);
         JTextField chatTextField = new JTextField(20);
 
-        chatTextField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                sendChat(chatTextField.getText());
-                //writeLogToScreen();
-                chatTextField.setText("");
-            }
+        chatTextField.addActionListener(e -> {
+            sendNewChatMessage(chatTextField.getText());
+            chatTextField.setText(" ");
         });
 
         chatTextField.setPreferredSize(new Dimension(30, 10));
@@ -142,21 +134,16 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
         JButton sendChatButton = new JButton("Send");
 
         //Send.button actionlistener
-        sendChatButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                sendChat(chatTextField.getText());
-                //writeLogToScreen();
-                chatTextField.setText("");
-            }
+        sendChatButton.addActionListener(e -> {
+            sendNewChatMessage(chatTextField.getText());
+            chatTextField.setText(" ");
         });
-
 
         JButton emptyLogButton = new JButton("Empty log");
         //Empty button actionlistener
-        emptyLogButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                logArea.setText("");
-            }
+        emptyLogButton.addActionListener(e -> {
+            sendNewChatMessage(chatTextField.getText());
+            chatTextField.setText(" ");
         });
 
         chatButtonsPanel.add(sendChatButton);
@@ -189,16 +176,14 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
             this.rows.add(newRow);
         }
 
-        //this.board.pack();
-
         this.board.repaint();
         this.board.revalidate();
         this.board.setVisible(true);
     }
 
-    public void sendChat(String text) {
-        //Log log = Logger.setChatLog(text);
-        this.game.onNewChat(text);
+    private void sendNewChatMessage(String message)
+    {
+        publishNewChatMessage(message);
     }
 
     public void writeLogToScreen(Log log) {
@@ -259,19 +244,15 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
             {
                 return true;
             }
-            if (this.game.myTurn() && (field.getCurrentPiece().isWhite() != this.game.amIWhite()) && Field.selectedField != null)
-            {
-                return true;
-            }
+            return this.game.myTurn() && (field.getCurrentPiece().isWhite() != this.game.amIWhite()) && Field.selectedField != null;
 
         }
         else {
             return this.game.myTurn();
         }
-        return false;
     }
 
-    protected Field getFieldOnPosition(Position pos)
+    Field getFieldOnPosition(Position pos)
     {
         Row row = this.getRowByIndex(pos.getRow());
         return row.getField(pos.getColumn());
@@ -293,7 +274,7 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
         field.setPiece(piece);
     }
 
-    protected String getCurrentFen()
+    String getCurrentFen()
     {
         StringBuilder fen = new StringBuilder();
         for(Row row : rows)

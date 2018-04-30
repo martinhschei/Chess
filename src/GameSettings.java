@@ -3,13 +3,13 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Observable;
 import java.util.Properties;
 
-public class GameSettings extends Observable {
+class GameSettings extends Observable {
 
     private Player player = null;
     private String ip;
     private String nickName;
-    Properties properties = new Properties();
-    File configFile = new File( System.getProperty("user.dir") + "\\src\\config.xml");
+    private Properties properties = new Properties();
+    private File configFile = new File( System.getProperty("user.dir") + "\\src\\config.xml");
 
     public void loadConfig(){
 
@@ -22,8 +22,6 @@ public class GameSettings extends Observable {
             inputStream.close();
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (InvalidPropertiesFormatException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

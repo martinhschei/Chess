@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class StartMeny extends JFrame {
+class StartMeny extends JFrame {
 
     private GameSettings gSettings;
 	public JPanel main = null;
@@ -42,11 +42,7 @@ public class StartMeny extends JFrame {
 		ButtonGroup bg1 = new ButtonGroup();
 		hostButton = new JRadioButton("Host Game");
 		joinButton = new JRadioButton("Join Game");
-		joinButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			ipInputField.setEditable(true);
-			}
-		});
+		joinButton.addActionListener(e -> ipInputField.setEditable(true));
 		hostButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ipInputField.setEditable(false);
