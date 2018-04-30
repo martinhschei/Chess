@@ -17,6 +17,7 @@ public class Field implements Serializable {
 	private boolean selected;
 	private transient IsMover mover;
 	public static Field selectedField;
+	private boolean isHighlighted;
 
 	private static String imgPath = System.getProperty("user.dir") + "\\img\\";;
 	
@@ -53,16 +54,22 @@ public class Field implements Serializable {
 	public void highlight()
     {
         this.button.setBackground(Color.ORANGE);
+        this.isHighlighted = true;
+    }
+    public boolean isFieldHighlighted()
+    {
+        return this.isHighlighted;
+    }
+    public void clearHighlights()
+    {
+        this.isHighlighted = false;
+        this.reset();
     }
 
 	public void clearSelection()
     {
 		this.button.removeAll();
-        if(this.isFieldWhite()) {
-			this.button.setBackground(Color.white);
-		} else {
-        	this.button.setBackground(Color.gray);
-		}
+       	this.reset();
     }
 
 	private void createFieldButton()
@@ -91,6 +98,22 @@ public class Field implements Serializable {
 
 	}
 
+	public void reset()
+	{
+		if(!this.isHighlighted)
+		{
+			if (this.isFieldWhite()) {
+				this.button.setBackground(Color.white);
+			} else {
+				this.button.setBackground(Color.gray);
+			}
+		}
+		else{
+			this.button.setBackground(Color.ORANGE);
+		}
+
+	}
+
 	private void fieldClick()
 	{
 		if (!this.mover.clickAllowed(this)) {
@@ -101,11 +124,7 @@ public class Field implements Serializable {
 		// deselect
 		if (Field.selectedField == this) {
 			this.selected = false;
-			if (this.isFieldWhite()) {
-				this.button.setBackground(Color.white);
-			} else {
-				this.button.setBackground(Color.gray);
-			}
+			this.reset();
 			Field.selectedField = null;
 			return;
 		}

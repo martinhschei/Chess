@@ -1,17 +1,16 @@
-import java.security.PrivateKey;
 import java.util.*;
 
 class Game extends HasListeners implements IsListener, IsActionListener, IsMoveListener, IsGame {
     
     private Player player;
     private Player opponent;
-
     private Logger logger;
-
     private boolean movesAllowed;
     private List<Move> moves;
     private ChessBoard board;
     private Stockfish stockFish;
+
+    private Logger logger;
 
 	public Game(Player player)
 	{
@@ -66,21 +65,18 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         this.publishAction(new Action("chat", new Log(LogType.CHAT, message)));
     }
 
+    public boolean isMoveLegal(Move move)
+    {
+        String moveString = getMovesString();
+        return stockFish.isMoveLegal(moveString, move);
+    }
+
+
     public void newMove(Move move)
     {
-        String fen = buildCurrentFen();
-        String moveString = getMovesString();
-        if(stockFish.isMoveLegal(moveString, move))
-        {
             moves.add(move);
             this.movesAllowed = false;
             this.publishAction(new Action("move", move));
-        }
-        else
-        {
-            System.out.println("DEBUG: ILLEGAL MOVE, TRY AGAIN \n");
-        }
-
     }
 
     private void highlightMove(Move move)
@@ -143,7 +139,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         answer.append(getMoveCount());
         return answer.toString();
     }
-
+    
     private String getPlayerColorForUserWhoHaveTurn()
     {
         if(this.myTurn()) {
