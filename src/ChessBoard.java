@@ -180,7 +180,7 @@ public class ChessBoard extends HasListeners implements IsMover {
         }
     }
 
-    private Field getFieldOnPosition(Position pos)
+    protected Field getFieldOnPosition(Position pos)
     {
         Row row = this.getRowByIndex(pos.getRow());
         return row.getField(pos.getColumn());
