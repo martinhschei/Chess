@@ -184,7 +184,7 @@ public class ChessGui extends HasListeners implements IsMover {
         publishNewChatMessage(message);
     }
 
-    public void writeLogToScreen(Log log) {
+    public void onNewChatMessage(Log log) {
         logArea.append("\n" + log.getMessage());
     }
 

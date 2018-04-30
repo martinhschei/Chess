@@ -188,12 +188,11 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
                         this.publishAction(new Action("thisisme", this.player));
                     }
                 }
-
                 break;
             }
-            
+
             case("chat") : {
-                this.chessGui.writeLogToScreen((Log)action.getPayload());
+                this.chessGui.onNewChatMessage((Log)action.getPayload());
                 break;
             }
         }
