@@ -69,7 +69,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         for(Move m : moves) {
             moveHistory += m.toString();
         }
-        
+
         return this.stockFish.getBestmove(moveHistory);
     }
 
