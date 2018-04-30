@@ -17,13 +17,14 @@ public class Field implements Serializable {
 	private boolean selected;
 	private transient IsMover mover;
 	public static Field selectedField;
-	private static String imgPath;
+
+	private static String imgPath = System.getProperty("user.dir") + "\\img\\";;
 	
 	public JLabel Image() {
 		
 	    BufferedImage img = null;
 		try {
-			String imgString = imgPath + this.currentPiece.imgString;
+			String imgString = Field.imgPath + this.currentPiece.imgString;
 			img = ImageIO.read(new File(imgString));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -31,16 +32,13 @@ public class Field implements Serializable {
 		return new JLabel(new ImageIcon(img));
 	}
 
-
 	public Field(Position position, IsMover mover)
 	{
 		this.position = position;
 		this.currentPiece = null;
 		this.selected = false;
 		this.mover = mover;
-		imgPath = System.getProperty("user.dir") + "\\img\\";
 		this.createFieldButton();
-
 	}
 	
 	private boolean isFieldWhite()
@@ -51,6 +49,11 @@ public class Field implements Serializable {
 			return this.position.getColumn() == 'b' || this.position.getColumn() == 'd' || this.position.getColumn() == 'f' || this.position.getColumn() == 'h';
 		}
 	}
+
+	public void highlight()
+    {
+        this.button.setBackground(Color.ORANGE);
+    }
 
 	public void clearSelection()
     {
@@ -133,7 +136,7 @@ public class Field implements Serializable {
 		}
 		return false;
 	}
-	
+
 	public boolean isAtPosition(Position pos)
 	{
 		return (this.position.getRow() == pos.getRow() && this.position.getColumn() == pos.getColumn());

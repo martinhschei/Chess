@@ -5,7 +5,8 @@ public class GameSettings extends Observable {
     private Player player = null;
     private String ip;
 
-    public GameSettings(){
+    public GameSettings()
+    {
         player = new Player("player1", true);
     }
 
@@ -29,7 +30,8 @@ public class GameSettings extends Observable {
         player = arg;
     }
 
-    public void setHost(){
+    public void setHost()
+    {
         player.setHost();
     }
 }

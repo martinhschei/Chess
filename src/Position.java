@@ -10,8 +10,7 @@ public class Position implements Serializable {
 		this.column = column;
 		this.row = row;
 	}
-	
-	
+
 	public int getRow() {
 		return this.row;
 	}

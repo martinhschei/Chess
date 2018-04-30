@@ -1,11 +1,9 @@
 import java.util.*;
-import java.util.List;
 
 class Game extends HasListeners implements IsListener, IsActionListener, IsMoveListener, IsGame {
-
+    
     private Player player;
     private Player opponent;
-
     private boolean movesAllowed;
     private List<Move> moves;
     private ChessBoard board;
@@ -62,20 +60,25 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         moves.add(move);
         this.movesAllowed = false;
         this.publishAction(new Action("move", move));
-        getBestMove();
+        Move bestMove = getBestMove();
+        this.highlightMove(bestMove);
     }
 
-    public void getBestMove()
+    private void highlightMove(Move move)
     {
-        String answer = buildCurrentFen();
-        System.out.println("FEN position: " + answer);
-        stockFish.setFEN(answer);
-        String moveHistory = getMovesString();
-        System.out.println("Spør stockfish om bestmove");
-        stockFish.setMovesString(moveHistory);
-        answer = this.stockFish.getComputerMoveByFen();
-        System.out.println("Stockfish svarte: " + answer);
+        move.getFrom().highlight();
+        move.getTo().highlight();
+    }
 
+    public Move getBestMove()
+    {
+        String fen = buildCurrentFen();
+        System.out.println("FEN position: " + fen);
+        stockFish.setFEN(fen);
+        System.out.println("Spør stockfish om bestmove");
+        Move move = this.stockFish.getComputerMoveByFen();
+        System.out.println("Stockfish svarte: " + move);
+        return new Move();
     }
 
     private String buildCurrentFen(){
