@@ -75,6 +75,7 @@ public class ChessBoard extends HasListeners implements IsMover {
         GridLayout logLayout = new GridLayout(0,1);
         JTextArea logArea = new JTextArea("Her vil loggen printes");
         logArea.setEditable(false);
+
         //Scrollpane for logArea. Currently logArea-text is hidden?
         JScrollPane logScrollPane = new JScrollPane();
         logScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -84,18 +85,24 @@ public class ChessBoard extends HasListeners implements IsMover {
 
         //Container for chat box
         JPanel chatArea = new JPanel();
+        GridLayout chatAreaLayout = new GridLayout(3,0);
         JTextField chatLabel = new JTextField("Chat med din motspiller!");
-        GridLayout chatAreaLayout = new GridLayout(2,0);
-        JTextField chatTextField = new JTextField(20);
-        chatArea.setLayout(chatAreaLayout);
         chatLabel.setEditable(false);
+        JTextField chatTextField = new JTextField(20);
+        JScrollPane chatTextFieldScrollPane = new JScrollPane(chatTextField);
+        chatArea.setLayout(chatAreaLayout);
+        JButton sendChatButton = new JButton("Send");
         chatArea.add(chatLabel);
-        chatArea.add(chatTextField);
+        chatArea.add(chatTextFieldScrollPane);
+        chatArea.add(sendChatButton);
+
         //Splitpane for the right-box
         JSplitPane leftBoxSplitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, logScrollPane, chatArea);
-        leftBoxSplitpane.setDividerLocation(630);
-        leftBoxSplitpane.setDividerSize(2);
+        leftBoxSplitpane.setEnabled(false);
+        leftBoxSplitpane.setDividerLocation(570);
+        leftBoxSplitpane.setDividerSize(10);
         rightPanel.add(leftBoxSplitpane);
+
         //Splitpane for the whole window
         JSplitPane containerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, boardPanel, rightPanel);
         containerSplitPane.setOneTouchExpandable(true);
