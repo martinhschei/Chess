@@ -59,43 +59,45 @@ public class ChessBoard extends HasListeners implements IsMover {
 
     public void buildBoard()
     {
+        //Container for sjakkbrett og høyrepanel
         this.board = new JFrame();
         this.board.setSize(1000,750);
         this.board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.board.setTitle("LotionChess: Din smootheste sjakk-opplevelse!");
 
-        GridLayout board = new GridLayout(8, 8, 1, 1);
+        //Container for board
         JPanel boardPanel = new JPanel();
-        boardPanel.setLayout(board);
+        GridLayout boardLayout = new GridLayout(8, 8, 1, 1);
+        boardPanel.setLayout(boardLayout);
 
-        JPanel leftPanel = new JPanel();
+        //Container for the rightbox
+        JPanel rightPanel = new JPanel();
         GridLayout logLayout = new GridLayout(0,1);
         JTextArea logArea = new JTextArea("Her vil loggen printes");
         logArea.setEditable(false);
+        //Scrollpane for logArea. Currently logArea-text is hidden?
+        JScrollPane logScrollPane = new JScrollPane();
+        logScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        logScrollPane.add(logArea);
+        rightPanel.setLayout(logLayout);
+        rightPanel.add(logScrollPane);
 
+        //Container for chat box
         JPanel chatArea = new JPanel();
-        JPanel chatTextAreaPanel = new JPanel();
-        JPanel chatTextFieldPanel = new JPanel();
-        JTextArea chatTextArea = new JTextArea("Chat chat chat chat chat chat chat chat");
+        JTextField chatLabel = new JTextField("Chat med din motspiller!");
+        GridLayout chatAreaLayout = new GridLayout(2,0);
         JTextField chatTextField = new JTextField(20);
-        chatTextAreaPanel.add(chatTextArea);
-        chatTextAreaPanel.setLayout(new FlowLayout());
-        chatTextFieldPanel.add(chatTextField);
-        chatTextFieldPanel.setLayout(new FlowLayout());
-        JSplitPane chatAreaSplitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, chatTextAreaPanel, chatTextFieldPanel);
-        chatAreaSplitpane.setDividerLocation(200);
-        chatArea.add(chatAreaSplitpane);
-
-        leftPanel.setLayout(logLayout);
-        leftPanel.add(logArea);
-        JSplitPane leftBoxSplitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, logArea, chatArea);
-        leftBoxSplitpane.setDividerLocation(400);
+        chatArea.setLayout(chatAreaLayout);
+        chatLabel.setEditable(false);
+        chatArea.add(chatLabel);
+        chatArea.add(chatTextField);
+        //Splitpane for the right-box
+        JSplitPane leftBoxSplitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, logScrollPane, chatArea);
+        leftBoxSplitpane.setDividerLocation(630);
         leftBoxSplitpane.setDividerSize(2);
-
-        leftPanel.add(leftBoxSplitpane);
-
-
-        JSplitPane containerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, boardPanel, leftPanel);
+        rightPanel.add(leftBoxSplitpane);
+        //Splitpane for the whole window
+        JSplitPane containerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, boardPanel, rightPanel);
         containerSplitPane.setOneTouchExpandable(true);
         containerSplitPane.setDividerLocation(735);
         Container content = this.board.getContentPane();
