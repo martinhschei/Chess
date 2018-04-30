@@ -100,6 +100,8 @@ public class ChessBoard extends HasListeners implements IsMover {
         chatTextField.setPreferredSize(new Dimension(30, 10));
         JScrollPane chatTextFieldScrollPane = new JScrollPane(chatTextField);
         chatArea.setLayout(chatAreaLayout);
+        JPanel chatButtonsPanel = new JPanel();
+        GridLayout chatButtonPanelLayout = new GridLayout(1,2);
         JButton sendChatButton = new JButton("Send");
 
         //Send.button actionlistener
@@ -109,9 +111,18 @@ public class ChessBoard extends HasListeners implements IsMover {
                 chatTextField.setText("");
             }
         });
+        JButton emptyLogButton = new JButton("Empty log");
+        //Empty button actionlistener
+        emptyLogButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                logArea.setText("");
+            }
+        });
+        chatButtonsPanel.add(sendChatButton);
+        chatButtonsPanel.add(emptyLogButton);
         chatArea.add(chatLabel);
         chatArea.add(chatTextFieldScrollPane);
-        chatArea.add(sendChatButton);
+        chatArea.add(chatButtonsPanel);
 
         //Splitpane for the right-box
         JSplitPane leftBoxSplitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, logArea, chatArea);
