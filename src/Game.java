@@ -10,6 +10,8 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
     private ChessBoard board;
     private Stockfish stockFish;
 
+    private Logger logger;
+
 	public Game(Player player)
 	{
 	    this.board = new ChessBoard(this);
@@ -58,7 +60,6 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
 
     public void newMove(Move move)
     {
-        String fen = buildCurrentFen();
         String moveString = getMovesString();
         if(stockFish.isMoveLegal(moveString, move))
         {
@@ -70,7 +71,6 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         {
             System.out.println("DEBUG: ILLEGAL MOVE, TRY AGAIN \n");
         }
-
     }
 
     private void highlightMove(Move move)

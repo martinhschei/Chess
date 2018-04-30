@@ -9,5 +9,6 @@ MANIFEST.MF
 .idea
 *.iml
 *.jar
+workspace.xml
 RemoteSystemsTempFiles
 Starting Workspace/.metadata/

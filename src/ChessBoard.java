@@ -30,7 +30,7 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
             this.board.setTitle("Venter på den andre spilleren...");
         }
     }
-    
+
     public void newAction(Action action)
     {
 
