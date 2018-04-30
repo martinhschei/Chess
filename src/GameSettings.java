@@ -9,7 +9,7 @@ public class GameSettings extends Observable {
     private String ip;
     private String nickName;
     Properties properties = new Properties();
-    File configFile = new File("config.xml");
+    File configFile = new File( System.getProperty("user.dir") + "\\src\\config.xml");
 
     public void loadConfig(){
 
@@ -79,6 +79,10 @@ public class GameSettings extends Observable {
     {
         player.setHost();
     }
+
+    public String getIp() { return ip; }
+
+    public  String getNickName() {return nickName; }
 
     public Player getPlayer() {
         return this.player;
