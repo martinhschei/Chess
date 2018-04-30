@@ -1,9 +1,10 @@
 import java.util.*;
 
 class Game extends HasListeners implements IsListener, IsActionListener, IsMoveListener, IsGame {
-    
+
     private Player player;
     private Player opponent;
+    private Logger logger;
     private boolean movesAllowed;
     private List<Move> moves;
     private ChessBoard board;
@@ -13,6 +14,8 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
 
 	public Game(Player player)
 	{
+	    this.logger = new Logger();
+
 	    this.board = new ChessBoard(this);
         this.board.addListener(this);
 
@@ -57,6 +60,11 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         return this.player.isWhite();
     }
 
+    public void onNewChat(String message)
+    {
+        this.publishAction(new Action("chat", new Log(LogType.CHAT, message)));
+    }
+
     public boolean isMoveLegal(Move move)
     {
         String moveString = getMovesString();
@@ -66,9 +74,9 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
 
     public void newMove(Move move)
     {
-            moves.add(move);
-            this.movesAllowed = false;
-            this.publishAction(new Action("move", move));
+        moves.add(move);
+        this.movesAllowed = false;
+        this.publishAction(new Action("move", move));
     }
 
     private void highlightMove(Move move)
@@ -86,6 +94,11 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         String moveString = this.stockFish.getComputerMoveByFen();
         System.out.println("Stockfish svarte: " + moveString);
         return this.translateFromMoveString(moveString);
+    }
+
+    public void onBoardAction(Action action)
+    {
+
     }
 
     private Move translateFromMoveString(String moveString)
@@ -140,7 +153,8 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         return this.amIWhite() ? "b" : "w" ;
     }
 
-    private String getMoveCount(){
+    private String getMoveCount()
+    {
 	    String temp = "";
 	    int no = 0;
 	    no = (moves.size()/2)+1;
@@ -203,7 +217,8 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
                 break;
             }
             case("chat") : {
-                // addToLog(action.gePayload());
+                Player p = this.player;
+                this.board.writeLogToScreen((Log)action.getPayload());
                 break;
             }
         }
