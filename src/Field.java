@@ -56,10 +56,12 @@ public class Field implements Serializable {
         this.button.setBackground(Color.ORANGE);
         this.isHighlighted = true;
     }
+
     public boolean isFieldHighlighted()
     {
         return this.isHighlighted;
     }
+
     public void clearHighlights()
     {
         this.isHighlighted = false;
