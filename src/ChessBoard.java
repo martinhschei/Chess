@@ -64,18 +64,17 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
         Move newMove = new Move(from, to, piece);
 
         if(!otherPlayer) {
-                if(this.game.isMoveLegal(newMove)) {
-                    clearHighlights();
-                    from.setPiece(null);
-                    to.setPiece(piece);
-                    this.publishNewMove(newMove);
-                }
-                else {
-                    from.reset();
-                    System.out.println("DEBUG: Illegal Move!!! \n");
-                }
+            if(this.game.isMoveLegal(newMove)) {
+                clearHighlights();
+                from.setPiece(null);
+                to.setPiece(piece);
+                this.publishNewMove(newMove);
+            }
+            else {
+                from.reset();
+                System.out.println("DEBUG: Illegal Move!!! \n");
+            }
         }
-
 
         this.updateBoardStatus();
         //Logger.setMoveLog(newMove.toString());
