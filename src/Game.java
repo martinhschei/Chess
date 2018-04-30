@@ -60,8 +60,6 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         moves.add(move);
         this.movesAllowed = false;
         this.publishAction(new Action("move", move));
-        Move bestMove = getBestMove();
-        this.highlightMove(bestMove);
     }
 
     private void highlightMove(Move move)
@@ -76,18 +74,17 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         System.out.println("FEN position: " + fen);
         stockFish.setFEN(fen);
         System.out.println("Spør stockfish om bestmove");
-        Move move = this.stockFish.getComputerMoveByFen();
-        System.out.println("Stockfish svarte: " + move);
-        return new Move();
+        String moveString = this.stockFish.getComputerMoveByFen();
+        System.out.println("Stockfish svarte: " + moveString);
+        return this.translateFromMoveString(moveString);
     }
-    private Move translateToMove(String answer){
 
+    private Move translateFromMoveString(String moveString)
+    {
 	    Move move = null;
         String pos1 = "";
         String pos2 = "";
-        String[] temp = answer.split("\\s");
-
-
+        String[] temp = moveString.split("\\s");
         pos1 = temp[1].substring(0,2);
         System.out.println("Pos1: " + pos1);
         pos2 = temp[1].substring(2,4);
@@ -95,9 +92,9 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         Field field1 = translateToField(pos1);
         Field field2 = translateToField(pos2);
         move = new Move(field1,field2,null);
-
 	    return move;
     }
+
     private char translatePositionToChar (String position)
     {
         System.out.println("Debug: translatePositionToChar " + position.substring(0,1).toCharArray()[0]);
@@ -148,6 +145,13 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
 	    return temp;
     }
 
+    private void onNewOpponentMove(Move move)
+    {
+        this.movesAllowed = true;
+        this.board.movePiece(move.getPiece(), move.getFrom(), move.getTo(), true);
+        Move bestMove = getBestMove();
+        this.highlightMove(bestMove);
+    }
 
 	public void newAction(Action action)
     {
@@ -158,8 +162,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
                 System.out.println("Mottaker:" + this.player.getName());
                 System.out.println("Host:" + this.player.isHost());
                 System.out.println("---");
-                this.movesAllowed = true;
-                this.board.movePiece(move.getPiece(), move.getFrom(), move.getTo(), true);
+                this.onNewOpponentMove(move);
                 break;
             }
             case("hereiam") : {
