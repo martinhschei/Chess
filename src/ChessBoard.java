@@ -20,10 +20,7 @@ public class ChessBoard extends HasListeners implements IsMover {
 
         this.buildBoard();
         this.setStartUpPosition();
-
-        /*Stockfish stockFish = new Stockfish();
-        (new Thread(stockFish)).start();*/
-
+        this.updateBoardStatus();
     }
 
     private void updateBoardStatus()
@@ -64,8 +61,9 @@ public class ChessBoard extends HasListeners implements IsMover {
         //Container for sjakkbrett og høyrepanel
         this.board = new JFrame();
         this.board.setSize(1000,750);
+        this.board.setResizable(false);
         this.board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.board.setTitle("LotionChess: Din smootheste sjakk-opplevelse!");
+        //this.board.setTitle("LotionChess: Din smootheste sjakk-opplevelse!");
 
         //Container for board
         JPanel boardPanel = new JPanel();
@@ -75,7 +73,9 @@ public class ChessBoard extends HasListeners implements IsMover {
         //Container for the right-box
         JPanel rightPanel = new JPanel();
         GridLayout logLayout = new GridLayout(0,1);
-        JTextArea logArea = new JTextArea("Her vil loggen printes", 0, 20);
+        JTextArea logArea = new JTextArea("Her vil loggen printes", 0, 30);
+        logArea.setLineWrap(true);
+        logArea.setWrapStyleWord(true);
         logArea.setEditable(false);
 
         //Scrollpane for logArea. Currently logArea-text is hidden?
@@ -90,7 +90,7 @@ public class ChessBoard extends HasListeners implements IsMover {
         GridLayout chatAreaLayout = new GridLayout(3,0);
         JTextField chatLabel = new JTextField("Chat med din motspiller!");
         chatLabel.setEditable(false);
-        JTextField chatTextField = new JTextField();
+        JTextField chatTextField = new JTextField(20);
         chatTextField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 logArea.append("\n" + chatTextField.getText());
@@ -151,7 +151,6 @@ public class ChessBoard extends HasListeners implements IsMover {
         this.board.repaint();
         this.board.revalidate();
         this.board.setVisible(true);
-
     }
 
     private void setStartUpPosition()

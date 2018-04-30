@@ -79,4 +79,8 @@ public class GameSettings extends Observable {
     {
         player.setHost();
     }
+
+    public Player getPlayer() {
+        return this.player;
+    }
 }

@@ -127,24 +127,18 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
     private String buildCurrentFen(){
         StringBuilder answer = new StringBuilder();
         answer.append(this.board.getCurrentFen());
-        answer.append(" " + getCurrentPlayerColor());
+        answer.append(" " + this.getPlayerColorForUserWhoHaveTurn());
         answer.append(" - - 0 ");
         answer.append(getMoveCount());
         return answer.toString();
     }
-
-    private String getCurrentPlayerColor()
+    
+    private String getPlayerColorForUserWhoHaveTurn()
     {
-        String temp = "";
-        if(this.myTurn())
-        {
-            temp = this.amIWhite() ? "w" : "b" ;
-
+        if(this.myTurn()) {
+            return this.amIWhite() ? "w" : "b" ;
         }
-        else{
-            temp = this.amIWhite() ? "b" : "w" ;
-        }
-        return temp;
+        return this.amIWhite() ? "b" : "w" ;
     }
 
     private String getMoveCount(){
@@ -182,6 +176,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
                 this.publishAction(new Action("whoareyou", null));
                 break;
             }
+
             case("whoareyou") : {
 
                 // client replies
@@ -201,6 +196,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
                 if(this.player.isHost()) {
                     System.out.println("Host::" + this.opponent);
                 }
+
                 if(!this.player.isHost()) {
                     System.out.println("Client:" + this.opponent);
                 }
