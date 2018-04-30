@@ -2,9 +2,9 @@ import java.io.Serializable;
 
 class Move implements Serializable {
 
-    private final Field from;
-    private final Field to;
-    private final ChessPiece piece;
+    private Field from;
+    private Field to;
+    private ChessPiece piece;
 
     public Move(Field from, Field to, ChessPiece piece)
     {
@@ -12,6 +12,8 @@ class Move implements Serializable {
         this.to = to;
         this.piece = piece;
     }
+
+    public Move() { }
 
     public String getType()
     {

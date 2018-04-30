@@ -67,10 +67,9 @@ class Stockfish implements Runnable {
 		}
 		System.out.println("Sender kommando: " + StockfishCommands.SET_POSITION + this.getMovesHistory() + "\n");
 		System.out.println("Sender kommando: " + StockfishCommands.NEXT_MOVE + "\n");
-		return this.sendCommand(
-				StockfishCommands.NEXT_MOVE +"\n",
-				StockfishReturns.BESTMOVE);
+		return this.sendCommand(StockfishCommands.NEXT_MOVE +"\n", StockfishReturns.BESTMOVE);
 	}
+
 	public String getComputerMoveByFen()
 	{
 		try {

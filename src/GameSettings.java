@@ -33,7 +33,8 @@ public class GameSettings extends Observable {
     }
 
 
-    public GameSettings(){
+    public GameSettings()
+    {
         player = new Player("player1", true);
         loadConfig();
     }
@@ -74,7 +75,8 @@ public class GameSettings extends Observable {
         this.nickName = arg.getName();
     }
 
-    public void setHost(){
+    public void setHost()
+    {
         player.setHost();
     }
 }

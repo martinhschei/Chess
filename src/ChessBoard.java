@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,43 +61,78 @@ public class ChessBoard extends HasListeners implements IsMover {
 
     public void buildBoard()
     {
+        //Container for sjakkbrett og høyrepanel
         this.board = new JFrame();
         this.board.setSize(1000,750);
         this.board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.board.setTitle("LotionChess: Din smootheste sjakk-opplevelse!");
 
-        GridLayout board = new GridLayout(8, 8, 1, 1);
+        //Container for board
         JPanel boardPanel = new JPanel();
-        boardPanel.setLayout(board);
+        GridLayout boardLayout = new GridLayout(8, 8, 1, 1);
+        boardPanel.setLayout(boardLayout);
 
-        JPanel leftPanel = new JPanel();
+        //Container for the right-box
+        JPanel rightPanel = new JPanel();
         GridLayout logLayout = new GridLayout(0,1);
-        JTextArea logArea = new JTextArea("Her vil loggen printes");
+        JTextArea logArea = new JTextArea("Her vil loggen printes", 0, 20);
         logArea.setEditable(false);
 
+        //Scrollpane for logArea. Currently logArea-text is hidden?
+        JScrollPane logScrollPane = new JScrollPane();
+        logScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        logScrollPane.add(logArea);
+        rightPanel.setLayout(logLayout);
+        rightPanel.add(logArea);
+
+        //Container for chat box
         JPanel chatArea = new JPanel();
-        JPanel chatTextAreaPanel = new JPanel();
-        JPanel chatTextFieldPanel = new JPanel();
-        JTextArea chatTextArea = new JTextArea("Chat chat chat chat chat chat chat chat");
-        JTextField chatTextField = new JTextField(20);
-        chatTextAreaPanel.add(chatTextArea);
-        chatTextAreaPanel.setLayout(new FlowLayout());
-        chatTextFieldPanel.add(chatTextField);
-        chatTextFieldPanel.setLayout(new FlowLayout());
-        JSplitPane chatAreaSplitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, chatTextAreaPanel, chatTextFieldPanel);
-        chatAreaSplitpane.setDividerLocation(200);
-        chatArea.add(chatAreaSplitpane);
+        GridLayout chatAreaLayout = new GridLayout(3,0);
+        JTextField chatLabel = new JTextField("Chat med din motspiller!");
+        chatLabel.setEditable(false);
+        JTextField chatTextField = new JTextField();
+        chatTextField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                logArea.append("\n" + chatTextField.getText());
+                chatTextField.setText("");
+            }
+        });
+        chatTextField.setPreferredSize(new Dimension(30, 10));
+        JScrollPane chatTextFieldScrollPane = new JScrollPane(chatTextField);
+        chatArea.setLayout(chatAreaLayout);
+        JPanel chatButtonsPanel = new JPanel();
+        GridLayout chatButtonPanelLayout = new GridLayout(1,2);
+        JButton sendChatButton = new JButton("Send");
 
-        leftPanel.setLayout(logLayout);
-        leftPanel.add(logArea);
+        //Send.button actionlistener
+        sendChatButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                logArea.append("\n" + chatTextField.getText());
+                chatTextField.setText("");
+            }
+        });
+        JButton emptyLogButton = new JButton("Empty log");
+        //Empty button actionlistener
+        emptyLogButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                logArea.setText("");
+            }
+        });
+        chatButtonsPanel.add(sendChatButton);
+        chatButtonsPanel.add(emptyLogButton);
+        chatArea.add(chatLabel);
+        chatArea.add(chatTextFieldScrollPane);
+        chatArea.add(chatButtonsPanel);
+
+        //Splitpane for the right-box
         JSplitPane leftBoxSplitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, logArea, chatArea);
-        leftBoxSplitpane.setDividerLocation(400);
-        leftBoxSplitpane.setDividerSize(2);
+        leftBoxSplitpane.setEnabled(false);
+        leftBoxSplitpane.setDividerLocation(570);
+        leftBoxSplitpane.setDividerSize(10);
+        rightPanel.add(leftBoxSplitpane);
 
-        leftPanel.add(leftBoxSplitpane);
-
-
-        JSplitPane containerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, boardPanel, leftPanel);
+        //Splitpane for the whole window
+        JSplitPane containerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, boardPanel, rightPanel);
         containerSplitPane.setOneTouchExpandable(true);
         containerSplitPane.setDividerLocation(735);
         Container content = this.board.getContentPane();
@@ -171,7 +208,7 @@ public class ChessBoard extends HasListeners implements IsMover {
         }
     }
 
-    private Field getFieldOnPosition(Position pos)
+    protected Field getFieldOnPosition(Position pos)
     {
         Row row = this.getRowByIndex(pos.getRow());
         return row.getField(pos.getColumn());

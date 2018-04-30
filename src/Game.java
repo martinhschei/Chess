@@ -1,11 +1,9 @@
 import java.util.*;
-import java.util.List;
 
 class Game extends HasListeners implements IsListener, IsActionListener, IsMoveListener, IsGame {
-
+    
     private Player player;
     private Player opponent;
-
     private boolean movesAllowed;
     private List<Move> moves;
     private ChessBoard board;
@@ -62,20 +60,61 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         moves.add(move);
         this.movesAllowed = false;
         this.publishAction(new Action("move", move));
-        getBestMove();
+        Move bestMove = getBestMove();
+        this.highlightMove(bestMove);
     }
 
-    public void getBestMove()
+    private void highlightMove(Move move)
     {
-        String answer = buildCurrentFen();
-        System.out.println("FEN position: " + answer);
-        stockFish.setFEN(answer);
-        String moveHistory = getMovesString();
-        System.out.println("Spør stockfish om bestmove");
-        stockFish.setMovesString(moveHistory);
-        answer = this.stockFish.getComputerMoveByFen();
-        System.out.println("Stockfish svarte: " + answer);
+        move.getFrom().highlight();
+        move.getTo().highlight();
+    }
 
+    public Move getBestMove()
+    {
+        String fen = buildCurrentFen();
+        System.out.println("FEN position: " + fen);
+        stockFish.setFEN(fen);
+        System.out.println("Spør stockfish om bestmove");
+        Move move = this.stockFish.getComputerMoveByFen();
+        System.out.println("Stockfish svarte: " + move);
+        return new Move();
+    }
+    private Move translateToMove(String answer){
+
+	    Move move = null;
+        String pos1 = "";
+        String pos2 = "";
+        String[] temp = answer.split("\\s");
+
+
+        pos1 = temp[1].substring(0,2);
+        System.out.println("Pos1: " + pos1);
+        pos2 = temp[1].substring(2,4);
+        System.out.println("Pos2: " + pos2);
+        Field field1 = translateToField(pos1);
+        Field field2 = translateToField(pos2);
+        move = new Move(field1,field2,null);
+
+	    return move;
+    }
+    private char translatePositionToChar (String position)
+    {
+        System.out.println("Debug: translatePositionToChar " + position.substring(0,1).toCharArray()[0]);
+        return position.substring(0,1).toCharArray()[0];
+    }
+    private int translatePositionToInt (String position)
+    {
+        System.out.println("Debug: translatePositionToInt " + Integer.parseInt(position.substring(1,2)));
+        return Integer.parseInt(position.substring(1,2));
+    }
+
+    private Field translateToField(String position)
+    {
+        char c = this.translatePositionToChar(position);
+        int i = this.translatePositionToInt(position);
+        Field field = this.board.getFieldOnPosition(new Position(c,i));
+        return field;
     }
 
     private String buildCurrentFen(){
