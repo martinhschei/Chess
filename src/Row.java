@@ -17,6 +17,10 @@ class Row {
 	{
 		return this.index;
 	}
+	public List<Field> getFields()
+	{
+		return fields;
+	}
 	
 	public void addField(Field field)
 	{

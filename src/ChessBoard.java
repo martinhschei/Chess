@@ -39,6 +39,20 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
 
     }
 
+    public void clearHighlights()
+    {
+        for(Row row : rows)
+        {
+            for (Field field : row.getFields())
+            {
+                if(field.isFieldHighlighted())
+                {
+                    field.clearHighlights();
+                }
+            }
+        }
+    }
+
     public void movePiece(ChessPiece piece, Field from, Field to, boolean otherPlayer)
     {
         if(otherPlayer)
@@ -48,15 +62,17 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
             from.setPiece(null);
             to.setPiece(piece);
         }
+
         Move newMove = new Move(from, to, piece);
+
         if(!otherPlayer) {
-                if(this.game.isMoveLegal(newMove))
-                {
-                from.setPiece(null);
-                to.setPiece(piece);
-                this.publishNewMove(newMove);
+                if(this.game.isMoveLegal(newMove)) {
+                    clearHighlights();
+                    from.setPiece(null);
+                    to.setPiece(piece);
+                    this.publishNewMove(newMove);
                 }
-                else{
+                else {
                     from.reset();
                     System.out.println("DEBUG: Illegal Move!!! \n");
                 }
