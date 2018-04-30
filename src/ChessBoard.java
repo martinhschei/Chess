@@ -7,6 +7,9 @@ import java.util.List;
 
 public class ChessBoard extends HasListeners implements IsMover {
 
+    private Logger logger;
+    private LogType logType;
+
     private IsGame game;
     private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };
     private List<Row> rows;
@@ -80,6 +83,7 @@ public class ChessBoard extends HasListeners implements IsMover {
         logArea.setLineWrap(true);
         logArea.setWrapStyleWord(true);
         logArea.setEditable(false);
+        //getLogOfType CHAT
 
         //Scrollpane for logArea. Currently logArea-text is hidden?
         JScrollPane logScrollPane = new JScrollPane();
@@ -94,9 +98,16 @@ public class ChessBoard extends HasListeners implements IsMover {
         JTextField chatLabel = new JTextField("Chat med din motspiller!");
         chatLabel.setEditable(false);
         JTextField chatTextField = new JTextField(20);
+
         chatTextField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                logArea.append("\n" + chatTextField.getText());
+                Logger.setChatLog(chatTextField.getText());
+                List<String> chatMessages = Logger.getLogOfType(LogType.CHAT);
+                logArea.setText(null);
+                for (String items : chatMessages) {
+
+                    logArea.append("\n" + items);
+                }
                 chatTextField.setText("");
             }
         });
@@ -110,7 +121,13 @@ public class ChessBoard extends HasListeners implements IsMover {
         //Send.button actionlistener
         sendChatButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                logArea.append("\n" + chatTextField.getText());
+                Logger.setChatLog(chatTextField.getText());
+                List<String> chatMessages = Logger.getLogOfType(LogType.CHAT);
+                logArea.setText(null);
+                for (String items : chatMessages) {
+
+                    logArea.append("\n" + items);
+                }
                 chatTextField.setText("");
             }
         });
