@@ -73,6 +73,8 @@ class Stockfish implements Runnable {
 	public String getComputerMoveByFen()
 	{
 		try{
+			this.stockFishWriter.write(StockfishCommands.START_NEW_GAME);
+			this.stockFishWriter.flush();
 			this.stockFishWriter.write(StockfishCommands.SET_FEN_POSITION + this.currentFen + "\n");
 			this.stockFishWriter.flush();
 		}
