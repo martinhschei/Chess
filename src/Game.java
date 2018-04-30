@@ -9,6 +9,8 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
     private ChessBoard board;
     private Stockfish stockFish;
 
+    private Logger logger;
+
 	public Game(Player player)
 	{
 	    this.board = new ChessBoard(this);
