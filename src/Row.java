@@ -39,7 +39,7 @@ class Row {
 		Collections.replaceAll(this.fields, toBeReplaced, field);
 	}
 
-	public String getFen()
+	/*public String getFen()
 	{
 		if (this.rowHasZeroPieces()) {
 			return "8/";
@@ -54,7 +54,30 @@ class Row {
 		}
 		return fen + "/";
 	}
-	
+	*/
+	public String getFen()
+	{
+		if (this.rowHasZeroPieces()) {
+			return "8/";
+		}
+
+		StringBuilder fen = new StringBuilder();
+		int empty = 0;
+		for(Field field : fields) {
+			if(field.hasPiece()) {
+				fen.append(empty == 0 ? field.getCurrentPieceName() : empty + field.getCurrentPieceName());
+				empty = 0;
+			}
+			else {
+				empty++;
+			}
+		}
+		if (empty != 0){
+			fen.append(empty);
+		}
+		return fen + "/";
+	}
+
 	private boolean rowHasZeroPieces()
 	{
 		for(Field field : fields) {
