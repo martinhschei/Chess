@@ -59,25 +59,34 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
 
     public void newMove(Move move)
     {
+        moves.add(move);
         this.movesAllowed = false;
         this.publishAction(new Action("move", move));
+        getBestMove();
     }
 
-    public Move getBestMove()
+    public void getBestMove()
     {
-        String moveHistory ="";
-        for(Move m : moves) {
-            moveHistory += m.toString();
-        }
+        String answer = "";
+        answer = this.board.getCurrentFen();
+        answer += " b - - 0 4 \n";
+        System.out.println("FEN position: " + answer);
+        stockFish.setFentPos(answer);
+        String moveHistory = getMovesString();
+        System.out.println("Spør stockfish om bestmove");
+        stockFish.setMovesString(moveHistory);
+        answer = this.stockFish.getComputerMoveByFen();
+        System.out.println("Stockfish svarte: " + answer);
 
-        return this.stockFish.getBestmove(moveHistory);
     }
+
 
 	public void newAction(Action action)
     {
         switch(action.getType()) {
             case("move") : {
                 Move move = (Move)action.getPayload();
+                moves.add(move);
                 System.out.println("Mottaker:" + this.player.getName());
                 System.out.println("Host:" + this.player.isHost());
                 System.out.println("---");
