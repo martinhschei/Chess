@@ -1,7 +1,7 @@
 import java.util.*;
 
 class Game extends HasListeners implements IsListener, IsActionListener, IsMoveListener, IsGame {
-    
+
     private Player player;
     private Player opponent;
     private boolean movesAllowed;
