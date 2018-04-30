@@ -2,23 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e04b9378-01c4-4eb2-a195-9ae8af47e610" name="Default" comment="minor">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/ChessBoard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Field.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/Field.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Move.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/Move.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Position.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/Position.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/StartMeny$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/StartMeny$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/StartMeny$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/StartMeny$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/StartMeny.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/StartMeny.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Tower.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Field.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChessBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HovedMeny.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HovedMeny.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Move.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Position.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StartMeny.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StartMeny.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Stockfish.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Stockfish.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,8 +21,8 @@
       <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+            <state relative-caret-position="108">
+              <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -419,11 +404,11 @@
     <layout>
       <window_info anchor="right" id="Palette" order="9" />
       <window_info anchor="bottom" id="TODO" order="15" />
-      <window_info anchor="bottom" id="Messages" order="20" sideWeight="0.489375" visible="true" weight="0.2659713" />
+      <window_info anchor="bottom" id="Messages" order="20" sideWeight="0.489375" visible="true" weight="0.009126467" />
       <window_info anchor="right" id="Palette&#9;" order="12" />
       <window_info id="Image Layers" order="10" />
       <window_info anchor="right" id="Capture Analysis" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="19" sideWeight="0.510625" side_tool="true" visible="true" weight="0.2659713" />
+      <window_info anchor="bottom" id="Event Log" order="19" sideWeight="0.510625" side_tool="true" visible="true" weight="0.009126467" />
       <window_info anchor="right" id="Maven Projects" order="13" />
       <window_info anchor="bottom" id="Run" order="5" sideWeight="0.85625" weight="0.1851369" />
       <window_info anchor="bottom" id="Version Control" order="17" sideWeight="0.49875" weight="0.33637547" />
@@ -431,7 +416,7 @@
       <window_info anchor="bottom" id="Terminal" order="18" />
       <window_info id="Capture Tool" order="11" />
       <window_info id="Designer" order="9" />
-      <window_info active="true" content_ui="combo" id="Project" order="7" visible="true" weight="0.155625" />
+      <window_info active="true" content_ui="combo" id="Project" order="7" visible="true" weight="0.14875" />
       <window_info anchor="bottom" id="Inspection Results" order="16" sideWeight="0.7825" weight="0.12907432" />
       <window_info anchor="bottom" id="Find" order="4" />
       <window_info id="Structure" order="8" side_tool="true" weight="0.25" />
@@ -903,8 +888,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+        <state relative-caret-position="108">
+          <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
         </state>
       </provider>
     </entry>

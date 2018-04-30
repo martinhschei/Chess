@@ -80,6 +80,42 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         System.out.println("Stockfish svarte: " + move);
         return new Move();
     }
+    private Move translateToMove(String answer){
+
+	    Move move = null;
+        String pos1 = "";
+        String pos2 = "";
+        String[] temp = answer.split("\\s");
+
+
+        pos1 = temp[1].substring(0,2);
+        System.out.println("Pos1: " + pos1);
+        pos2 = temp[1].substring(2,4);
+        System.out.println("Pos2: " + pos2);
+        Field field1 = translateToField(pos1);
+        Field field2 = translateToField(pos2);
+        move = new Move(field1,field2,null);
+
+	    return move;
+    }
+    private char translatePositionToChar (String position)
+    {
+        System.out.println("Debug: translatePositionToChar " + position.substring(0,1).toCharArray()[0]);
+        return position.substring(0,1).toCharArray()[0];
+    }
+    private int translatePositionToInt (String position)
+    {
+        System.out.println("Debug: translatePositionToInt " + Integer.parseInt(position.substring(1,2)));
+        return Integer.parseInt(position.substring(1,2));
+    }
+
+    private Field translateToField(String position)
+    {
+        char c = this.translatePositionToChar(position);
+        int i = this.translatePositionToInt(position);
+        Field field = this.board.getFieldOnPosition(new Position(c,i));
+        return field;
+    }
 
     private String buildCurrentFen(){
         StringBuilder answer = new StringBuilder();
