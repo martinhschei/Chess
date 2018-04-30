@@ -1,9 +1,12 @@
+import java.security.PrivateKey;
 import java.util.*;
 
 class Game extends HasListeners implements IsListener, IsActionListener, IsMoveListener, IsGame {
     
     private Player player;
     private Player opponent;
+
+    private Logger logger;
 
     private boolean movesAllowed;
     private List<Move> moves;
@@ -12,6 +15,8 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
 
 	public Game(Player player)
 	{
+	    this.logger = new Logger();
+
 	    this.board = new ChessBoard(this);
         this.board.addListener(this);
 
@@ -54,6 +59,11 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
     public boolean amIWhite()
     {
         return this.player.isWhite();
+    }
+
+    public void onNewChat(String message)
+    {
+        this.publishAction(new Action("chat", new Log(LogType.CHAT, message)));
     }
 
     public void newMove(Move move)
@@ -205,7 +215,8 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
                 break;
             }
             case("chat") : {
-                // addToLog(action.gePayload());
+                Player p = this.player;
+                this.board.writeLogToScreen((Log)action.getPayload());
                 break;
             }
         }

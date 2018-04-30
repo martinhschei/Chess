@@ -7,9 +7,7 @@ import java.util.List;
 
 public class ChessBoard extends HasListeners implements IsMover, IsActionListener {
 
-    private Logger logger;
-    private LogType logType;
-
+    private JTextArea logArea;
     private IsGame game;
     private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };
     private List<Row> rows;
@@ -55,6 +53,8 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
         }
 
         this.updateBoardStatus();
+        //Logger.setMoveLog(newMove.toString());
+        //writeLogToScreen();
 
         // refactoring => send med move string ved hver kommando til Stockfish
         // this.stockFish.setMovesString(this.getMovesString());
@@ -80,7 +80,7 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
         //Container for the right-box
         JPanel rightPanel = new JPanel();
         GridLayout logLayout = new GridLayout(0,1);
-        JTextArea logArea = new JTextArea("Her vil loggen printes", 0, 30);
+        logArea = new JTextArea("Her vil loggen printes", 0, 30);
         logArea.setLineWrap(true);
         logArea.setWrapStyleWord(true);
         logArea.setEditable(false);
@@ -102,13 +102,8 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
 
         chatTextField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Logger.setChatLog(chatTextField.getText());
-                List<String> chatMessages = Logger.getLogOfType(LogType.CHAT);
-                logArea.setText(null);
-                for (String items : chatMessages) {
-
-                    logArea.append("\n" + items);
-                }
+                sendChat(chatTextField.getText());
+                //writeLogToScreen();
                 chatTextField.setText("");
             }
         });
@@ -123,16 +118,12 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
         //Send.button actionlistener
         sendChatButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Logger.setChatLog(chatTextField.getText());
-                List<String> chatMessages = Logger.getLogOfType(LogType.CHAT);
-                logArea.setText(null);
-                for (String items : chatMessages) {
-
-                    logArea.append("\n" + items);
-                }
+                sendChat(chatTextField.getText());
+                //writeLogToScreen();
                 chatTextField.setText("");
             }
         });
+
 
         JButton emptyLogButton = new JButton("Empty log");
         //Empty button actionlistener
@@ -177,6 +168,15 @@ public class ChessBoard extends HasListeners implements IsMover, IsActionListene
         this.board.repaint();
         this.board.revalidate();
         this.board.setVisible(true);
+    }
+
+    public void sendChat(String text) {
+        //Log log = Logger.setChatLog(text);
+        this.game.onNewChat(text);
+    }
+
+    public void writeLogToScreen(Log log) {
+        logArea.append("\n" + log.getMessage());
     }
 
     private void setStartUpPosition()
