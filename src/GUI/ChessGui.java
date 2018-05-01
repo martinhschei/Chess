@@ -95,7 +95,6 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
         this.board.setSize(1000,750);
         this.board.setResizable(false);
         this.board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //this.board.setTitle("LotionChess: Din smootheste sjakk-opplevelse!");
 
         //Container for board
         JPanel boardPanel = new JPanel();
@@ -110,12 +109,7 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
         logArea.setWrapStyleWord(true);
         logArea.setEditable(false);
 
-        //Scrollpane for logArea
-        JScrollPane logScrollPane = new JScrollPane();
-        logScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        logScrollPane.add(logArea);
         rightPanel.setLayout(logLayout);
-        rightPanel.add(logArea);
 
         //Container for chat box
         JPanel chatArea = new JPanel();
@@ -124,7 +118,7 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
         chatLabel.setEditable(false);
         JTextField chatTextField = new JTextField(20);
 
-        // listener for enter-click on chatTextfield
+        //Listener for enter-click on chatTextfield
         chatTextField.addActionListener(e -> {
             sendNewChatMessage(chatTextField.getText());
             chatTextField.setText(" ");
@@ -134,17 +128,16 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
         JScrollPane chatTextFieldScrollPane = new JScrollPane(chatTextField);
         chatArea.setLayout(chatAreaLayout);
         JPanel chatButtonsPanel = new JPanel();
-        //GridLayout chatButtonPanelLayout = new GridLayout(1,2);
-        JButton sendChatButton = new JButton("Send");
 
-        //Send.button actionlistener
+        //Button for sending chat
+        JButton sendChatButton = new JButton("Send");
         sendChatButton.addActionListener(e -> {
             sendNewChatMessage(chatTextField.getText());
             chatTextField.setText(" ");
         });
 
+        // Button for emptying the logArea
         JButton emptyLogButton = new JButton("Tøm logg");
-        //Empty button actionlistener
         emptyLogButton.addActionListener(e -> {
             sendNewChatMessage(chatTextField.getText());
             logArea.setText(" ");
@@ -156,8 +149,16 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
         chatArea.add(chatTextFieldScrollPane);
         chatArea.add(chatButtonsPanel);
 
+        //Scrollpane for logArea
+        JScrollPane logScrollPane = new JScrollPane(logArea);
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                logScrollPane.getVerticalScrollBar().setValue(0);
+            }
+        });
+        //logScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         //Splitpane for the right-box
-        JSplitPane leftBoxSplitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, logArea, chatArea);
+        JSplitPane leftBoxSplitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, logScrollPane, chatArea);
         leftBoxSplitpane.setEnabled(false);
         leftBoxSplitpane.setDividerLocation(570);
         leftBoxSplitpane.setDividerSize(10);
