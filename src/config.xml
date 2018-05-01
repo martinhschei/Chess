@@ -2,6 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment/>
+<entry key="nickName">player1</entry>
+    <entry key="localPlayer1">Spiller 1</entry>
+    <entry key="localPlayer2">Spiller 2</entry>
 <entry key="ip">127.0.0.1</entry>
-<entry key="nickName">robinatto</entry>
 </properties>

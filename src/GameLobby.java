@@ -3,19 +3,20 @@ import java.util.Observer;
 
 class GameLobby implements Observer {
 
-    HovedMeny menu = null;
+    MainMenu menu = null;
     GameSettings settings = null;
 
     public GameLobby()
     {
         settings = new GameSettings();
         settings.addObserver(this);
-        menu = new HovedMeny(settings);
+        menu = new MainMenu(settings);
     }
 
     public void update(Observable obj, Object arg)
     {
         new Game((Player)arg);
+        menu.RemoveMenu();
     }
 
 }

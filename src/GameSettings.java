@@ -7,6 +7,8 @@ class GameSettings extends Observable {
     private Player player = null;
     private String ip;
     private String nickName;
+    private String localPlayer1;
+    private String localPlayer2;
     private Properties properties = new Properties();
     private File configFile = new File( System.getProperty("user.dir") + "\\src\\config.xml");
 
@@ -27,18 +29,24 @@ class GameSettings extends Observable {
         }
         this.ip = properties.getProperty("ip");
         this.nickName = properties.getProperty("nickName");
+        this.localPlayer1 = properties.getProperty("localPlayer1");
+        this.localPlayer2 = properties.getProperty("localPlayer2");
     }
 
 
     public GameSettings()
     {
         player = new Player("player1", true);
+        localPlayer1 = "Player1";
+        localPlayer2 = "Player2";
         loadConfig();
     }
 
     public void saveSettings () {
         properties.setProperty("ip", ip);
         properties.setProperty("nickName", nickName);
+        properties.setProperty("localPlayer1", localPlayer1);
+        properties.setProperty("localPlayer2", localPlayer2);
 
         OutputStream outputStream;
         try {
@@ -65,6 +73,19 @@ class GameSettings extends Observable {
             notifyObservers(player);
         }
     }
+    public void startLocalGame ()
+    {
+        Player p1 = new Player(localPlayer1, true);
+        p1.setHost();
+        p1.setReady(true);
+        Player p2 = new Player(localPlayer2, false);
+        p2.setIp("localhost");
+        p2.setReady(true);
+        new Game(p1);
+        setChanged();
+        notifyObservers(p2);
+    }
+
 
     public void setPlayer(Player arg)
     {
