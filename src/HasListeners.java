@@ -10,11 +10,11 @@ abstract class HasListeners {
         this.listeners.add(listener);
     }
 
-    void publishNewChatMessage(String message)
+    void publishNewChatMessage(Log log)
     {
         for(IsListener listener : listeners) {
             if (listener instanceof IsActionListener) {
-                ((IsLogListener) listener).onNewLogEntry(message);
+                ((IsLogListener) listener).onNewLogEntry(log);
             }
         }
     }
