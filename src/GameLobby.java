@@ -15,6 +15,7 @@ class GameLobby implements Observer {
 
     public void update(Observable obj, Object arg)
     {
+        settings.saveSettings();
         new Game((Player)arg);
         menu.RemoveMenu();
     }

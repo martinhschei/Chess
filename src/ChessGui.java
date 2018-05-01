@@ -67,7 +67,8 @@ public class ChessGui extends HasListeners implements IsMover {
             }
             else {
                 from.reset();
-                System.out.println("DEBUG: Illegal Move!!! \n");
+                this.game.addToLog(LogType.STOCKFISH, this.game.getPlayer().getName(), " prøvde å gjøre ett ugyldig trekk: " +newMove.toString());
+                System.out.println("DEBUG: Illegal Move ("+newMove.toString()+")!!\n");
             }
         }
 
@@ -103,9 +104,8 @@ public class ChessGui extends HasListeners implements IsMover {
         logArea.setLineWrap(true);
         logArea.setWrapStyleWord(true);
         logArea.setEditable(false);
-        //getLogOfType CHAT
 
-        //Scrollpane for logArea. Currently logArea-text is hidden?
+        //Scrollpane for logArea
         JScrollPane logScrollPane = new JScrollPane();
         logScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         logScrollPane.add(logArea);
@@ -115,10 +115,11 @@ public class ChessGui extends HasListeners implements IsMover {
         //Container for chat box
         JPanel chatArea = new JPanel();
         GridLayout chatAreaLayout = new GridLayout(3,0);
-        JTextField chatLabel = new JTextField("Chat med din motspiller!");
+        JTextField chatLabel = new JTextField(game.getPlayer().getName()+ ", chat med din motspiller!");
         chatLabel.setEditable(false);
         JTextField chatTextField = new JTextField(20);
 
+        // listener for enter-click on chatTextfield
         chatTextField.addActionListener(e -> {
             sendNewChatMessage(chatTextField.getText());
             chatTextField.setText(" ");
@@ -137,11 +138,11 @@ public class ChessGui extends HasListeners implements IsMover {
             chatTextField.setText(" ");
         });
 
-        JButton emptyLogButton = new JButton("Empty log");
+        JButton emptyLogButton = new JButton("Tøm logg");
         //Empty button actionlistener
         emptyLogButton.addActionListener(e -> {
             sendNewChatMessage(chatTextField.getText());
-            chatTextField.setText(" ");
+            logArea.setText(" ");
         });
 
         chatButtonsPanel.add(sendChatButton);

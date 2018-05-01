@@ -3,5 +3,5 @@ interface IsGame {
     boolean amIWhite();
     boolean isMoveLegal(Move move);
     Player getPlayer();
-
+    void addToLog(LogType logType, String playerName, String message);
 }
