@@ -174,7 +174,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
             case("move") : {
                 Move move = (Move)action.getPayload();
                 moves.add(move);
-                logger.setMoveLog(player.getName(), move.toString());
+                logger.setMoveLog(opponent.getName(), move.toString());
                 System.out.println("Mottaker:" + this.player.getName());
                 System.out.println("Host:" + this.player.isHost());
                 System.out.println("---");
@@ -207,6 +207,8 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
             }
 
             case("chat") : {
+                Log chat = (Log)action.getPayload();
+                logger.setChatLog(opponent.getName(), chat.getMessage());
                 this.chessGui.onNewChatMessage((Log)action.getPayload());
                 break;
             }
