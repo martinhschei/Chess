@@ -197,7 +197,7 @@ public class Game extends HasListeners implements IsListener, IsActionListener, 
         {
             Move move = getBestMove();
             this.highlightMove(move);
-            Log log = logger.setStockfishLog(player.getName()+returnPlayerColor(player), "Spurte stockfish. Bestmove: " + move.toString());
+            Log log = logger.setStockfishLog(player.getName()+returnPlayerColor(player), "Stockfish bestmove: " + move.toString());
             this.publishNewChatMessage(log);
             this.publishAction(new Action("chat", log));
         }
