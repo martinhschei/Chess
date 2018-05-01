@@ -36,8 +36,8 @@ class Stockfish implements Runnable {
 	{
 		boolean answer = false;
 		String moveString = move.toString();
-		String fen = null;
-		String newFen = null;
+		String fen = "";
+		String newFen = "";
 
 		try {
 			this.stockFishWriter.write(StockfishCommands.START_NEW_GAME);

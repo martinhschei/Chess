@@ -2,40 +2,39 @@ import javax.swing.JFrame;
 
 class MainMenu extends JFrame {
 
-	private JFrame hovedVindu;
-	ConnectionMenu connectionMenu;
-	GameModeSelectorMenu gameModeMenu;
+	private JFrame mainWindow;
+	private ConnectionMenu connectionMenu;
+	private GameModeSelectorMenu gameModeMenu;
 
 	public MainMenu(GameSettings settings)
 	{
-        hovedVindu = BuildWindow();
+		mainWindow = buildWindow();
 		connectionMenu = new ConnectionMenu(settings);
         gameModeMenu = new GameModeSelectorMenu(settings, this);
-		hovedVindu.setContentPane(gameModeMenu.main);
-		hovedVindu.setVisible(true);
+		mainWindow.setContentPane(gameModeMenu.main);
+		mainWindow.setVisible(true);
 	}
 
-	private JFrame BuildWindow()
+	private JFrame buildWindow()
 	{
 		JFrame frame = new JFrame("Startmeny for LotionChess");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(500, 500, 480, 300);
 		frame.setLocationRelativeTo(null);
-		//frame.pack();
 		return frame;
 	}
 
-	protected void RemoveMenu()
+	protected void removeMenu()
 	{
-		this.hovedVindu.setVisible(false);
-		this.hovedVindu.setContentPane(null);
-		this.hovedVindu.dispose();
+		this.mainWindow.setVisible(false);
+		this.mainWindow.setContentPane(null);
+		this.mainWindow.dispose();
 	}
-	protected void SwitchToStartMenu()
+
+	protected void switchToStartMenu()
 	{
-		this.hovedVindu.setContentPane(connectionMenu.main);
-		this.hovedVindu.revalidate();
+		this.mainWindow.setContentPane(connectionMenu.main);
+		this.mainWindow.revalidate();
 	}
-	
-	
+
 }

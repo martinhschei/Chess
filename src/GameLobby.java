@@ -17,7 +17,7 @@ class GameLobby implements Observer {
     {
         settings.saveSettings();
         new Game((Player)arg);
-        menu.RemoveMenu();
+        menu.removeMenu();
     }
 
 }

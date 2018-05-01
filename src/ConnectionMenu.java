@@ -29,8 +29,9 @@ class ConnectionMenu extends JFrame {
 		JPanel field2 = new JPanel();
 		JPanel field3 = new JPanel();
 		JPanel field4 = new JPanel();
-		JButton join = MonitorConnectButton();
+		JButton join = monitorConnectButton();
 		JLabel ipAddr = createIpLabel();
+
 		//Textfield for IP input. Changes when joinButton isSelected();
 		ipInputField = new JTextField(10);
 		nickNameField = new JTextField(10);
@@ -38,6 +39,7 @@ class ConnectionMenu extends JFrame {
 		ipInputField.setText(gameSettings.getIp());
 		nickNameField.setText(gameSettings.getNickName());
 		ipInputField.setEditable(false);
+
 		//NameInputField.setEditable(true);
 		ButtonGroup bg1 = new ButtonGroup();
 		hostButton = new JRadioButton("Host Game");
@@ -84,14 +86,13 @@ class ConnectionMenu extends JFrame {
 		}
 	}
 
-	private JButton MonitorConnectButton()
+	private JButton monitorConnectButton()
 	{
-		JButton retur = new JButton("Connect to Game");
-		retur.addActionListener(new ActionListener()
+		JButton btnConnect = new JButton("Connect to Game");
+		btnConnect.addActionListener(new ActionListener()
 		{
 		    public void actionPerformed(ActionEvent e)
 		    {
-		    	//NameInputField.setText("playaaaa");
 		        //Here goes the action (method) you want to execute when clicked
 		        System.out.println("You clicked the connecto buttono");
 		        if(joinButton.isSelected()) {
@@ -110,6 +111,6 @@ class ConnectionMenu extends JFrame {
 				}
 		    }
 		});
-		return retur;
+		return btnConnect;
 	}
 }

@@ -1,5 +1,3 @@
-import sun.applet.Main;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -41,7 +39,7 @@ public class GameModeSelectorMenu extends JFrame{
                 //Here goes the action (method) you want to execute when clicked
                 if(source.getText().equalsIgnoreCase(singleWindow)) {
                     System.out.println("debug: SINGLE WINDOW");
-                    mainMenu.SwitchToStartMenu();
+                    mainMenu.switchToStartMenu();
                 }
                 if(source.getText().equalsIgnoreCase(multiWindow)) {
                     gSettings.startLocalGame();

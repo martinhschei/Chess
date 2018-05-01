@@ -6,7 +6,6 @@ public abstract class ChessPiece extends JPanel {
 	final boolean isStriking;
 	private final boolean white;
 	String imgString;
-	//protected String imgPath = System.getProperty("user.dir") + "\\img\\";
 
 	ChessPiece(String name, boolean white)
 	{

@@ -67,18 +67,11 @@ public class ChessGui extends HasListeners implements IsMover {
             }
             else {
                 from.reset();
-                this.game.addToLog(LogType.STOCKFISH, this.game.getPlayer().getName(), " prøvde å gjøre ett ugyldig trekk: " +newMove.toString());
                 System.out.println("DEBUG: Illegal Move ("+newMove.toString()+")!!\n");
             }
         }
 
         this.updateBoardStatus();
-        //Logger.setMoveLog(newMove.toString());
-        //writeLogToScreen();
-
-        // refactoring => send med move string ved hver kommando til Stockfish
-        // this.stockFish.setMovesString(this.getMovesString());
-
         this.board.repaint();
         this.board.revalidate();
     }
@@ -242,8 +235,6 @@ public class ChessGui extends HasListeners implements IsMover {
     public boolean clickAllowed(Field field)
     {
         if (field.hasPiece()) {
-            // Gammel kode, incase jeg tuller det til
-            //return (this.game.myTurn() && (field.getCurrentPiece().isWhite() == this.game.amIWhite()));
             if (this.game.myTurn() && (field.getCurrentPiece().isWhite() == this.game.amIWhite()))
             {
                 return true;

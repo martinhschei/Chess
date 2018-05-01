@@ -24,8 +24,6 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         this.chessGui = new ChessGui(this);
         this.chessGui.addListener(this);
 
-
-
 		this.movesAllowed = this.player.isHost();
 
 		this.moves = new ArrayList<>();
@@ -71,6 +69,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         String moveString = getMovesString();
         return stockFish.isMoveLegal(moveString, move);
     }
+    
     public void addToLog(LogType logType, String playerName, String message)
     {
         switch (logType)
