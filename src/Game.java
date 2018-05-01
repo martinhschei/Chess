@@ -187,6 +187,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
                     if (this.player.isHost()) {
                         this.publishAction(new Action("thisisme", this.player));
                     }
+                    System.out.println(this.opponent);
                 }
                 break;
             }
