@@ -87,7 +87,6 @@ public class GameSettings extends Observable {
         return isLocalGame;
     }
 
-
     public void setPlayer(Player arg)
     {
         player = arg;
