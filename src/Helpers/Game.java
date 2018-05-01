@@ -199,8 +199,22 @@ public class Game extends HasListeners implements IsListener, IsActionListener, 
     {
         this.movesAllowed = true;
         this.chessGui.movePiece(move.getPiece(), move.getFrom(), move.getTo(), true);
-        Move bestMove = getBestMove();
-        this.highlightMove(bestMove);
+    }
+    public void askStockFish()
+    {
+        if(this.movesAllowed)
+        {
+            Move move = getBestMove();
+            this.highlightMove(move);
+            Log log = logger.setStockfishLog(player.getName()+returnPlayerColor(opponent), "Spurte stockfish. Bestmove: " + move.toString());
+            chessGui.onNewLogEntry(log);
+            publishNewChatMessage(log);
+        }
+        else
+        {
+            Log log = logger.setStockfishLog(player.getName()+returnPlayerColor(opponent), "Du kan ikke spørre om Bestmove når det ikke er din tur!!");
+            chessGui.onNewLogEntry(log);
+        }
     }
 
 	public void onNewAction(Action action)

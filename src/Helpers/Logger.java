@@ -27,9 +27,11 @@ class Logger extends Observable {
         return temp;
     }
 
-    public void setStockfishLog(String playerName, String message) {
+    public Log setStockfishLog(String playerName, String message) {
 
-        logList.add(new Log(LogType.STOCKFISH, playerName, message));
+        Log temp = new Log(LogType.STOCKFISH, playerName, message);
+        logList.add(temp);
+        return temp;
     }
 
     public List<Log> getLog() {
