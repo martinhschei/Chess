@@ -19,7 +19,6 @@ class StartMeny extends JFrame {
 		gSettings = settings;
 		main = new JPanel();
 		FyllPanel(main);
-
 	}
 
 	private void FyllPanel(JPanel main2) {
