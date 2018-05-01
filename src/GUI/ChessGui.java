@@ -151,13 +151,9 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
         chatArea.add(chatButtonsPanel);
 
         //Scrollpane for logArea
+        logArea.setCaretPosition(logArea.getDocument().getLength());
         JScrollPane logScrollPane = new JScrollPane(logArea);
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                logScrollPane.getVerticalScrollBar().setValue(0);
-            }
-        });
-        //logScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
         //Splitpane for the right-box
         JSplitPane leftBoxSplitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, logScrollPane, chatArea);
         leftBoxSplitpane.setEnabled(false);
