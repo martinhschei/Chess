@@ -1,12 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e04b9378-01c4-4eb2-a195-9ae8af47e610" name="Default" comment="">
+    <list default="true" id="e04b9378-01c4-4eb2-a195-9ae8af47e610" name="Default" comment="bugfixing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Field.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/Field.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChessBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Field.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Chess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Action.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Bishop.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Chess.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eksamen/Chess.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/ChessBoard$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/ChessBoard$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/ChessBoard$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/ChessBoard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/ChessPiece.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Field.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/GameLobby.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/GameSettings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/HasListeners.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/HovedMeny.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/IsActionListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/IsGame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/IsListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/IsMoveListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/IsMover.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/King.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Knight.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Log.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/LogType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Logger.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Move.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/NetworkClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/NetworkServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Pawn.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Position.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Queen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Rook.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Row.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/StartMeny$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/StartMeny$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/StartMeny$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/StartMeny.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/Stockfish.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/StockfishCommands.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/StockfishReturns.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eksamen/main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Config/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Config/config.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -25,53 +63,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ChessBoard.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ChessBoard.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ChessPiece.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ChessPiece.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Chess.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Chess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Row.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Row.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="621">
-              <caret line="37" selection-start-line="37" selection-end-line="37" />
+            <state relative-caret-position="108">
+              <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#55#56#0" expanded="true" />
+                <element signature="e#77#78#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IsGame.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/IsGame.java">
+      <file leaf-file-name="ChessGui.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/GUI/ChessGui.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+            <state relative-caret-position="306">
+              <caret line="155" column="31" lean-forward="true" selection-start-line="155" selection-start-column="31" selection-end-line="155" selection-end-column="31" />
+              <folding>
+                <element signature="e#5051#5052#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -85,6 +97,7 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -92,11 +105,19 @@
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/main.java" />
-        <option value="$PROJECT_DIR$/src/IsGame.java" />
-        <option value="$PROJECT_DIR$/src/Game.java" />
         <option value="$PROJECT_DIR$/src/Row.java" />
         <option value="$PROJECT_DIR$/src/Field.java" />
         <option value="$PROJECT_DIR$/src/ChessBoard.java" />
+        <option value="$PROJECT_DIR$/src/HovedMeny.java" />
+        <option value="$PROJECT_DIR$/src/StartMeny.java" />
+        <option value="$PROJECT_DIR$/src/GameLobby.java" />
+        <option value="$PROJECT_DIR$/src/Game.java" />
+        <option value="$PROJECT_DIR$/src/IsGame.java" />
+        <option value="$PROJECT_DIR$/src/ConnetionMenu.java" />
+        <option value="$PROJECT_DIR$/src/MainMenu.java" />
+        <option value="$PROJECT_DIR$/src/ChessGui.java" />
+        <option value="$PROJECT_DIR$/src/ConnectionMenu.java" />
+        <option value="$PROJECT_DIR$/src/GUI/ChessGui.java" />
       </list>
     </option>
   </component>
@@ -114,31 +135,38 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="eksamen-OOP-V2018-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eksamen-OOP-V2018-master" type="462c0819:PsiDirectoryNode" />
+              <item name="eksamen-OOP-V2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eksamen-OOP-V2018" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="eksamen-OOP-V2018-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eksamen-OOP-V2018-master" type="462c0819:PsiDirectoryNode" />
+              <item name="eksamen-OOP-V2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eksamen-OOP-V2018" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eksamen-OOP-V2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eksamen-OOP-V2018" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GUI" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -227,69 +255,117 @@
       <option name="project" value="LOCAL" />
       <updated>1525091959846</updated>
     </task>
-    <task id="LOCAL-00002" summary="new layout logic">
-      <created>1525008611712</created>
+    <task id="LOCAL-00002" summary="bugfixing">
+      <created>1525166341815</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1525008611712</updated>
+      <updated>1525166341815</updated>
     </task>
-    <task id="LOCAL-00003" summary="new &quot;handshake-procedure&quot; before network game starts">
-      <created>1525022931156</created>
+    <task id="LOCAL-00003" summary="bugfixing">
+      <created>1525167620091</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1525022931156</updated>
+      <updated>1525167620091</updated>
     </task>
-    <task id="LOCAL-00004" summary="new &quot;handshake-procedure&quot; before network game starts">
-      <created>1525072523589</created>
+    <task id="LOCAL-00004" summary="bugfixing">
+      <created>1525168822272</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1525072523589</updated>
+      <updated>1525168822272</updated>
     </task>
-    <task id="LOCAL-00005" summary="new gitignore">
-      <created>1525086592663</created>
+    <task id="LOCAL-00005" summary="bugfixing">
+      <created>1525169046714</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1525086592663</updated>
+      <updated>1525169046714</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00006" summary="Noe rydding og fikset tøm-logg knapp">
+      <created>1525172509732</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1525172509732</updated>
+    </task>
+    <task id="LOCAL-00007" summary="bugfixing">
+      <created>1525173282420</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1525173282420</updated>
+    </task>
+    <task id="LOCAL-00008" summary="bugfixing">
+      <created>1525176193317</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1525176193317</updated>
+    </task>
+    <task id="LOCAL-00009" summary="bugfixing">
+      <created>1525190555845</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1525190555845</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="9" />
       <window_info anchor="bottom" id="TODO" order="15" />
+      <window_info anchor="bottom" id="Messages" order="20" sideWeight="0.48682284" weight="0.27555555" />
       <window_info anchor="right" id="Palette&#9;" order="12" />
       <window_info id="Image Layers" order="10" />
       <window_info anchor="right" id="Capture Analysis" order="10" />
-      <window_info active="true" anchor="bottom" id="Event Log" order="19" sideWeight="0.32875" side_tool="true" visible="true" weight="0.6636245" />
+      <window_info anchor="bottom" id="Event Log" order="19" sideWeight="0.5102489" side_tool="true" visible="true" weight="0.1837037" />
       <window_info anchor="right" id="Maven Projects" order="13" />
-      <window_info anchor="bottom" id="Version Control" order="17" sideWeight="0.49875" weight="0.33637547" />
-      <window_info anchor="bottom" id="Run" order="5" sideWeight="0.67125" weight="0.6792699" />
+      <window_info anchor="bottom" id="Run" order="5" sideWeight="0.65959007" weight="0.20148148" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="17" sideWeight="0.4897511" visible="true" weight="0.1837037" />
       <window_info anchor="bottom" id="Terminal" order="18" />
       <window_info id="Capture Tool" order="11" />
       <window_info id="Designer" order="9" />
-      <window_info content_ui="combo" id="Project" order="7" visible="true" weight="0.16875" />
+      <window_info content_ui="combo" id="Project" order="7" visible="true" weight="0.13616398" />
+      <window_info anchor="bottom" id="Inspection Results" order="16" sideWeight="0.78111273" weight="0.37777779" />
+      <window_info anchor="bottom" id="Find" order="4" />
+      <window_info id="Learn" />
       <window_info id="Structure" order="8" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="6" weight="0.25" />
       <window_info id="UI Designer" order="12" />
       <window_info anchor="right" id="Theme Preview" order="11" />
+      <window_info anchor="bottom" id="Debug" order="11" sideWeight="0.49121523" weight="0.50666666" />
       <window_info id="Favorites" order="13" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="11" sideWeight="0.491875" weight="0.0" />
+      <window_info anchor="right" id="Palette" order="9" />
+      <window_info id="Designer" order="9" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="10" />
       <window_info anchor="right" id="Coverage" order="14" side_tool="true" weight="0.205" />
       <window_info anchor="bottom" id="Inspection" order="14" weight="0.4" />
-      <window_info anchor="bottom" id="Inspection Results" order="16" sideWeight="0.7825" weight="0.12907432" />
+      <window_info anchor="right" id="Ant Build" order="6" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="18" />
+      <window_info id="Structure" order="8" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="15" />
+      <window_info id="Favorites" order="13" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="17" sideWeight="0.49875" weight="0.33637547" />
+      <window_info anchor="bottom" id="Run" order="5" sideWeight="0.67125" weight="0.6792699" />
+      <window_info id="Image Layers" order="10" />
+      <window_info id="Capture Tool" order="11" />
+      <window_info id="UI Designer" order="12" />
+      <window_info anchor="bottom" id="Debug" order="11" sideWeight="0.491875" weight="0.0" />
+      <window_info anchor="right" id="Theme Preview" order="11" />
+      <window_info anchor="right" id="Palette&#9;" order="12" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="19" sideWeight="0.32875" side_tool="true" visible="true" weight="0.6636245" />
       <window_info anchor="bottom" id="Cvs" order="13" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="4" />
       <window_info anchor="bottom" id="Messages" order="20" sideWeight="0.644375" weight="0.48370275" />
+      <window_info anchor="right" id="Maven Projects" order="13" />
+      <window_info content_ui="combo" id="Project" order="7" visible="true" weight="0.16875" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -297,76 +373,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merge branch 'master' of https://github.com/martinhschei/eksamen-OOP-V2018&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;out/production/Eksamen/ChessBoard$1.class&#10;#&#9;out/production/Eksamen/ChessBoard$2.class&#10;#&#9;out/production/Eksamen/ChessBoard$3.class&#10;#&#9;out/production/Eksamen/ChessBoard.class&#10;#&#9;out/production/Eksamen/Game.class&#10;#&#9;out/production/Eksamen/Stockfish.class&#10;#&#9;out/production/Eksamen/StockfishCommands.class&#10;#&#9;out/production/Eksamen/StockfishReturns.class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/martinhschei/eksamen-OOP-V2018&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;out/production/Eksamen/ChessBoard$1.class&#10;#&#9;out/production/Eksamen/ChessBoard$2.class&#10;#&#9;out/production/Eksamen/ChessBoard$3.class&#10;#&#9;out/production/Eksamen/ChessBoard.class&#10;#&#9;out/production/Eksamen/Game.class&#10;#&#9;out/production/Eksamen/Stockfish.class&#10;#&#9;out/production/Eksamen/StockfishCommands.class&#10;#&#9;out/production/Eksamen/StockfishReturns.class" />
+    <MESSAGE value="Noe rydding og fikset tøm-logg knapp" />
+    <MESSAGE value="bugfixing" />
+    <option name="LAST_COMMIT_MESSAGE" value="bugfixing" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Chess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/stockfish_testing/stockfish_testing/src/model/SuperStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-96">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChessBoard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.java" />
-    <entry file="file://$PROJECT_DIR$/src/Move.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Field.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="119" selection-start-line="119" selection-end-line="119" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/StockfishReturns.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="47" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Stockfish.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/StockfishCommands.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChessPiece.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/jre/lib/rt.jar!/java/util/Observer.class" />
     <entry file="file://$PROJECT_DIR$/src/Bishop.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -397,45 +408,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Tower.java" />
-    <entry file="file://$USER_HOME$/Downloads/stockfish_testing/stockfish_testing/src/model/runtimestrategy/ClientThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="39" column="30" selection-start-line="39" selection-end-line="41" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/stockfish_testing/stockfish_testing/src/model/SuperStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-96">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/HovedMeny.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Downloads/stockfish_testing/stockfish_testing/src/model/runtimestrategy/ClientThread.java" />
+    <entry file="file://$USER_HOME$/Downloads/stockfish_testing/stockfish_testing/src/model/SuperStrategy.java" />
     <entry file="file://$PROJECT_DIR$/src/Position.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
           <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/IsMover.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLobby.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
@@ -446,24 +424,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/IsListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="5" selection-start-column="5" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/IsMoveListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="27">
           <caret line="1" column="16" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/IsActionListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="2" column="1" lean-forward="true" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -478,13 +442,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
           <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
         </state>
       </provider>
     </entry>
@@ -516,13 +473,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/StartMeny.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="93" column="51" selection-start-line="93" selection-start-column="51" selection-end-line="93" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Move.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
@@ -544,27 +494,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HasListeners.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/io/FileInputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="194" selection-start-line="194" selection-end-line="194" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/io/FileInputStream.java" />
+    <entry file="file://$PROJECT_DIR$/.gitignore" />
     <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -587,20 +518,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.java" />
-    <entry file="file://$PROJECT_DIR$/src/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/IsGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Row.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="621">
@@ -625,19 +542,184 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Chess.java">
+    <entry file="file://$PROJECT_DIR$/src/ChessBoard.java" />
+    <entry file="file://$PROJECT_DIR$/src/IsActionListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+        <state>
+          <caret column="10" selection-start-column="10" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChessBoard.java">
+    <entry file="file://$PROJECT_DIR$/src/HovedMeny.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="18">
+          <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IsListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="10" selection-start-column="10" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IsMover.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="10" selection-start-column="10" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/Eksamen/config.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IsChatListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HasListeners.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-125">
+          <caret line="16" column="52" lean-forward="true" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StartMeny.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1206">
+          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1474#1475#0" expanded="true" />
+            <element signature="e#1516#1517#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ConnetionMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="83" column="84" selection-start-line="83" selection-start-column="84" selection-end-line="83" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_172/src.zip!/java/awt/event/ActionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLobby.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding>
+            <element signature="e#431#432#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+            <element signature="e#534#535#0" expanded="true" />
+            <element signature="e#555#556#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IsGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-288">
+          <caret line="56" column="5" lean-forward="true" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
+          <folding>
+            <element signature="e#379#380#0" expanded="true" />
+            <element signature="e#413#414#0" expanded="true" />
+            <element signature="e#1459#1460#0" expanded="true" />
+            <element signature="e#1494#1495#0" expanded="true" />
+            <element signature="e#1531#1532#0" expanded="true" />
+            <element signature="e#1575#1576#0" expanded="true" />
+            <element signature="e#4959#4960#0" expanded="true" />
+            <element signature="e#5015#5016#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-83">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+          <folding>
+            <element signature="e#693#694#0" expanded="true" />
+            <element signature="e#723#724#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChessGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-648">
+          <caret line="69" column="16" selection-start-line="69" selection-start-column="16" selection-end-line="69" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MainMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="19" column="47" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ConnectionMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="59" column="34" lean-forward="true" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Chess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+          <folding>
+            <element signature="e#55#56#0" expanded="true" />
+            <element signature="e#77#78#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_172/src.zip!/java/lang/Runnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="67" column="25" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/ChessGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="155" column="31" lean-forward="true" selection-start-line="155" selection-start-column="31" selection-end-line="155" selection-end-column="31" />
+          <folding>
+            <element signature="e#5051#5052#0" expanded="true" />
           </folding>
         </state>
       </provider>

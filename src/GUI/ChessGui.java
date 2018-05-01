@@ -152,6 +152,7 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
 
         //Scrollpane for logArea
         JScrollPane logScrollPane = new JScrollPane(logArea);
+        logScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 logScrollPane.getVerticalScrollBar().setValue(0);
