@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-class StartMeny extends JFrame {
+class ConnetionMenu extends JFrame {
 
     private GameSettings gSettings;
 	public JPanel main = null;
@@ -14,7 +14,7 @@ class StartMeny extends JFrame {
 	private JTextField nickNameField;
 	private JTextField ipInputField;
 
-	public StartMeny(GameSettings settings)
+	public ConnetionMenu(GameSettings settings)
 	{
 		gSettings = settings;
 		main = new JPanel();

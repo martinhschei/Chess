@@ -33,12 +33,12 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         (new Thread(stockFish)).start();
 
         if (player.isHost()) {
-            NetworkServer server = new NetworkServer(1337);
+            NetworkServer server = new NetworkServer(80);
             server.addListener(this);
             this.addListener(server);
             (new Thread(server)).start();
         } else {
-            NetworkClient client = new NetworkClient(player.getIp(), 1337);
+            NetworkClient client = new NetworkClient(player.getIp(), 80);
             client.addListener(this);
             this.addListener(client);
             (new Thread(client)).start();

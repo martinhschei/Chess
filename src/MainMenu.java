@@ -1,16 +1,15 @@
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 class MainMenu extends JFrame {
 
 	private JFrame hovedVindu = null;
-	StartMeny startMeny;
+	ConnetionMenu connetionMenu;
 	GameModeSelectorMenu gameModeMenu;
 	
 	public MainMenu(GameSettings settings)
 	{
         hovedVindu = BuildWindow();
-        startMeny = new StartMeny(settings);
+        connetionMenu = new ConnetionMenu(settings);
         gameModeMenu = new GameModeSelectorMenu(settings, this);
 		hovedVindu.setContentPane(gameModeMenu.main);
 		hovedVindu.setVisible(true);
@@ -34,7 +33,7 @@ class MainMenu extends JFrame {
 	}
 	protected void SwitchToStartMenu()
 	{
-		this.hovedVindu.setContentPane(startMeny.main);
+		this.hovedVindu.setContentPane(connetionMenu.main);
 		this.hovedVindu.revalidate();
 	}
 	
