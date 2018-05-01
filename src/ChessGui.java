@@ -181,6 +181,7 @@ public class ChessGui extends HasListeners implements IsMover {
 
     private void sendNewChatMessage(String message)
     {
+        logArea.append("\n" + message);
         publishNewChatMessage(message);
     }
 
