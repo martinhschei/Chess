@@ -115,7 +115,7 @@ public class ChessGui extends HasListeners implements IsMover {
         //Container for chat box
         JPanel chatArea = new JPanel();
         GridLayout chatAreaLayout = new GridLayout(3,0);
-        JTextField chatLabel = new JTextField("Chat med din motspiller!");
+        JTextField chatLabel = new JTextField(game.getPlayer().getName()+ ", chat med din motspiller!");
         chatLabel.setEditable(false);
         JTextField chatTextField = new JTextField(20);
 
@@ -137,7 +137,7 @@ public class ChessGui extends HasListeners implements IsMover {
             chatTextField.setText(" ");
         });
 
-        JButton emptyLogButton = new JButton("Empty log");
+        JButton emptyLogButton = new JButton("Tøm logg");
         //Empty button actionlistener
         emptyLogButton.addActionListener(e -> {
             sendNewChatMessage(chatTextField.getText());
