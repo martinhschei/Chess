@@ -17,12 +17,13 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
     private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };
     private final List<Row> rows;
     private JFrame board;
+    private Player player;
 
     public ChessGui(IsGame game)
     {
         this.game = game;
+        player = this.game.getPlayer();
         this.rows = new ArrayList();
-
         this.buildBoard();
         this.setStartUpPosition();
         this.updateBoardStatus();
@@ -31,7 +32,7 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
     private void updateBoardStatus()
     {
         if (this.game.myTurn()) {
-            this.board.setTitle("Ditt trekk " + game.getPlayer().getName());
+            this.board.setTitle("Ditt trekk " + player.getName() + game.returnPlayerColor(player));
         } else {
             this.board.setTitle("Venter på den andre spilleren...");
         }
@@ -76,7 +77,7 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
                 from.reset();
                 onNewLogEntry(
                         this.game.logIllegalMove(
-                                this.game.getPlayer().getName(), newMove.toString()
+                                player.getName()+this.game.returnPlayerColor(player), newMove.toString()
                         )
                 );
                 System.out.println("DEBUG: Illegal Helpers.Move ("+newMove.toString()+")!!\n");
@@ -189,7 +190,7 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
     private void sendNewChatMessage(String message)
     {
         if (message.length() > 0 ) {
-            Log log = new Log(LogType.CHAT, game.getPlayer().getName(), message);
+            Log log = new Log(LogType.CHAT, player.getName()+this.game.returnPlayerColor(player), message);
             this.onNewLogEntry(log);
             publishNewChatMessage(log);
         }
