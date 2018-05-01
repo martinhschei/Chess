@@ -3,8 +3,8 @@ import java.util.Observer;
 
 class GameLobby implements Observer {
 
-    MainMenu menu = null;
-    GameSettings settings = null;
+    MainMenu menu;
+    GameSettings settings;
 
     public GameLobby()
     {
