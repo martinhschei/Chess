@@ -10,7 +10,6 @@ class ConnetionMenu extends JFrame {
 	public JPanel main = null;
 	private JRadioButton hostButton;
 	private JRadioButton joinButton;
-	//private JTextField NameInputField = new JTextField(10);
 	private JTextField nickNameField;
 	private JTextField ipInputField;
 
@@ -30,6 +29,7 @@ class ConnetionMenu extends JFrame {
 		JPanel rute4 = new JPanel();
 		JButton join = MonitorConnectButton();
 		JLabel ipAddr = LagIpAddr();
+
 		//Textfield for IP input. Changes when joinButton isSelected();
 		ipInputField = new JTextField(10);
 		nickNameField = new JTextField(10);
@@ -37,7 +37,6 @@ class ConnetionMenu extends JFrame {
 		ipInputField.setText(gSettings.getIp());
 		nickNameField.setText(gSettings.getNickName());
 		ipInputField.setEditable(false);
-		//NameInputField.setEditable(true);
 		ButtonGroup bg1 = new ButtonGroup();
 		hostButton = new JRadioButton("Host Game");
 		joinButton = new JRadioButton("Join Game");
@@ -57,7 +56,6 @@ class ConnetionMenu extends JFrame {
 		rute2.add(ipInputField);
 		rute3.add(new JLabel("Skriv ditt nickname"));
 		rute3.add(nickNameField);
-
 		rute3.add(join);
 		main.add(rute1);
 		main.add(rute2);
@@ -77,18 +75,13 @@ class ConnetionMenu extends JFrame {
 		{
 		    public void actionPerformed(ActionEvent e)
 		    {
-		    	//NameInputField.setText("playaaaa");
-		        //Here goes the action (method) you want to execute when clicked
-		        System.out.println("You clicked the connecto buttono");
 		        if(joinButton.isSelected()) {
-					System.out.println("debug: joinbutton isselected. FUNGERER");
 					gSettings.setPlayer(new Player(nickNameField.getText(), false));
 					gSettings.setIp(ipInputField.getText());
 					gSettings.setReady(true);
 					gSettings.saveSettings();
 				}
 				if(hostButton.isSelected() && !nickNameField.getText().equals("")) {
-					System.out.println("debug: hostbutton isselected. FUNGERER");
 					gSettings.setPlayer(new Player(nickNameField.getText(), true));
 					gSettings.setHost();
 					gSettings.setReady(true);
