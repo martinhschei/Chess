@@ -104,9 +104,8 @@ public class ChessGui extends HasListeners implements IsMover {
         logArea.setLineWrap(true);
         logArea.setWrapStyleWord(true);
         logArea.setEditable(false);
-        //getLogOfType CHAT
 
-        //Scrollpane for logArea. Currently logArea-text is hidden?
+        //Scrollpane for logArea
         JScrollPane logScrollPane = new JScrollPane();
         logScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         logScrollPane.add(logArea);
@@ -120,6 +119,7 @@ public class ChessGui extends HasListeners implements IsMover {
         chatLabel.setEditable(false);
         JTextField chatTextField = new JTextField(20);
 
+        // listener for enter-click on chatTextfield
         chatTextField.addActionListener(e -> {
             sendNewChatMessage(chatTextField.getText());
             chatTextField.setText(" ");
@@ -142,7 +142,7 @@ public class ChessGui extends HasListeners implements IsMover {
         //Empty button actionlistener
         emptyLogButton.addActionListener(e -> {
             sendNewChatMessage(chatTextField.getText());
-            chatTextField.setText(" ");
+            logArea.setText(" ");
         });
 
         chatButtonsPanel.add(sendChatButton);
