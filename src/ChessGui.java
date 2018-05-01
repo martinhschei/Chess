@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChessGui extends HasListeners implements IsMover {
+public class ChessGui extends HasListeners implements IsMover, IsListener, IsLogListener {
     
     private JTextArea logArea;
     private IsGame game;
@@ -77,12 +77,6 @@ public class ChessGui extends HasListeners implements IsMover {
         }
 
         this.updateBoardStatus();
-        //Logger.setMoveLog(newMove.toString());
-        //writeLogToScreen();
-
-        // refactoring => send med move string ved hver kommando til Stockfish
-        // this.stockFish.setMovesString(this.getMovesString());
-
         this.board.repaint();
         this.board.revalidate();
     }
@@ -94,40 +88,42 @@ public class ChessGui extends HasListeners implements IsMover {
         this.board.setSize(1000,750);
         this.board.setResizable(false);
         this.board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.board.setTitle("LotionChess: Din smootheste sjakk-opplevelse!");
 
-        //Container for chess-board
+        //Container for board
         JPanel boardPanel = new JPanel();
         GridLayout boardLayout = new GridLayout(8, 8, 1, 1);
         boardPanel.setLayout(boardLayout);
 
-        //Container for the side-panel
-        JPanel sidePanel = new JPanel();
+        //Container for the right-box
+        JPanel rightPanel = new JPanel();
         GridLayout logLayout = new GridLayout(0,1);
         logArea = new JTextArea("Her vil loggen printes", 0, 30);
         logArea.setLineWrap(true);
         logArea.setWrapStyleWord(true);
         logArea.setEditable(false);
 
-        //Container for logArea. This is the JTextArea for the log.
+        //Scrollpane for logArea
         JScrollPane logScrollPane = new JScrollPane();
         logScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         logScrollPane.add(logArea);
-        sidePanel.setLayout(logLayout);
-        sidePanel.add(logArea);
+        rightPanel.setLayout(logLayout);
+        rightPanel.add(logArea);
 
-        //Container for chat box.
+        //Container for chat box
         JPanel chatArea = new JPanel();
         GridLayout chatAreaLayout = new GridLayout(3,0);
         JTextField chatLabel = new JTextField(game.getPlayer().getName()+ ", chat med din motspiller!");
         chatLabel.setEditable(false);
         JTextField chatTextField = new JTextField(20);
-        chatTextField.setPreferredSize(new Dimension(30, 10));
 
         // listener for enter-click on chatTextfield
         chatTextField.addActionListener(e -> {
             sendNewChatMessage(chatTextField.getText());
             chatTextField.setText(" ");
         });
+
+        chatTextField.setPreferredSize(new Dimension(30, 10));
         JScrollPane chatTextFieldScrollPane = new JScrollPane(chatTextField);
         chatArea.setLayout(chatAreaLayout);
         JPanel chatButtonsPanel = new JPanel();
@@ -158,10 +154,10 @@ public class ChessGui extends HasListeners implements IsMover {
         leftBoxSplitpane.setEnabled(false);
         leftBoxSplitpane.setDividerLocation(570);
         leftBoxSplitpane.setDividerSize(10);
-        sidePanel.add(leftBoxSplitpane);
+        rightPanel.add(leftBoxSplitpane);
 
         //Splitpane for the whole window
-        JSplitPane containerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, boardPanel, sidePanel);
+        JSplitPane containerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, boardPanel, rightPanel);
         containerSplitPane.setOneTouchExpandable(true);
         containerSplitPane.setDividerLocation(735);
         Container content = this.board.getContentPane();
@@ -184,17 +180,15 @@ public class ChessGui extends HasListeners implements IsMover {
 
     private void sendNewChatMessage(String message)
     {
-        Log log = new Log(LogType.CHAT, game.getPlayer().getName(), message);
-        onNewLogEntry(log);
-        publishNewChatMessage(log);
+        if (message.length() > 0 ) {
+            Log log = new Log(LogType.CHAT, game.getPlayer().getName(), message);
+            this.onNewLogEntry(log);
+            publishNewChatMessage(log);
+        }
     }
 
     public void onNewLogEntry(Log log) {
-        logArea.append(
-                "\n" +log.getPlayerName()
-                        + ": "
-                        + log.getMessage()
-        );
+        logArea.append("\n" +log.getPlayerName() + ": " + log.getMessage());
     }
 
     private void setStartUpPosition()

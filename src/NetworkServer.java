@@ -33,7 +33,7 @@ public class NetworkServer extends HasListeners implements Runnable, IsActionLis
 			System.out.println("new player");
             ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
 			this.oos = new ObjectOutputStream(clientSocket.getOutputStream());
-			while(true) {
+			while(clientSocket.isConnected()) {
 				try {
 					Action action = (Action) ois.readObject();
                     this.publishAction(action);

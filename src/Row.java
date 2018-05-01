@@ -4,6 +4,7 @@ import java.util.List;
 class Row {
 
 	private final List<Field> fields = new ArrayList<>();
+
 	private final int index;
 	
 	public Row(int index)
@@ -15,6 +16,7 @@ class Row {
 	{
 		return this.index;
 	}
+
 	public List<Field> getFields()
 	{
 		return fields;
