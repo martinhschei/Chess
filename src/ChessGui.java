@@ -137,7 +137,7 @@ public class ChessGui extends HasListeners implements IsMover {
             chatTextField.setText(" ");
         });
 
-        JButton emptyLogButton = new JButton("Empty log");
+        JButton emptyLogButton = new JButton("Tøm logg");
         //Empty button actionlistener
         emptyLogButton.addActionListener(e -> {
             sendNewChatMessage(chatTextField.getText());
