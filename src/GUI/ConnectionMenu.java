@@ -1,20 +1,20 @@
 package GUI;
 
-import Helpers.Player;
+import javafx.scene.layout.StackPane;
 
-import Config.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
+import Config.*;
+import Helpers.*;
 import javax.swing.*;
 
-class ConnectionMenu extends JFrame {
+public class ConnectionMenu extends JFrame {
 
-    private final GameSettings gameSettings;
-	public final JPanel main;
+	private GameSettings gameSettings;
+	public JPanel main;
 	private JRadioButton hostButton;
 	private JRadioButton joinButton;
 	private JTextField nickNameField;
@@ -28,13 +28,16 @@ class ConnectionMenu extends JFrame {
 	}
 
 	private void fillPanel(JPanel main2) {
-		main.setLayout(new GridLayout(2,2));
+		main.setLayout(new GridLayout(5,1));
+		StackPane stackPane = new StackPane();
 		JPanel field1 = new JPanel();
-		field1.setLayout(new GridLayout(4,0));
-		JPanel field2 = new JPanel();
-		JPanel field3 = new JPanel();
+		//field1.setLayout(new GridLayout(4,0));
+		JPanel field2 = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 0));
+
+		JPanel field3 = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 0));
 		JPanel field4 = new JPanel();
-		JButton join = monitorConnectButton();
+		JPanel field5 = new JPanel();
+		JButton join = MonitorConnectButton();
 		JLabel ipAddr = createIpLabel();
 
 		//Textfield for IP input. Changes when joinButton isSelected();
@@ -45,40 +48,37 @@ class ConnectionMenu extends JFrame {
 		nickNameField.setText(gameSettings.getNickName());
 		ipInputField.setEditable(false);
 
-		//NameInputField.setEditable(true);
+		//bg1 = Buttongroup for Join og Host-knapp
 		ButtonGroup bg1 = new ButtonGroup();
-		hostButton = new JRadioButton("Host Game");
 		joinButton = new JRadioButton("Join Game");
 		joinButton.addActionListener(e -> ipInputField.setEditable(true));
-		hostButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ipInputField.setEditable(false);
-			}
-		});
+		hostButton = new JRadioButton("Host Game");
+		hostButton.addActionListener(e -> ipInputField.setEditable(false));
 
 		bg1.add(hostButton);
 		bg1.add(joinButton);
 		field1.add(joinButton);
 		field1.add(hostButton);
 
-		field2.add(new JLabel("Skriv IP-adresse du koble deg til"));
+		field2.add(new JLabel("Set the IP-adress for connection"));
 		field2.add(ipInputField);
 
-		field3.add(new JLabel("Skriv ditt nickname"));
+		field3.add(new JLabel("Your nickname"));
 		field3.add(nickNameField);
-		field3.add(join);
-		field3.add(ipAddr);
+		field4.add(join);
+		field5.add(ipAddr);
 
 		main.add(field1);
 		main.add(field2);
 		main.add(field3);
 		main.add(field4);
+		main.add(field5);
 	}
 
 	private JLabel createIpLabel()
 	{
 		JLabel ipLabel = new JLabel();
-		ipLabel.setText("Din lokale ip adresse er: " + this.getLocalIp());
+		ipLabel.setText("Your local IP-adress is: " + this.getLocalIp());
 		return ipLabel;
 	}
 
@@ -91,16 +91,17 @@ class ConnectionMenu extends JFrame {
 		}
 	}
 
-	private JButton monitorConnectButton()
+	private JButton MonitorConnectButton()
 	{
-		JButton btnConnect = new JButton("Connect to Game");
-		btnConnect.addActionListener(new ActionListener()
+		JButton retur = new JButton("Connect and play");
+		retur.addActionListener(new ActionListener()
 		{
-		    public void actionPerformed(ActionEvent e)
-		    {
-		        //Here goes the action (method) you want to execute when clicked
-		        System.out.println("You clicked the connecto buttono");
-		        if(joinButton.isSelected()) {
+			public void actionPerformed(ActionEvent e)
+			{
+				//NameInputField.setText("playaaaa");
+				//Here goes the action (method) you want to execute when clicked
+				System.out.println("You clicked the connecto buttono");
+				if(joinButton.isSelected()) {
 					System.out.println("debug: joinbutton isselected. FUNGERER");
 					gameSettings.setPlayer(new Player(nickNameField.getText(), false));
 					gameSettings.setIp(ipInputField.getText());
@@ -114,8 +115,8 @@ class ConnectionMenu extends JFrame {
 					gameSettings.setReady(true);
 					gameSettings.saveSettings();
 				}
-		    }
+			}
 		});
-		return btnConnect;
+		return retur;
 	}
 }

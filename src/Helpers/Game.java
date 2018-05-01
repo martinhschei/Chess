@@ -29,6 +29,8 @@ public class Game extends HasListeners implements IsListener, IsActionListener, 
 
         logger = new Logger();
 
+        createSocket();
+
         this.chessGui = new ChessGui(this);
         this.chessGui.addListener(this);
         this.addListener(chessGui);
@@ -40,19 +42,25 @@ public class Game extends HasListeners implements IsListener, IsActionListener, 
 		stockFish = new Stockfish();
         (new Thread(stockFish)).start();
 
+
+	}
+	private void createSocket()
+    {
         if (player.isHost()) {
+            this.movesAllowed = true;
             NetworkServer server = new NetworkServer(80);
             server.addListener(this);
             this.addListener(server);
             (new Thread(server)).start();
 
         } else {
+            this.movesAllowed = false;
             NetworkClient client = new NetworkClient(player.getIp(), 80);
             client.addListener(this);
             this.addListener(client);
             (new Thread(client)).start();
         }
-	}
+    }
 
     private String getMovesString()
     {
