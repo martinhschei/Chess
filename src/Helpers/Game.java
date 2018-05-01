@@ -189,9 +189,9 @@ public class Game extends HasListeners implements IsListener, IsActionListener, 
     {
         this.movesAllowed = true;
         this.chessGui.movePiece(move.getPiece(), move.getFrom(), move.getTo(), true);
-        askStockFish();
+        askStockFishBestMove();
     }
-    public void askStockFish()
+    public void askStockFishBestMove()
     {
         if(this.movesAllowed)
         {
