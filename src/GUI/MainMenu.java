@@ -33,7 +33,6 @@ class MainMenu extends JFrame {
 	void RemoveMenu()
 	{
 		this.hovedVindu.setVisible(false);
-		this.hovedVindu.setContentPane(null);
 		this.hovedVindu.dispose();
 	}
 	void SwitchToStartMenu()
