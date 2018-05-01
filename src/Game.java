@@ -38,6 +38,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
             server.addListener(this);
             this.addListener(server);
             (new Thread(server)).start();
+
         } else {
             NetworkClient client = new NetworkClient(player.getIp(), 80);
             client.addListener(this);
@@ -69,6 +70,15 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
     {
         String moveString = getMovesString();
         return stockFish.isMoveLegal(moveString, move);
+    }
+    public void addToLog(LogType logType, String playerName, String message)
+    {
+        switch (logType)
+        {
+            case CHAT: logger.setChatLog(playerName, message); break;
+            case STOCKFISH: logger.setStockfishLog(playerName, message); break;
+            case MOVE: logger.setMoveLog(playerName, message); break;
+        }
     }
 
     public void onNewMove(Move move)

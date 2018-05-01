@@ -67,7 +67,8 @@ public class ChessGui extends HasListeners implements IsMover {
             }
             else {
                 from.reset();
-                System.out.println("DEBUG: Illegal Move!!! \n");
+                this.game.addToLog(LogType.STOCKFISH, this.game.getPlayer().getName(), " prøvde å gjøre ett ugyldig trekk: " +newMove.toString());
+                System.out.println("DEBUG: Illegal Move ("+newMove.toString()+")!!\n");
             }
         }
 
