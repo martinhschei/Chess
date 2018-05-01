@@ -12,9 +12,6 @@ class Stockfish implements Runnable {
 	private OutputStreamWriter stockFishWriter;
 	private BufferedReader stockFishReader;
     private String currentFen;
-    private int fullMoveCount = 0;
-    private char turn = 'w';
-    private String castling = "KQkq";
 	
 	public Stockfish()
 	{
@@ -33,6 +30,53 @@ class Stockfish implements Runnable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public boolean isMoveLegal(String movesString, Move move)
+	{
+		boolean answer = false;
+		String moveString = move.toString();
+		String fen = null;
+		String newFen = null;
+
+		try {
+			this.stockFishWriter.write(StockfishCommands.START_NEW_GAME);
+			this.stockFishWriter.flush();
+			this.stockFishWriter.write(StockfishCommands.SET_POSITION  + movesString + "\n");
+			this.stockFishWriter.flush();
+			fen = this.sendCommand(StockfishCommands.GET_POSITION, StockfishReturns.FEN_POSITION);
+			this.stockFishWriter.write(StockfishCommands.START_NEW_GAME);
+			this.stockFishWriter.flush();
+			this.stockFishWriter.write(StockfishCommands.SET_POSITION  + movesString + " " + moveString + "\n");
+			this.stockFishWriter.flush();
+			newFen = this.sendCommand(StockfishCommands.GET_POSITION, StockfishReturns.FEN_POSITION);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		fen = translateAnswerToFen(fen);
+		newFen = translateAnswerToFen(newFen);
+		if(newFen.equals(fen))
+		{
+			System.out.println("DEBUG: " + newFen + " samsvarer med " + fen + "\n");
+			answer = false;
+		}
+		else
+		{
+			System.out.println("DEBUG: " + newFen + " samsvarer ikke med " + fen + " og move er dermed valid \n");
+			answer = true;
+		}
+
+		return answer;
+	}
+
+	private String translateAnswerToFen(String answer)
+	{
+		String fen = null;
+		int length = answer.length();
+		fen = answer.substring(6,(length));
+
+		return fen;
 	}
 
 

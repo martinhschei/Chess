@@ -16,7 +16,7 @@ public class NetworkClient extends HasListeners implements Runnable, IsListener,
 		this.port = port;
 	}
 
-	public void newAction(Action action)
+	public void onNewAction(Action action)
 	{
 		try {
 			this.oos.writeObject(action);
@@ -27,7 +27,7 @@ public class NetworkClient extends HasListeners implements Runnable, IsListener,
 
 	private void onConnect()
 	{
-		this.newAction(new Action("hereiam", null));
+		this.onNewAction(new Action("hereiam", null));
 	}
 
 	@Override
@@ -46,8 +46,6 @@ public class NetworkClient extends HasListeners implements Runnable, IsListener,
 					e.printStackTrace();
 				}
 			}
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

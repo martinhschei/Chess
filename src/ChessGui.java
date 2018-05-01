@@ -1,29 +1,24 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChessBoard extends HasListeners implements IsMover {
+public class ChessGui extends HasListeners implements IsMover {
 
+    private JTextArea logArea;
     private IsGame game;
     private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };
     private List<Row> rows;
-
     private JFrame board;
 
-    public ChessBoard(IsGame game)
+    public ChessGui(IsGame game)
     {
         this.game = game;
         this.rows = new ArrayList();
 
         this.buildBoard();
         this.setStartUpPosition();
-
-        /*Stockfish stockFish = new Stockfish();
-        (new Thread(stockFish)).start();*/
-
+        this.updateBoardStatus();
     }
 
     private void updateBoardStatus()
@@ -35,22 +30,50 @@ public class ChessBoard extends HasListeners implements IsMover {
         }
     }
 
+    private void clearHighlights()
+    {
+        for(Row row : rows)
+        {
+            for (Field field : row.getFields())
+            {
+                if(field.isFieldHighlighted())
+                {
+                    field.clearHighlights();
+                }
+            }
+        }
+    }
+
     public void movePiece(ChessPiece piece, Field from, Field to, boolean otherPlayer)
     {
         if(otherPlayer)
         {
             from = translateToLocalField(from);
             to = translateToLocalField(to);
+            from.setPiece(null);
+            to.setPiece(null);
+            to.setPiece(piece);
         }
-        from.setPiece(null);
-        to.setPiece(piece);
+
         Move newMove = new Move(from, to, piece);
 
         if(!otherPlayer) {
-            this.publishNewMove(newMove);
+            if(this.game.isMoveLegal(newMove)) {
+                clearHighlights();
+                from.setPiece(null);
+                to.setPiece(null);
+                to.setPiece(piece);
+                this.publishNewMove(newMove);
+            }
+            else {
+                from.reset();
+                System.out.println("DEBUG: Illegal Move!!! \n");
+            }
         }
 
         this.updateBoardStatus();
+        //Logger.setMoveLog(newMove.toString());
+        //writeLogToScreen();
 
         // refactoring => send med move string ved hver kommando til Stockfish
         // this.stockFish.setMovesString(this.getMovesString());
@@ -59,7 +82,7 @@ public class ChessBoard extends HasListeners implements IsMover {
         this.board.revalidate();
     }
 
-    public void buildBoard()
+    private void buildBoard()
     {
         //Container for sjakkbrett og høyrepanel
         this.board = new JFrame();
@@ -76,10 +99,11 @@ public class ChessBoard extends HasListeners implements IsMover {
         //Container for the right-box
         JPanel rightPanel = new JPanel();
         GridLayout logLayout = new GridLayout(0,1);
-        JTextArea logArea = new JTextArea("Her vil loggen printes", 0, 30);
+        logArea = new JTextArea("Her vil loggen printes", 0, 30);
         logArea.setLineWrap(true);
         logArea.setWrapStyleWord(true);
         logArea.setEditable(false);
+        //getLogOfType CHAT
 
         //Scrollpane for logArea. Currently logArea-text is hidden?
         JScrollPane logScrollPane = new JScrollPane();
@@ -94,12 +118,12 @@ public class ChessBoard extends HasListeners implements IsMover {
         JTextField chatLabel = new JTextField("Chat med din motspiller!");
         chatLabel.setEditable(false);
         JTextField chatTextField = new JTextField(20);
-        chatTextField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                logArea.append("\n" + chatTextField.getText());
-                chatTextField.setText("");
-            }
+
+        chatTextField.addActionListener(e -> {
+            sendNewChatMessage(chatTextField.getText());
+            chatTextField.setText(" ");
         });
+
         chatTextField.setPreferredSize(new Dimension(30, 10));
         JScrollPane chatTextFieldScrollPane = new JScrollPane(chatTextField);
         chatArea.setLayout(chatAreaLayout);
@@ -108,19 +132,18 @@ public class ChessBoard extends HasListeners implements IsMover {
         JButton sendChatButton = new JButton("Send");
 
         //Send.button actionlistener
-        sendChatButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                logArea.append("\n" + chatTextField.getText());
-                chatTextField.setText("");
-            }
+        sendChatButton.addActionListener(e -> {
+            sendNewChatMessage(chatTextField.getText());
+            chatTextField.setText(" ");
         });
+
         JButton emptyLogButton = new JButton("Empty log");
         //Empty button actionlistener
-        emptyLogButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                logArea.setText("");
-            }
+        emptyLogButton.addActionListener(e -> {
+            sendNewChatMessage(chatTextField.getText());
+            chatTextField.setText(" ");
         });
+
         chatButtonsPanel.add(sendChatButton);
         chatButtonsPanel.add(emptyLogButton);
         chatArea.add(chatLabel);
@@ -150,10 +173,19 @@ public class ChessBoard extends HasListeners implements IsMover {
             }
             this.rows.add(newRow);
         }
-        //this.board.pack();
+
         this.board.repaint();
         this.board.revalidate();
         this.board.setVisible(true);
+    }
+
+    private void sendNewChatMessage(String message)
+    {
+        publishNewChatMessage(message);
+    }
+
+    public void onNewChatMessage(Log log) {
+        logArea.append("\n" + log.getMessage());
     }
 
     private void setStartUpPosition()
@@ -204,13 +236,21 @@ public class ChessBoard extends HasListeners implements IsMover {
     public boolean clickAllowed(Field field)
     {
         if (field.hasPiece()) {
-            return (this.game.myTurn() && (field.getCurrentPiece().isWhite() == this.game.amIWhite()));
-        } else {
+            // Gammel kode, incase jeg tuller det til
+            //return (this.game.myTurn() && (field.getCurrentPiece().isWhite() == this.game.amIWhite()));
+            if (this.game.myTurn() && (field.getCurrentPiece().isWhite() == this.game.amIWhite()))
+            {
+                return true;
+            }
+            return this.game.myTurn() && (field.getCurrentPiece().isWhite() != this.game.amIWhite()) && Field.selectedField != null;
+
+        }
+        else {
             return this.game.myTurn();
         }
     }
 
-    protected Field getFieldOnPosition(Position pos)
+    Field getFieldOnPosition(Position pos)
     {
         Row row = this.getRowByIndex(pos.getRow());
         return row.getField(pos.getColumn());
@@ -232,7 +272,7 @@ public class ChessBoard extends HasListeners implements IsMover {
         field.setPiece(piece);
     }
 
-    protected String getCurrentFen()
+    String getCurrentFen()
     {
         StringBuilder fen = new StringBuilder();
         for(Row row : rows)

@@ -1,7 +1,7 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class HovedMeny extends JFrame {
+class HovedMeny extends JFrame {
 
 	private JFrame hovedVindu = null;
 	private StartMeny startMeny = null;

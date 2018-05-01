@@ -14,7 +14,7 @@ public class NetworkServer extends HasListeners implements Runnable, IsActionLis
 		this.port = port;
 	}
 
-    public void newAction(Action action)
+    public void onNewAction(Action action)
     {
         try {
             this.oos.writeObject(action);

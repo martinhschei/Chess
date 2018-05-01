@@ -1,11 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Collections;
-
 
 class Row {
 
-	private final List<Field> fields = new ArrayList<Field>();
+	private final List<Field> fields = new ArrayList<>();
 	private final int index;
 	
 	public Row(int index)
@@ -16,6 +14,10 @@ class Row {
 	public int getIndex()
 	{
 		return this.index;
+	}
+	public List<Field> getFields()
+	{
+		return fields;
 	}
 	
 	public void addField(Field field)
@@ -33,28 +35,6 @@ class Row {
 		return null;
 	}
 
-	public void replace(Field field)
-	{
-		Field toBeReplaced = getField(field.getColumn());
-		Collections.replaceAll(this.fields, toBeReplaced, field);
-	}
-
-	/*public String getFen()
-	{
-		if (this.rowHasZeroPieces()) {
-			return "8/";
-		}
-		
-		StringBuilder fen = new StringBuilder();
-		int empty = 0;
-		for(Field field : fields) {
-			if(field.hasPiece()) {
-				fen.append(empty == 0 ? field.getCurrentPieceName() : empty + field.getCurrentPieceName());
-			}
-		}
-		return fen + "/";
-	}
-	*/
 	public String getFen()
 	{
 		if (this.rowHasZeroPieces()) {

@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class StartMeny extends JFrame {
+class StartMeny extends JFrame {
 
     private GameSettings gSettings;
 	public JPanel main = null;
@@ -34,17 +34,15 @@ public class StartMeny extends JFrame {
 		//Textfield for IP input. Changes when joinButton isSelected();
 		ipInputField = new JTextField(10);
 		nickNameField = new JTextField(10);
-
+		gSettings.loadConfig();
+		ipInputField.setText(gSettings.getIp());
+		nickNameField.setText(gSettings.getNickName());
 		ipInputField.setEditable(false);
 		//NameInputField.setEditable(true);
 		ButtonGroup bg1 = new ButtonGroup();
 		hostButton = new JRadioButton("Host Game");
 		joinButton = new JRadioButton("Join Game");
-		joinButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			ipInputField.setEditable(true);
-			}
-		});
+		joinButton.addActionListener(e -> ipInputField.setEditable(true));
 		hostButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ipInputField.setEditable(false);
@@ -88,12 +86,14 @@ public class StartMeny extends JFrame {
 					gSettings.setPlayer(new Player(nickNameField.getText(), false));
 					gSettings.setIp(ipInputField.getText());
 					gSettings.setReady(true);
+					gSettings.saveSettings();
 				}
 				if(hostButton.isSelected() && !nickNameField.getText().equals("")) {
 					System.out.println("debug: hostbutton isselected. FUNGERER");
 					gSettings.setPlayer(new Player(nickNameField.getText(), true));
 					gSettings.setHost();
 					gSettings.setReady(true);
+					gSettings.saveSettings();
 				}
 		    }
 		});

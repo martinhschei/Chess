@@ -1,18 +1,22 @@
 import java.util.*;
 
-class Game extends HasListeners implements IsListener, IsActionListener, IsMoveListener, IsGame {
-    
+class Game extends HasListeners implements IsListener, IsActionListener, IsMoveListener, IsChatListener, IsGame {
+
     private Player player;
     private Player opponent;
+
     private boolean movesAllowed;
+
     private List<Move> moves;
-    private ChessBoard board;
+    private ChessGui chessGui;
     private Stockfish stockFish;
 
 	public Game(Player player)
 	{
-	    this.board = new ChessBoard(this);
-        this.board.addListener(this);
+        Logger logger = new Logger();
+
+	    this.chessGui = new ChessGui(this);
+        this.chessGui.addListener(this);
 
         this.player = player;
 
@@ -55,11 +59,22 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         return this.player.isWhite();
     }
 
-    public void newMove(Move move)
+    public boolean isMoveLegal(Move move)
+    {
+        String moveString = getMovesString();
+        return stockFish.isMoveLegal(moveString, move);
+    }
+
+    public void onNewMove(Move move)
     {
         moves.add(move);
         this.movesAllowed = false;
         this.publishAction(new Action("move", move));
+    }
+
+    public void onNewChatMessage(String message)
+    {
+        this.publishAction(new Action("chat", new Log(LogType.CHAT, message)));
     }
 
     private void highlightMove(Move move)
@@ -68,7 +83,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         move.getTo().highlight();
     }
 
-    public Move getBestMove()
+    private Move getBestMove()
     {
         String fen = buildCurrentFen();
         System.out.println("FEN position: " + fen);
@@ -81,18 +96,14 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
 
     private Move translateFromMoveString(String moveString)
     {
-	    Move move = null;
-        String pos1 = "";
-        String pos2 = "";
         String[] temp = moveString.split("\\s");
-        pos1 = temp[1].substring(0,2);
+        String pos1 = temp[1].substring(0,2);
         System.out.println("Pos1: " + pos1);
-        pos2 = temp[1].substring(2,4);
+        String pos2 = temp[1].substring(2,4);
         System.out.println("Pos2: " + pos2);
         Field field1 = translateToField(pos1);
         Field field2 = translateToField(pos2);
-        move = new Move(field1,field2,null);
-	    return move;
+        return new Move(field1,field2,null);
     }
 
     private char translatePositionToChar (String position)
@@ -110,50 +121,40 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
     {
         char c = this.translatePositionToChar(position);
         int i = this.translatePositionToInt(position);
-        Field field = this.board.getFieldOnPosition(new Position(c,i));
+        Field field = this.chessGui.getFieldOnPosition(new Position(c,i));
         return field;
     }
 
     private String buildCurrentFen(){
-        StringBuilder answer = new StringBuilder();
-        answer.append(this.board.getCurrentFen());
-        answer.append(" " + getCurrentPlayerColor());
-        answer.append(" - - 0 ");
-        answer.append(getMoveCount());
-        return answer.toString();
+        String answer = this.chessGui.getCurrentFen() +
+                " " + this.getPlayerColorForUserWhoHaveTurn() +
+                " - - 0 " +
+                getMoveCount();
+        return answer;
     }
-
-    private String getCurrentPlayerColor()
+    
+    private String getPlayerColorForUserWhoHaveTurn()
     {
-        String temp = "";
-        if(this.myTurn())
-        {
-            temp = this.amIWhite() ? "w" : "b" ;
-
+        if(this.myTurn()) {
+            return this.amIWhite() ? "w" : "b" ;
         }
-        else{
-            temp = this.amIWhite() ? "b" : "w" ;
-        }
-        return temp;
+        return this.amIWhite() ? "b" : "w" ;
     }
 
-    private String getMoveCount(){
-	    String temp = "";
-	    int no = 0;
-	    no = (moves.size()/2)+1;
-	    temp = Integer.toString(no);
-	    return temp;
+    private String getMoveCount()
+    {
+	    return Integer.toString((moves.size()/2)+1);
     }
 
     private void onNewOpponentMove(Move move)
     {
         this.movesAllowed = true;
-        this.board.movePiece(move.getPiece(), move.getFrom(), move.getTo(), true);
+        this.chessGui.movePiece(move.getPiece(), move.getFrom(), move.getTo(), true);
         Move bestMove = getBestMove();
         this.highlightMove(bestMove);
     }
 
-	public void newAction(Action action)
+	public void onNewAction(Action action)
     {
         switch(action.getType()) {
             case("move") : {
@@ -172,6 +173,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
                 this.publishAction(new Action("whoareyou", null));
                 break;
             }
+
             case("whoareyou") : {
 
                 // client replies
@@ -186,19 +188,11 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
                         this.publishAction(new Action("thisisme", this.player));
                     }
                 }
-
-                // for debugging
-                if(this.player.isHost()) {
-                    System.out.println("Host::" + this.opponent);
-                }
-                if(!this.player.isHost()) {
-                    System.out.println("Client:" + this.opponent);
-                }
-
                 break;
             }
+
             case("chat") : {
-                // addToLog(action.gePayload());
+                this.chessGui.onNewChatMessage((Log)action.getPayload());
                 break;
             }
         }

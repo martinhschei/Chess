@@ -1,12 +1,27 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
-public final class Logger {
-    static private List<Log> logList = new ArrayList<>();
-    public static void setLog(Log log) {
-        logList.add(log);
+class Logger extends Observable {
+    private List<Log> logList = new ArrayList<>();
+
+    public Log setChatLog(String message) {
+        Log logTemp = new Log(LogType.CHAT, message);
+        logList.add(logTemp);
+        setChanged();
+        return logTemp;
     }
-    public static List<Log> getLog() {
+    public void setMoveLog(String message) {
+
+        logList.add(new Log(LogType.MOVE, message));
+        //System.out.println("TEST" + message);
+    }
+    public void setStockfishLog(String message) {
+        logList.add(new Log(LogType.STOCKFISH, message));
+    }
+
+    public List<Log> getLog() {
+
         return logList;
     }
 

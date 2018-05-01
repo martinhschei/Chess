@@ -1,3 +1,3 @@
 interface IsMoveListener {
-    void newMove(Move move);
+    void onNewMove(Move move);
 }
