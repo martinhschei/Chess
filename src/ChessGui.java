@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChessGui extends HasListeners implements IsMover {
-
+    
     private JTextArea logArea;
     private IsGame game;
     private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };

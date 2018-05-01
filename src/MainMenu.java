@@ -2,14 +2,14 @@ import javax.swing.JFrame;
 
 class MainMenu extends JFrame {
 
-	private JFrame hovedVindu = null;
-	ConnetionMenu connetionMenu;
+	private JFrame hovedVindu;
+	ConnectionMenu connectionMenu;
 	GameModeSelectorMenu gameModeMenu;
-	
+
 	public MainMenu(GameSettings settings)
 	{
         hovedVindu = BuildWindow();
-        connetionMenu = new ConnetionMenu(settings);
+		connectionMenu = new ConnectionMenu(settings);
         gameModeMenu = new GameModeSelectorMenu(settings, this);
 		hovedVindu.setContentPane(gameModeMenu.main);
 		hovedVindu.setVisible(true);
@@ -19,7 +19,7 @@ class MainMenu extends JFrame {
 	{
 		JFrame frame = new JFrame("Startmeny for LotionChess");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(500, 500, 400, 300);
+		frame.setBounds(500, 500, 480, 300);
 		frame.setLocationRelativeTo(null);
 		//frame.pack();
 		return frame;
@@ -33,7 +33,7 @@ class MainMenu extends JFrame {
 	}
 	protected void SwitchToStartMenu()
 	{
-		this.hovedVindu.setContentPane(connetionMenu.main);
+		this.hovedVindu.setContentPane(connectionMenu.main);
 		this.hovedVindu.revalidate();
 	}
 	
