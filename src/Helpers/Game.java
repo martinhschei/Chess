@@ -108,9 +108,18 @@ public class Game extends HasListeners implements IsListener, IsActionListener, 
     {
         moves.add(move);
         this.movesAllowed = false;
-        Log log = logger.setMoveLog(player.getName(), move.toString());
+        Log log = logger.setMoveLog(player.getName()+returnPlayerColor(player), move.toString());
         chessGui.onNewLogEntry(log);
         this.publishAction(new Action("move", move));
+    }
+    public String returnPlayerColor(Player player)
+    {
+        String string ="(Svart)";
+        if (player.isWhite())
+        {
+            string = "(Hvit)";
+        }
+        return string;
     }
 
     public void onNewLogEntry(Log log)
@@ -200,7 +209,7 @@ public class Game extends HasListeners implements IsListener, IsActionListener, 
             case("move") : {
                 Move move = (Move)action.getPayload();
                 moves.add(move);
-                Log log = logger.setMoveLog(opponent.getName(), move.toString());
+                Log log = logger.setMoveLog(opponent.getName()+returnPlayerColor(opponent), move.toString());
                 chessGui.onNewLogEntry(log);
                 System.out.println("Mottaker:" + this.player.getName());
                 System.out.println("Host:" + this.player.isHost());
