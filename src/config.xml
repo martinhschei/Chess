@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<comment/>
-<entry key="nickName">player1</entry>
+    <comment/>
+    <entry key="nickName">player1</entry>
     <entry key="localPlayer1">player1</entry>
-    <entry key="localPlayer2">player1</entry>
-<entry key="ip">127.0.0.1</entry>
+    <entry key="localPlayer2">player2</entry>
+    <entry key="ip">127.0.0.1</entry>
 </properties>

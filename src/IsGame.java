@@ -3,5 +3,4 @@ interface IsGame {
     boolean amIWhite();
     boolean isMoveLegal(Move move);
     Player getPlayer();
-
 }
