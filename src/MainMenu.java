@@ -17,11 +17,11 @@ class MainMenu extends JFrame {
 
 	private JFrame BuildWindow()
 	{
-		JFrame frame = new JFrame("Startmeny for LotionChess");
+		JFrame frame = new JFrame("LotionChess™");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(500, 500, 480, 300);
+		frame.setBounds(500, 500, 380, 250);
 		frame.setLocationRelativeTo(null);
-		//frame.pack();
+		frame.setResizable(false);
 		return frame;
 	}
 

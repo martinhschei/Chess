@@ -23,14 +23,16 @@ class ConnectionMenu extends JFrame {
 	}
 
 	private void fillPanel(JPanel main2) {
-		main.setLayout(new GridLayout(2,2));
+		main.setLayout(new GridLayout(5,1));
 		JPanel field1 = new JPanel();
-		field1.setLayout(new GridLayout(4,0));
+		//field1.setLayout(new GridLayout(4,0));
 		JPanel field2 = new JPanel();
 		JPanel field3 = new JPanel();
 		JPanel field4 = new JPanel();
+		JPanel field5 = new JPanel();
 		JButton join = MonitorConnectButton();
 		JLabel ipAddr = createIpLabel();
+
 		//Textfield for IP input. Changes when joinButton isSelected();
 		ipInputField = new JTextField(10);
 		nickNameField = new JTextField(10);
@@ -38,40 +40,38 @@ class ConnectionMenu extends JFrame {
 		ipInputField.setText(gameSettings.getIp());
 		nickNameField.setText(gameSettings.getNickName());
 		ipInputField.setEditable(false);
-		//NameInputField.setEditable(true);
+
+		//bg1 = Buttongroup for Join og Host-knapp
 		ButtonGroup bg1 = new ButtonGroup();
-		hostButton = new JRadioButton("Host Game");
 		joinButton = new JRadioButton("Join Game");
 		joinButton.addActionListener(e -> ipInputField.setEditable(true));
-		hostButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ipInputField.setEditable(false);
-			}
-		});
+		hostButton = new JRadioButton("Host Game");
+		hostButton.addActionListener(e -> ipInputField.setEditable(false));
 
 		bg1.add(hostButton);
 		bg1.add(joinButton);
 		field1.add(joinButton);
 		field1.add(hostButton);
 
-		field2.add(new JLabel("Skriv IP-adresse du koble deg til"));
+		field2.add(new JLabel("Set the IP-adress for connection"));
 		field2.add(ipInputField);
 
-		field3.add(new JLabel("Skriv ditt nickname"));
+		field3.add(new JLabel("Your nickname"));
 		field3.add(nickNameField);
-		field3.add(join);
-		field3.add(ipAddr);
+		field4.add(join);
+		field5.add(ipAddr);
 
 		main.add(field1);
 		main.add(field2);
 		main.add(field3);
 		main.add(field4);
+		main.add(field5);
 	}
 
 	private JLabel createIpLabel()
 	{
 		JLabel ipLabel = new JLabel();
-		ipLabel.setText("Din lokale ip adresse er: " + this.getLocalIp());
+		ipLabel.setText("Your local IP-adress is: " + this.getLocalIp());
 		return ipLabel;
 	}
 
@@ -86,7 +86,7 @@ class ConnectionMenu extends JFrame {
 
 	private JButton MonitorConnectButton()
 	{
-		JButton retur = new JButton("Connect to Game");
+		JButton retur = new JButton("Connect and play");
 		retur.addActionListener(new ActionListener()
 		{
 		    public void actionPerformed(ActionEvent e)
