@@ -13,7 +13,7 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
     private Stockfish stockFish;
 
     public Player getPlayer() {
-        return player;
+        return this.player;
     }
 
 	public Game(Player player)

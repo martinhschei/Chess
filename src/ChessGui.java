@@ -24,7 +24,7 @@ public class ChessGui extends HasListeners implements IsMover {
     private void updateBoardStatus()
     {
         if (this.game.myTurn()) {
-            this.board.setTitle("Ditt trekk");
+            this.board.setTitle("Ditt trekk " + game.getPlayer().getName());
         } else {
             this.board.setTitle("Venter på den andre spilleren...");
         }
