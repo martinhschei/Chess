@@ -81,8 +81,7 @@ class GameSettings extends Observable {
         Player p2 = new Player(localPlayer2, false);
         p2.setIp("localhost");
         p2.setReady(true);
-        setChanged();
-        notifyObservers(p1);
+        new Game(p1);
         setChanged();
         notifyObservers(p2);
     }
