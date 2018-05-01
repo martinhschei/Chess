@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChessGui extends HasListeners implements IsMover {
-
+    
     private JTextArea logArea;
     private IsGame game;
     private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };
@@ -94,42 +94,40 @@ public class ChessGui extends HasListeners implements IsMover {
         this.board.setSize(1000,750);
         this.board.setResizable(false);
         this.board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //this.board.setTitle("LotionChess: Din smootheste sjakk-opplevelse!");
 
-        //Container for board
+        //Container for chess-board
         JPanel boardPanel = new JPanel();
         GridLayout boardLayout = new GridLayout(8, 8, 1, 1);
         boardPanel.setLayout(boardLayout);
 
-        //Container for the right-box
-        JPanel rightPanel = new JPanel();
+        //Container for the side-panel
+        JPanel sidePanel = new JPanel();
         GridLayout logLayout = new GridLayout(0,1);
         logArea = new JTextArea("Her vil loggen printes", 0, 30);
         logArea.setLineWrap(true);
         logArea.setWrapStyleWord(true);
         logArea.setEditable(false);
 
-        //Scrollpane for logArea
+        //Container for logArea. This is the JTextArea for the log.
         JScrollPane logScrollPane = new JScrollPane();
         logScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         logScrollPane.add(logArea);
-        rightPanel.setLayout(logLayout);
-        rightPanel.add(logArea);
+        sidePanel.setLayout(logLayout);
+        sidePanel.add(logArea);
 
-        //Container for chat box
+        //Container for chat box.
         JPanel chatArea = new JPanel();
         GridLayout chatAreaLayout = new GridLayout(3,0);
         JTextField chatLabel = new JTextField(game.getPlayer().getName()+ ", chat med din motspiller!");
         chatLabel.setEditable(false);
         JTextField chatTextField = new JTextField(20);
+        chatTextField.setPreferredSize(new Dimension(30, 10));
 
         // listener for enter-click on chatTextfield
         chatTextField.addActionListener(e -> {
             sendNewChatMessage(chatTextField.getText());
             chatTextField.setText(" ");
         });
-
-        chatTextField.setPreferredSize(new Dimension(30, 10));
         JScrollPane chatTextFieldScrollPane = new JScrollPane(chatTextField);
         chatArea.setLayout(chatAreaLayout);
         JPanel chatButtonsPanel = new JPanel();
@@ -160,10 +158,10 @@ public class ChessGui extends HasListeners implements IsMover {
         leftBoxSplitpane.setEnabled(false);
         leftBoxSplitpane.setDividerLocation(570);
         leftBoxSplitpane.setDividerSize(10);
-        rightPanel.add(leftBoxSplitpane);
+        sidePanel.add(leftBoxSplitpane);
 
         //Splitpane for the whole window
-        JSplitPane containerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, boardPanel, rightPanel);
+        JSplitPane containerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, boardPanel, sidePanel);
         containerSplitPane.setOneTouchExpandable(true);
         containerSplitPane.setDividerLocation(735);
         Container content = this.board.getContentPane();
