@@ -12,9 +12,17 @@ class Logger extends Observable {
         return logTemp;
     }
 
-    public void setMoveLog(String playerName, String message) {
+    public Log setIllegalMove(String playerName, String message)
+    {
+        Log temp = new Log(LogType.ILLEGALMOVE, playerName, " ugyldig trekk: " + message);
+        logList.add(temp);
+        return temp;
+    }
 
-        logList.add(new Log(LogType.MOVE, playerName, message));
+    public Log setMoveLog(String playerName, String message) {
+        Log temp = new Log(LogType.MOVE, playerName, message);
+        logList.add(temp);
+        return temp;
     }
 
     public void setStockfishLog(String playerName, String message) {

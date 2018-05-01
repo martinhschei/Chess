@@ -1,6 +1,7 @@
 public enum LogType {
     CHAT,
     MOVE,
-    STOCKFISH
+    STOCKFISH,
+    ILLEGALMOVE
 
 }

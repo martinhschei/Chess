@@ -1,3 +1,3 @@
 interface IsLogListener {
-    void onNewLogEntry(String message);
+    void onNewLogEntry(Log log);
 }
