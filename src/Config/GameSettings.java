@@ -15,6 +15,7 @@ public class GameSettings extends Observable {
     private String localPlayer2;
     private final Properties properties = new Properties();
     private final File configFile = new File( System.getProperty("user.dir") + "\\src\\Config\\config.xml");
+    private boolean isLocalGame;
 
     public void loadConfig(){
 
@@ -68,26 +69,22 @@ public class GameSettings extends Observable {
         this.ip = ip;
     }
 
-    public void setReady (boolean ready)
+    public void startNetworkGame ()
     {
-        player.setReady(ready);
-        if (ready)
-        {
+        player.setReady(true);
+        isLocalGame = false;
             setChanged();
-            notifyObservers(player);
-        }
+            notifyObservers(this);
     }
     public void startLocalGame ()
     {
-        Player p1 = new Player(localPlayer1, true);
-        p1.setHost();
-        p1.setReady(true);
-        Player p2 = new Player(localPlayer2, false);
-        p2.setIp("localhost");
-        p2.setReady(true);
-        new Game(p1);
+        isLocalGame = true;
         setChanged();
-        notifyObservers(p2);
+        notifyObservers(this);
+    }
+
+    public boolean getIsLocalGame(){
+        return isLocalGame;
     }
 
 
@@ -104,7 +101,11 @@ public class GameSettings extends Observable {
 
     public String getIp() { return ip; }
 
-    public String getNickName() {return nickName; }
+    public String getNickName() { return nickName; }
+
+    public String getLocalPlayer1() { return localPlayer1; }
+
+    public String getLocalPlayer2() { return localPlayer2; }
 
     public Player getPlayer() {
         return this.player;
