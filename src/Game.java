@@ -18,12 +18,13 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
 
 	public Game(Player player)
 	{
+        this.player = player;
         logger = new Logger();
 
         this.chessGui = new ChessGui(this);
         this.chessGui.addListener(this);
 
-        this.player = player;
+
 
 		this.movesAllowed = this.player.isHost();
 
