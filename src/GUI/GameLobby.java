@@ -20,7 +20,21 @@ public class GameLobby implements Observer {
     public void update(Observable obj, Object arg)
     {
         settings.saveSettings();
-        new Game((Player)arg);
+        if(settings.getIsLocalGame())
+        {
+            Player p1 = new Player(settings.getLocalPlayer1(), true);
+            p1.setHost();
+            p1.setReady(true);
+            Player p2 = new Player(settings.getLocalPlayer2(), false);
+            p2.setIp("localhost");
+            p2.setReady(true);
+            new Game(p1);
+            new Game(p2);
+        }
+        else{
+            new Game(settings.getPlayer());
+        }
+
         mainMenu.RemoveMenu();
     }
 

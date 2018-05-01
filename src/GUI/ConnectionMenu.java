@@ -105,14 +105,14 @@ public class ConnectionMenu extends JFrame {
 					System.out.println("debug: joinbutton isselected. FUNGERER");
 					gameSettings.setPlayer(new Player(nickNameField.getText(), false));
 					gameSettings.setIp(ipInputField.getText());
-					gameSettings.setReady(true);
+					gameSettings.startNetworkGame();
 					gameSettings.saveSettings();
 				}
 				if(hostButton.isSelected() && !nickNameField.getText().equals("")) {
 					System.out.println("debug: hostbutton isselected. FUNGERER");
 					gameSettings.setPlayer(new Player(nickNameField.getText(), true));
 					gameSettings.setHost();
-					gameSettings.setReady(true);
+					gameSettings.startNetworkGame();
 					gameSettings.saveSettings();
 				}
 			}
