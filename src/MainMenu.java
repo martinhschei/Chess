@@ -19,7 +19,7 @@ class MainMenu extends JFrame {
 	{
 		JFrame frame = new JFrame("LotionChess™");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(500, 500, 380, 250);
+		frame.setSize(380, 250);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 		return frame;
