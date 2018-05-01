@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChessGui extends HasListeners implements IsMover {
+public class ChessGui extends HasListeners implements IsMover, IsListener, IsLogListener {
     
     private JTextArea logArea;
     private IsGame game;
@@ -77,12 +77,6 @@ public class ChessGui extends HasListeners implements IsMover {
         }
 
         this.updateBoardStatus();
-        //Logger.setMoveLog(newMove.toString());
-        //writeLogToScreen();
-
-        // refactoring => send med move string ved hver kommando til Stockfish
-        // this.stockFish.setMovesString(this.getMovesString());
-
         this.board.repaint();
         this.board.revalidate();
     }
@@ -186,16 +180,15 @@ public class ChessGui extends HasListeners implements IsMover {
 
     private void sendNewChatMessage(String message)
     {
-        onNewLogEntry((new Log(LogType.CHAT, game.getPlayer().getName(), message)));
-        publishNewChatMessage(message);
+        if (message.length() > 0 ) {
+            Log log = new Log(LogType.CHAT, game.getPlayer().getName(), message);
+            this.onNewLogEntry(log);
+            publishNewChatMessage(log);
+        }
     }
 
     public void onNewLogEntry(Log log) {
-        logArea.append(
-                "\n" +log.getPlayerName()
-                        + ": "
-                        + log.getMessage()
-        );
+        logArea.append("\n" +log.getPlayerName() + ": " + log.getMessage());
     }
 
     private void setStartUpPosition()

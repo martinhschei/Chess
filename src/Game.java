@@ -19,10 +19,12 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
 	public Game(Player player)
 	{
         this.player = player;
+
         logger = new Logger();
 
         this.chessGui = new ChessGui(this);
         this.chessGui.addListener(this);
+        this.addListener(chessGui);
 
 		this.movesAllowed = this.player.isHost();
 
@@ -69,6 +71,13 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         String moveString = getMovesString();
         return stockFish.isMoveLegal(moveString, move);
     }
+
+    public Log logIllegalMove(String playerName, String message)
+    {
+        Log temp = logger.setIllegalMove(playerName, message);
+        this.publishAction(new Action("chat", temp));
+        return temp;
+    }
     
     public void addToLog(LogType logType, String playerName, String message)
     {
@@ -86,19 +95,12 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
         this.movesAllowed = false;
         logger.setMoveLog(player.getName(), move.toString());
         this.publishAction(new Action("move", move));
-
-        //TEST START =>
-        List<Log> loggerList = logger.getLog();
-        for (Log log : loggerList) {
-            System.out.println(log.getPlayerName() + " " + log.getMessage());
-        }
-        //TEST SLUTT <=
     }
 
-    public void onNewLogEntry(String message)
+    public void onNewLogEntry(Log log)
     {
-        logger.setChatLog(player.getName(), message);
-        this.publishAction(new Action("chat", new Log(LogType.CHAT, player.getName(), message)));
+        logger.setChatLog(log.getPlayerName(), log.getMessage());
+        this.publishAction(new Action("chat", log));
     }
 
     private void highlightMove(Move move)
@@ -189,7 +191,6 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
                 System.out.println("Host:" + this.player.isHost());
                 System.out.println("---");
                 this.onNewOpponentMove(move);
-                this.chessGui.onNewLogEntry((Log)action.getPayload());
                 break;
             }
             case("hereiam") : {
@@ -221,7 +222,8 @@ class Game extends HasListeners implements IsListener, IsActionListener, IsMoveL
             case("chat") : {
                 Log chat = (Log)action.getPayload();
                 logger.setChatLog(opponent.getName(), chat.getMessage());
-                this.chessGui.onNewLogEntry((Log)action.getPayload());
+                publishNewChatMessage(chat);
+                //this.chessGui.onNewLogEntry(chat);
                 break;
             }
         }

@@ -13,7 +13,7 @@ abstract class HasListeners {
     void publishNewChatMessage(Log log)
     {
         for(IsListener listener : listeners) {
-            if (listener instanceof IsActionListener) {
+            if (listener instanceof IsLogListener) {
                 ((IsLogListener) listener).onNewLogEntry(log);
             }
         }

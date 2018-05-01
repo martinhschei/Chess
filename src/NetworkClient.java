@@ -37,7 +37,7 @@ public class NetworkClient extends HasListeners implements Runnable, IsListener,
 			this.oos = new ObjectOutputStream(socket.getOutputStream());
 			this.onConnect();
 			ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-			while(true) {
+			while(socket.isConnected()) {
 				try {
 					Action action = (Action) ois.readObject();
 					this.publishAction(action);
