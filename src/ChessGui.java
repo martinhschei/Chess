@@ -67,7 +67,8 @@ public class ChessGui extends HasListeners implements IsMover {
             }
             else {
                 from.reset();
-                System.out.println("DEBUG: Illegal Move!!! \n");
+                this.game.addToLog(LogType.STOCKFISH, this.game.getPlayer().getName(), " prøvde å gjøre ett ugyldig trekk: " +newMove.toString());
+                System.out.println("DEBUG: Illegal Move ("+newMove.toString()+")!!\n");
             }
         }
 
@@ -103,9 +104,8 @@ public class ChessGui extends HasListeners implements IsMover {
         logArea.setLineWrap(true);
         logArea.setWrapStyleWord(true);
         logArea.setEditable(false);
-        //getLogOfType CHAT
 
-        //Scrollpane for logArea. Currently logArea-text is hidden?
+        //Scrollpane for logArea
         JScrollPane logScrollPane = new JScrollPane();
         logScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         logScrollPane.add(logArea);
@@ -119,6 +119,7 @@ public class ChessGui extends HasListeners implements IsMover {
         chatLabel.setEditable(false);
         JTextField chatTextField = new JTextField(20);
 
+        // listener for enter-click on chatTextfield
         chatTextField.addActionListener(e -> {
             sendNewChatMessage(chatTextField.getText());
             chatTextField.setText(" ");
@@ -141,7 +142,7 @@ public class ChessGui extends HasListeners implements IsMover {
         //Empty button actionlistener
         emptyLogButton.addActionListener(e -> {
             sendNewChatMessage(chatTextField.getText());
-            chatTextField.setText(" ");
+            logArea.setText(" ");
         });
 
         chatButtonsPanel.add(sendChatButton);
@@ -181,12 +182,16 @@ public class ChessGui extends HasListeners implements IsMover {
 
     private void sendNewChatMessage(String message)
     {
-        logArea.append("\n" + game.getPlayer().getName() + ": " + message);
+        onNewLogEntry((new Log(LogType.CHAT, game.getPlayer().getName(), message)));
         publishNewChatMessage(message);
     }
 
-    public void onNewChatMessage(Log log) {
-        logArea.append("\n" +log.getPlayerName() + ": " + log.getMessage());
+    public void onNewLogEntry(Log log) {
+        logArea.append(
+                "\n" +log.getPlayerName()
+                        + ": "
+                        + log.getMessage()
+        );
     }
 
     private void setStartUpPosition()

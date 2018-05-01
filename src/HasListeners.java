@@ -14,7 +14,7 @@ abstract class HasListeners {
     {
         for(IsListener listener : listeners) {
             if (listener instanceof IsActionListener) {
-                ((IsChatListener) listener).onNewChatMessage(message);
+                ((IsLogListener) listener).onNewLogEntry(message);
             }
         }
     }
