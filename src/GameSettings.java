@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.InvalidPropertiesFormatException;
 import java.util.Observable;
 import java.util.Properties;
 

@@ -5,23 +5,24 @@ import java.util.Observable;
 class Logger extends Observable {
     private List<Log> logList = new ArrayList<>();
 
-    public Log setChatLog(String message) {
-        Log logTemp = new Log(LogType.CHAT, message);
+    public Log setChatLog(String playerName, String message) {
+        Log logTemp = new Log(LogType.CHAT, playerName, message);
         logList.add(logTemp);
         setChanged();
         return logTemp;
     }
-    public void setMoveLog(String message) {
 
-        logList.add(new Log(LogType.MOVE, message));
-        //System.out.println("TEST" + message);
+    public void setMoveLog(String playerName, String message) {
+
+        logList.add(new Log(LogType.MOVE, playerName, message));
     }
-    public void setStockfishLog(String message) {
-        logList.add(new Log(LogType.STOCKFISH, message));
+
+    public void setStockfishLog(String playerName, String message) {
+
+        logList.add(new Log(LogType.STOCKFISH, playerName, message));
     }
 
     public List<Log> getLog() {
-
         return logList;
     }
 
@@ -34,4 +35,5 @@ class Logger extends Observable {
         }
         return logItems;
     }
+
 }
