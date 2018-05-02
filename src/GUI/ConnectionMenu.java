@@ -1,7 +1,5 @@
 package GUI;
 
-import javafx.scene.layout.StackPane;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,11 +27,8 @@ public class ConnectionMenu extends JFrame {
 
 	private void fillPanel(JPanel main2) {
 		main.setLayout(new GridLayout(5,1));
-		StackPane stackPane = new StackPane();
 		JPanel field1 = new JPanel();
-		//field1.setLayout(new GridLayout(4,0));
 		JPanel field2 = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 0));
-
 		JPanel field3 = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 0));
 		JPanel field4 = new JPanel();
 		JPanel field5 = new JPanel();

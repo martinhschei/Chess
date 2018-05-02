@@ -93,16 +93,6 @@ public class Game extends HasListeners implements IsListener, IsActionListener, 
         this.publishAction(new Action("chat", temp));
         return temp;
     }
-    
-    public void addToLog(LogType logType, String playerName, String message)
-    {
-        switch (logType)
-        {
-            case CHAT: logger.setChatLog(playerName, message); break;
-            case STOCKFISH: logger.setStockfishLog(playerName, message); break;
-            case MOVE: logger.setMoveLog(playerName, message); break;
-        }
-    }
 
     public void onNewMove(Move move)
     {
@@ -199,8 +189,23 @@ public class Game extends HasListeners implements IsListener, IsActionListener, 
     {
         this.movesAllowed = true;
         this.chessGui.movePiece(move.getPiece(), move.getFrom(), move.getTo(), true);
-        Move bestMove = getBestMove();
-        this.highlightMove(bestMove);
+        askStockFishBestMove();
+    }
+    public void askStockFishBestMove()
+    {
+        if(this.movesAllowed)
+        {
+            Move move = getBestMove();
+            this.highlightMove(move);
+            Log log = logger.setStockfishLog(player.getName()+returnPlayerColor(player), "Stockfish bestmove: " + move.toString());
+            this.publishNewChatMessage(log);
+            this.publishAction(new Action("chat", log));
+        }
+        else
+        {
+            Log log = logger.setStockfishLog(player.getName()+returnPlayerColor(player), "Du kan ikke spørre om Bestmove når det ikke er din tur!!");
+            this.publishNewChatMessage(log);
+        }
     }
 
 	public void onNewAction(Action action)
