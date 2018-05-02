@@ -22,10 +22,10 @@ public class GameLobby implements Observer {
         settings.saveSettings();
         if(settings.getIsLocalGame())
         {
-            Player p1 = new Player(settings.getLocalPlayer1(), true);
+            Player p1 = new Player(settings.getLocalPlayerWhite(), true);
             p1.setHost();
             p1.setReady(true);
-            Player p2 = new Player(settings.getLocalPlayer2(), false);
+            Player p2 = new Player(settings.getLocalPlayerBlack(), false);
             p2.setIp("localhost");
             p2.setReady(true);
             new Game(p1);
