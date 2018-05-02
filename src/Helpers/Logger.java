@@ -19,6 +19,12 @@ class Logger extends Observable {
         logList.add(temp);
         return temp;
     }
+    public Log setError(String playerName, String message)
+    {
+        Log temp = new Log(LogType.ILLEGALMOVE, playerName, " Error: " + message);
+        logList.add(temp);
+        return temp;
+    }
 
     public Log setMoveLog(String playerName, String message) {
         Log temp = new Log(LogType.MOVE, playerName, message);

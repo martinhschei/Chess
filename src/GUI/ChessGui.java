@@ -69,12 +69,19 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
 
         if(!otherPlayer) {
             if(this.game.isMoveLegal(newMove)) {
-                asksStockfishButton.setEnabled(false);
-                clearHighlights();
-                from.setPiece(null);
-                to.setPiece(null);
-                to.setPiece(piece);
-                this.publishNewMove(newMove);
+                if(this.game.checkForOpponent())
+                {
+                    asksStockfishButton.setEnabled(false);
+                    clearHighlights();
+                    from.setPiece(null);
+                    to.setPiece(null);
+                    to.setPiece(piece);
+                    this.publishNewMove(newMove);
+                }
+                else
+                {
+                    from.reset();
+                }
             }
             else {
                 from.reset();
@@ -128,7 +135,7 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
 
         //Listener for enter-click on chatTextfield
         chatTextField.addActionListener(e -> {
-            if(chatTextField.getText().length() > 0) {
+            if(chatTextField.getText().length() > 0 && game.checkForOpponent()) {
                 sendNewChatMessage(chatTextField.getText());
                 chatTextField.setText(" ");
             }
@@ -137,7 +144,7 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
         //Button for sending chat
         JButton sendChatButton = new JButton("Send");
         sendChatButton.addActionListener(e -> {
-            if(chatTextField.getText().length() > 0) {
+            if(chatTextField.getText().length() > 0 && game.checkForOpponent()) {
                 sendNewChatMessage(chatTextField.getText());
                 chatTextField.setText(" ");
             }
@@ -146,8 +153,11 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
         // Button for asking stockfish for help
         //if(game.myTurn()) { asksStockfishButton.setEnabled(true); }
         asksStockfishButton.addActionListener(e -> {
-            game.askStockFishBestMove();
-            asksStockfishButton.setEnabled(false);
+            if(game.checkForOpponent())
+            {
+                game.askStockFishBestMove();
+                asksStockfishButton.setEnabled(false);
+            }
         });
 
         //Panel for Send and Ask Stockfish - buttons
