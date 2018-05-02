@@ -88,18 +88,14 @@ class ConnectionMenu extends JFrame {
 	{
 		JButton retur = new JButton("Connect and play");
 		retur.addActionListener(e -> {
-			//NameInputField.setText("playaaaa");
 			//Here goes the action (method) you want to execute when clicked
-			System.out.println("You clicked the connecto buttono");
 			if(joinButton.isSelected()) {
-				System.out.println("debug: joinbutton isselected. FUNGERER");
 				gameSettings.setPlayer(new Player(nickNameField.getText(), false));
 				gameSettings.setIp(ipInputField.getText());
 				gameSettings.startNetworkGame();
 				gameSettings.saveSettings();
 			}
 			if(hostButton.isSelected() && !nickNameField.getText().equals("")) {
-				System.out.println("debug: hostbutton isselected. FUNGERER");
 				gameSettings.setPlayer(new Player(nickNameField.getText(), true));
 				gameSettings.setHost();
 				gameSettings.startNetworkGame();

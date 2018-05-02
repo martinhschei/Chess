@@ -15,7 +15,7 @@ class Logger extends Observable {
 
     public Log setIllegalMove(String playerName, String message)
     {
-        Log temp = new Log(LogType.ILLEGALMOVE, playerName, " ugyldig trekk: " + message);
+        Log temp = new Log(LogType.ILLEGALMOVE, playerName, " invalid move: " + message);
         logList.add(temp);
         return temp;
     }
