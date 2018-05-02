@@ -105,7 +105,7 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
         //Container for the right-box
         JPanel rightPanel = new JPanel();
         GridLayout logLayout = new GridLayout(0,1);
-        logArea = new JTextArea("Her vil loggen printes", 0, 30);
+        logArea = new JTextArea("Chat and move-log:", 0, 30);
         logArea.setLineWrap(true);
         logArea.setWrapStyleWord(true);
         logArea.setEditable(false);
@@ -137,15 +137,16 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
             chatTextField.setText(" ");
         });
 
-        // Button for emptying the logArea
-        JButton emptyLogButton = new JButton("Tøm logg");
-        emptyLogButton.addActionListener(e -> {
+        // Button for asking stockfish for help
+        JButton asksStockfishButton = new JButton("Tøm logg");
+        if(game.myTurn()) { asksStockfishButton.setEnabled(true); }
+        asksStockfishButton.addActionListener(e -> {
             sendNewChatMessage(chatTextField.getText());
             logArea.setText(" ");
         });
 
         chatButtonsPanel.add(sendChatButton);
-        chatButtonsPanel.add(emptyLogButton);
+        chatButtonsPanel.add(asksStockfishButton);
         chatArea.add(chatLabel);
         chatArea.add(chatTextFieldScrollPane);
         chatArea.add(chatButtonsPanel);
