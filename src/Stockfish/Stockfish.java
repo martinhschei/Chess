@@ -79,7 +79,6 @@ public class Stockfish implements Runnable {
 		return fen;
 	}
 
-
 	public void setMovesString(String moves)
     {
         this.movesString = moves;
