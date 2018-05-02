@@ -77,7 +77,7 @@ public class Game extends HasListeners implements IsListener, IsActionListener, 
             this.publishNewChatMessage(
                     this.logger.setError(
                             this.player.getName()+returnPlayerColor(player),
-                            "Mangler motstander, kan ikke utføre handling.")
+                            "Missing opponent, cannot perform action yet.")
                     );
             return false;
         }
