@@ -116,8 +116,13 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
         //Container for chat box
         JPanel chatArea = new JPanel();
         GridLayout chatAreaLayout = new GridLayout(3,0);
+        chatArea.setLayout(chatAreaLayout);
+
+        //Label over chatTextField
         JTextField chatLabel = new JTextField(game.getPlayer().getName()+ ", chat with opponent!");
         chatLabel.setEditable(false);
+
+        //Textfield for chat
         JTextField chatTextField = new JTextField(20);
         chatTextField.setPreferredSize(new Dimension(30, 10));
 
@@ -128,9 +133,6 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
                 chatTextField.setText(" ");
             }
         });
-
-        chatArea.setLayout(chatAreaLayout);
-        JPanel chatButtonsPanel = new JPanel();
 
         //Button for sending chat
         JButton sendChatButton = new JButton("Send");
@@ -148,6 +150,10 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
             asksStockfishButton.setEnabled(false);
         });
 
+        //Panel for Send and Ask Stockfish - buttons
+        JPanel chatButtonsPanel = new JPanel();
+
+        //Building the chatArea
         chatButtonsPanel.add(sendChatButton);
         chatButtonsPanel.add(asksStockfishButton);
         chatArea.add(chatLabel);
