@@ -6,12 +6,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.*;
 
 public class Stockfish implements Runnable {
 
 	private final String stockfishPath = System.getProperty("user.dir") + "\\stockfish-9-win\\Windows\\stockfish_9_x32.exe";
-	private final Stack<String> commandHistory;
 	private String movesString;
 	private OutputStreamWriter stockFishWriter;
 	private BufferedReader stockFishReader;
@@ -20,7 +18,6 @@ public class Stockfish implements Runnable {
 	public Stockfish()
 	{
 	    this.movesString = "";
-	    this.commandHistory = new Stack<>();
 	}
 
 	public void run()
@@ -63,7 +60,6 @@ public class Stockfish implements Runnable {
 		if(newFen.equals(fen))
 		{
 			System.out.println("DEBUG: " + newFen + " samsvarer med " + fen + "\n");
-			answer = false;
 		}
 		else
 		{
@@ -76,7 +72,7 @@ public class Stockfish implements Runnable {
 
 	private String translateAnswerToFen(String answer)
 	{
-		String fen = null;
+		String fen;
 		int length = answer.length();
 		fen = answer.substring(6,(length));
 
@@ -154,7 +150,6 @@ public class Stockfish implements Runnable {
 	{
 		try 
 		{
-		    this.commandHistory.push(command);
 			this.stockFishWriter.write(command);
 			this.stockFishWriter.flush();
 			return this.readResponse(stopMark);

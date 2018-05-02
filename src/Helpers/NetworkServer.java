@@ -25,7 +25,7 @@ public class NetworkServer extends HasListeners implements Runnable, IsActionLis
         try {
             this.oos.writeObject(action);
         } catch (Exception e) {
-
+			e.printStackTrace();
         }
     }
 

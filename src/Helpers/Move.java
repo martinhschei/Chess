@@ -20,11 +20,6 @@ public class Move implements Serializable {
 
     public Move() { }
 
-    public String getType()
-    {
-        return "move";
-    }
-
     public ChessPiece getPiece()
     {
     	return this.piece;

@@ -9,13 +9,12 @@ class MainMenu extends JFrame {
 
 	private final JFrame hovedVindu;
 	private final ConnectionMenu connectionMenu;
-	private final GameModeSelectorMenu gameModeMenu;
 
 	public MainMenu(GameSettings settings)
 	{
         hovedVindu = BuildWindow();
 		connectionMenu = new ConnectionMenu(settings);
-        gameModeMenu = new GameModeSelectorMenu(settings, this);
+        GameModeSelectorMenu gameModeMenu = new GameModeSelectorMenu(settings, this);
 		hovedVindu.setContentPane(gameModeMenu.main);
 		hovedVindu.setVisible(true);
 	}
