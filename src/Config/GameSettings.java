@@ -11,8 +11,8 @@ public class GameSettings extends Observable {
     private Player player;
     private String ip;
     private String nickName;
-    private String localPlayer1;
-    private String localPlayer2;
+    private String localPlayerWhite;
+    private String localPlayerBlack;
     private final Properties properties = new Properties();
     private final File configFile = new File( System.getProperty("user.dir") + "\\src\\Config\\config.xml");
     private boolean isLocalGame;
@@ -34,24 +34,24 @@ public class GameSettings extends Observable {
         }
         this.ip = properties.getProperty("ip");
         this.nickName = properties.getProperty("nickName");
-        this.localPlayer1 = properties.getProperty("localPlayer1");
-        this.localPlayer2 = properties.getProperty("localPlayer2");
+        this.localPlayerWhite = properties.getProperty("localPlayerWhite");
+        this.localPlayerBlack = properties.getProperty("localPlayerBlack");
     }
 
 
     public GameSettings()
     {
         player = new Player("player1", true);
-        localPlayer1 = "Player1";
-        localPlayer2 = "Player2";
+        localPlayerWhite = "Player1";
+        localPlayerBlack = "Player2";
         loadConfig();
     }
 
     public void saveSettings () {
         properties.setProperty("ip", ip);
         properties.setProperty("nickName", nickName);
-        properties.setProperty("localPlayer1", localPlayer1);
-        properties.setProperty("localPlayer2", localPlayer2);
+        properties.setProperty("localPlayerWhite", localPlayerWhite);
+        properties.setProperty("localPlayerBlack", localPlayerBlack);
 
         OutputStream outputStream;
         try {
@@ -102,9 +102,9 @@ public class GameSettings extends Observable {
 
     public String getNickName() { return nickName; }
 
-    public String getLocalPlayer1() { return localPlayer1; }
+    public String getLocalPlayerWhite() { return localPlayerWhite; }
 
-    public String getLocalPlayer2() { return localPlayer2; }
+    public String getLocalPlayerBlack() { return localPlayerBlack; }
 
     public Player getPlayer() {
         return this.player;

@@ -18,6 +18,7 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
     private final List<Row> rows;
     private JFrame board;
     private Player player;
+    private JButton asksStockfishButton = new JButton("Spør Stockfish");
 
     public ChessGui(IsGame game)
     {
@@ -61,12 +62,14 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
             from.setPiece(null);
             to.setPiece(null);
             to.setPiece(piece);
+            asksStockfishButton.setEnabled(true);
         }
 
         Move newMove = new Move(from, to, piece);
 
         if(!otherPlayer) {
             if(this.game.isMoveLegal(newMove)) {
+                asksStockfishButton.setEnabled(false);
                 clearHighlights();
                 from.setPiece(null);
                 to.setPiece(null);
@@ -94,7 +97,7 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
         //Container for sjakkbrett og høyrepanel
         this.board = new JFrame();
         this.board.setSize(1000,750);
-        this.board.setResizable(false);
+        this.board.setResizable(true);
         this.board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Container for board
@@ -105,12 +108,11 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
         //Container for the right-box
         JPanel rightPanel = new JPanel();
         GridLayout logLayout = new GridLayout(0,1);
-        logArea = new JTextArea("Her vil loggen printes", 0, 30);
+        rightPanel.setLayout(logLayout);
+        logArea = new JTextArea("Chat and move-log:", 0, 30);
         logArea.setLineWrap(true);
         logArea.setWrapStyleWord(true);
         logArea.setEditable(false);
-
-        rightPanel.setLayout(logLayout);
 
         //Container for chat box
         JPanel chatArea = new JPanel();
@@ -118,36 +120,39 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
         JTextField chatLabel = new JTextField(game.getPlayer().getName()+ ", chat med din motspiller!");
         chatLabel.setEditable(false);
         JTextField chatTextField = new JTextField(20);
+        chatTextField.setPreferredSize(new Dimension(30, 10));
 
         //Listener for enter-click on chatTextfield
         chatTextField.addActionListener(e -> {
-            sendNewChatMessage(chatTextField.getText());
-            chatTextField.setText(" ");
+            if(chatTextField.getText().length() > 0) {
+                sendNewChatMessage(chatTextField.getText());
+                chatTextField.setText(" ");
+            }
         });
 
-        chatTextField.setPreferredSize(new Dimension(30, 10));
-        JScrollPane chatTextFieldScrollPane = new JScrollPane(chatTextField);
         chatArea.setLayout(chatAreaLayout);
         JPanel chatButtonsPanel = new JPanel();
 
         //Button for sending chat
         JButton sendChatButton = new JButton("Send");
         sendChatButton.addActionListener(e -> {
-            sendNewChatMessage(chatTextField.getText());
-            chatTextField.setText(" ");
+            if(chatTextField.getText().length() > 0) {
+                sendNewChatMessage(chatTextField.getText());
+                chatTextField.setText(" ");
+            }
         });
 
-        // Button for emptying the logArea
-        JButton emptyLogButton = new JButton("Tøm logg");
-        emptyLogButton.addActionListener(e -> {
-            sendNewChatMessage(chatTextField.getText());
-            logArea.setText(" ");
+        // Button for asking stockfish for help
+        //if(game.myTurn()) { asksStockfishButton.setEnabled(true); }
+        asksStockfishButton.addActionListener(e -> {
+            game.askStockFishBestMove();
+            asksStockfishButton.setEnabled(false);
         });
 
         chatButtonsPanel.add(sendChatButton);
-        chatButtonsPanel.add(emptyLogButton);
+        chatButtonsPanel.add(asksStockfishButton);
         chatArea.add(chatLabel);
-        chatArea.add(chatTextFieldScrollPane);
+        chatArea.add(chatTextField);
         chatArea.add(chatButtonsPanel);
 
         //Scrollpane for logArea
