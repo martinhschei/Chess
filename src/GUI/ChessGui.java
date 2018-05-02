@@ -18,6 +18,7 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
     private final List<Row> rows;
     private JFrame board;
     private Player player;
+    private JButton asksStockfishButton = new JButton("Spør Stockfish");
 
     public ChessGui(IsGame game)
     {
@@ -61,12 +62,14 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
             from.setPiece(null);
             to.setPiece(null);
             to.setPiece(piece);
+            asksStockfishButton.setEnabled(true);
         }
 
         Move newMove = new Move(from, to, piece);
 
         if(!otherPlayer) {
             if(this.game.isMoveLegal(newMove)) {
+                asksStockfishButton.setEnabled(false);
                 clearHighlights();
                 from.setPiece(null);
                 to.setPiece(null);
@@ -138,11 +141,10 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
         });
 
         // Button for asking stockfish for help
-        JButton asksStockfishButton = new JButton("Tøm logg");
-        if(game.myTurn()) { asksStockfishButton.setEnabled(true); }
+        //if(game.myTurn()) { asksStockfishButton.setEnabled(true); }
         asksStockfishButton.addActionListener(e -> {
-            sendNewChatMessage(chatTextField.getText());
-            logArea.setText(" ");
+            game.askStockFishBestMove();
+            asksStockfishButton.setEnabled(false);
         });
 
         chatButtonsPanel.add(sendChatButton);
