@@ -124,7 +124,7 @@ public class Game extends HasListeners implements IsListener, IsActionListener, 
         move.getTo().highlight();
     }
 
-    private Move getBestMove()
+    private Move getBestMoveFromStockfish()
     {
         String fen = buildCurrentFen();
         System.out.println("FEN position: " + fen);
@@ -194,7 +194,7 @@ public class Game extends HasListeners implements IsListener, IsActionListener, 
     {
         if(this.movesAllowed)
         {
-            Move move = getBestMove();
+            Move move = getBestMoveFromStockfish();
             this.highlightMove(move);
             Log log = logger.setStockfishLog(player.getName()+returnPlayerColor(player), "Har spurt stockfish! (" + move.toString() +")");
             this.publishNewChatMessage(log);
