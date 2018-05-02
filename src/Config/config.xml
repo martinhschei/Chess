@@ -4,6 +4,6 @@
 <comment/>
 <entry key="localPlayerBlack">Spiller 2</entry>
 <entry key="localPlayerWhite">Spiller 1</entry>
-<entry key="ip">localhost</entry>
 <entry key="nickName">player2</entry>
+<entry key="ip">localhost</entry>
 </properties>

@@ -43,9 +43,9 @@ class ConnectionMenu extends JFrame {
 
 		//bg1 = Buttongroup for Join og Host-knapp
 		ButtonGroup bg1 = new ButtonGroup();
-		joinButton = new JRadioButton("Join Game (white)");
+		joinButton = new JRadioButton("Join Game (black)");
 		joinButton.addActionListener(e -> ipInputField.setEditable(true));
-		hostButton = new JRadioButton("Host Game (black)");
+		hostButton = new JRadioButton("Host Game (white)");
 		hostButton.addActionListener(e -> ipInputField.setEditable(false));
 
 		bg1.add(hostButton);
