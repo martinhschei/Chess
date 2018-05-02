@@ -70,6 +70,19 @@ public class Game extends HasListeners implements IsListener, IsActionListener, 
         }
         return movesString.toString();
     }
+    public boolean checkForOpponent()
+    {
+        if(this.opponent == null)
+        {
+            this.publishNewChatMessage(
+                    this.logger.setError(
+                            this.player.getName()+returnPlayerColor(player),
+                            "Mangler motstander, kan ikke utføre handling.")
+                    );
+            return false;
+        }
+        return true;
+    }
 
 	public boolean myTurn()
     {
