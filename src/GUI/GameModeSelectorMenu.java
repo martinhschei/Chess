@@ -3,8 +3,6 @@ package GUI;
 import javax.swing.*;
 import Config.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 class GameModeSelectorMenu extends JFrame{
     private final GameSettings gSettings;
@@ -33,20 +31,16 @@ class GameModeSelectorMenu extends JFrame{
 
     private JButton SelectGameButton(String name) {
         JButton retur = new JButton(name);
-        retur.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                JButton source = (JButton)e.getSource();
-                System.out.println("debug: " + source.getText());
-                //Here goes the action (method) you want to execute when clicked
-                if(source.getText().equalsIgnoreCase(singleWindow)) {
-                    System.out.println("debug: SINGLE WINDOW");
-                    mainMenu.SwitchToStartMenu();
-                }
-                if(source.getText().equalsIgnoreCase(multiWindow)) {
-                    gSettings.startLocalGame();
-                }
+        retur.addActionListener(e -> {
+            JButton source = (JButton)e.getSource();
+            System.out.println("debug: " + source.getText());
+            //Here goes the action (method) you want to execute when clicked
+            if(source.getText().equalsIgnoreCase(singleWindow)) {
+                System.out.println("debug: SINGLE WINDOW");
+                mainMenu.SwitchToStartMenu();
+            }
+            if(source.getText().equalsIgnoreCase(multiWindow)) {
+                gSettings.startLocalGame();
             }
         });
         return retur;

@@ -7,11 +7,10 @@ import java.util.Observable;
 class Logger extends Observable {
     private final List<Log> logList = new ArrayList<>();
 
-    public Log setChatLog(String playerName, String message) {
+    public void setChatLog(String playerName, String message) {
         Log logTemp = new Log(LogType.CHAT, playerName, message);
         logList.add(logTemp);
         setChanged();
-        return logTemp;
     }
 
     public Log setIllegalMove(String playerName, String message)

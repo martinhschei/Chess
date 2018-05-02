@@ -204,10 +204,6 @@ public class Field implements Serializable {
 		return this.button;
 	}
 
-	public Position getPosition() {
-		return position;
-	}
-
 	public ChessPiece getCurrentPiece() {
 		return currentPiece;
 	}

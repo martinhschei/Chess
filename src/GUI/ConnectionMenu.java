@@ -1,18 +1,16 @@
 package GUI;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import Config.*;
 import Helpers.*;
 import javax.swing.*;
 
-public class ConnectionMenu extends JFrame {
+class ConnectionMenu extends JFrame {
 
-	private GameSettings gameSettings;
-	public JPanel main;
+	private final GameSettings gameSettings;
+	public final JPanel main;
 	private JRadioButton hostButton;
 	private JRadioButton joinButton;
 	private JTextField nickNameField;
@@ -22,10 +20,10 @@ public class ConnectionMenu extends JFrame {
 	{
 		gameSettings = settings;
 		main = new JPanel();
-		fillPanel(main);
+		fillPanel();
 	}
 
-	private void fillPanel(JPanel main2) {
+	private void fillPanel() {
 		main.setLayout(new GridLayout(5,1));
 		JPanel field1 = new JPanel();
 		JPanel field2 = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 0));
@@ -45,9 +43,9 @@ public class ConnectionMenu extends JFrame {
 
 		//bg1 = Buttongroup for Join og Host-knapp
 		ButtonGroup bg1 = new ButtonGroup();
-		joinButton = new JRadioButton("Join game");
+		joinButton = new JRadioButton("Join Game");
 		joinButton.addActionListener(e -> ipInputField.setEditable(true));
-		hostButton = new JRadioButton("Host game");
+		hostButton = new JRadioButton("Host Game");
 		hostButton.addActionListener(e -> ipInputField.setEditable(false));
 
 		bg1.add(hostButton);
@@ -89,24 +87,23 @@ public class ConnectionMenu extends JFrame {
 	private JButton MonitorConnectButton()
 	{
 		JButton retur = new JButton("Connect and play");
-		retur.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				//NameInputField.setText("playaaaa");
-				//Here goes the action (method) you want to execute when clicked
-				if(joinButton.isSelected()) {
-					gameSettings.setPlayer(new Player(nickNameField.getText(), false));
-					gameSettings.setIp(ipInputField.getText());
-					gameSettings.startNetworkGame();
-					gameSettings.saveSettings();
-				}
-				if(hostButton.isSelected() && !nickNameField.getText().equals("")) {
-					gameSettings.setPlayer(new Player(nickNameField.getText(), true));
-					gameSettings.setHost();
-					gameSettings.startNetworkGame();
-					gameSettings.saveSettings();
-				}
+		retur.addActionListener(e -> {
+			//NameInputField.setText("playaaaa");
+			//Here goes the action (method) you want to execute when clicked
+			System.out.println("You clicked the connecto buttono");
+			if(joinButton.isSelected()) {
+				System.out.println("debug: joinbutton isselected. FUNGERER");
+				gameSettings.setPlayer(new Player(nickNameField.getText(), false));
+				gameSettings.setIp(ipInputField.getText());
+				gameSettings.startNetworkGame();
+				gameSettings.saveSettings();
+			}
+			if(hostButton.isSelected() && !nickNameField.getText().equals("")) {
+				System.out.println("debug: hostbutton isselected. FUNGERER");
+				gameSettings.setPlayer(new Player(nickNameField.getText(), true));
+				gameSettings.setHost();
+				gameSettings.startNetworkGame();
+				gameSettings.saveSettings();
 			}
 		});
 		return retur;

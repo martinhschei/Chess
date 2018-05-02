@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 public abstract class ChessPiece extends JPanel {
 	
 	private final String name;
-	private final boolean isStriking;
 	private final boolean white;
 	private String imagePath;
 
@@ -13,7 +12,6 @@ public abstract class ChessPiece extends JPanel {
 	{
 		this.name = white ? name.toUpperCase() : name;
 		this.white = white;
-		this.isStriking = false;
 	}
 
 	public boolean isWhite()

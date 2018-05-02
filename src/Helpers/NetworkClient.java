@@ -27,7 +27,7 @@ public class NetworkClient extends HasListeners implements Runnable, IsListener,
 		try {
 			this.oos.writeObject(action);
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 
