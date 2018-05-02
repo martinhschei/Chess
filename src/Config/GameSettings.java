@@ -34,8 +34,8 @@ public class GameSettings extends Observable {
         }
         this.ip = properties.getProperty("ip");
         this.nickName = properties.getProperty("nickName");
-        this.localPlayerWhite = properties.getProperty("localPlayer1");
-        this.localPlayerBlack = properties.getProperty("localPlayer2");
+        this.localPlayerWhite = properties.getProperty("localPlayerWhite");
+        this.localPlayerBlack = properties.getProperty("localPlayerBlack");
     }
 
 
@@ -50,8 +50,8 @@ public class GameSettings extends Observable {
     public void saveSettings () {
         properties.setProperty("ip", ip);
         properties.setProperty("nickName", nickName);
-        properties.setProperty("localPlayer1", localPlayerWhite);
-        properties.setProperty("localPlayer2", localPlayerBlack);
+        properties.setProperty("localPlayerWhite", localPlayerWhite);
+        properties.setProperty("localPlayerBlack", localPlayerBlack);
 
         OutputStream outputStream;
         try {
