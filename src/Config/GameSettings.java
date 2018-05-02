@@ -27,8 +27,6 @@ public class GameSettings extends Observable {
 
             inputStream.close();
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

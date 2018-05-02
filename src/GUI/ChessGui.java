@@ -17,8 +17,8 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
     private final char[] columns = new char[] { 'a','b','c','d','e','f','g','h' };
     private final List<Row> rows;
     private JFrame board;
-    private Player player;
-    private JButton asksStockfishButton = new JButton("Spør Stockfish");
+    private final Player player;
+    private final JButton asksStockfishButton = new JButton("Spør Stockfish");
 
     public ChessGui(IsGame game)
     {
