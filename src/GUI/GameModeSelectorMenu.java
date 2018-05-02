@@ -22,9 +22,13 @@ class GameModeSelectorMenu extends JFrame{
     }
 
     private void FyllPanel(JPanel main) {
-        main.setLayout(new GridLayout(2,0));
+        main.setLayout(new GridLayout(3,0));
+        JPanel infoBox = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 30));
+        JLabel infoText = new JLabel("Choose your gamemode:");
+        infoBox.add(infoText);
         JButton singleWindowSelector = SelectGameButton(singleWindow);
         JButton multiWindowSelector = SelectGameButton(multiWindow);
+        main.add(infoBox);
         main.add(singleWindowSelector);
         main.add(multiWindowSelector);
     }
