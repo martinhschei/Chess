@@ -18,7 +18,7 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
     private final List<Row> rows;
     private JFrame board;
     private final Player player;
-    private final JButton asksStockfishButton = new JButton("Spør Stockfish");
+    private final JButton asksStockfishButton = new JButton("Ask Stockfish");
 
     public ChessGui(IsGame game)
     {
@@ -33,9 +33,9 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
     private void updateBoardStatus()
     {
         if (this.game.myTurn()) {
-            this.board.setTitle("Ditt trekk " + player.getName() + game.returnPlayerColor(player));
+            this.board.setTitle("Your turn " + player.getName() + game.returnPlayerColor(player));
         } else {
-            this.board.setTitle("Venter på den andre spilleren...");
+            this.board.setTitle("Waiting for opponent...");
         }
     }
 
@@ -83,7 +83,6 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
                                 player.getName()+this.game.returnPlayerColor(player), newMove.toString()
                         )
                 );
-                System.out.println("DEBUG: Illegal Helpers.Move ("+newMove.toString()+")!!\n");
             }
         }
 
@@ -117,7 +116,7 @@ public class ChessGui extends HasListeners implements IsMover, IsListener, IsLog
         //Container for chat box
         JPanel chatArea = new JPanel();
         GridLayout chatAreaLayout = new GridLayout(3,0);
-        JTextField chatLabel = new JTextField(game.getPlayer().getName()+ ", chat med din motspiller!");
+        JTextField chatLabel = new JTextField(game.getPlayer().getName()+ ", chat with opponent!");
         chatLabel.setEditable(false);
         JTextField chatTextField = new JTextField(20);
         chatTextField.setPreferredSize(new Dimension(30, 10));

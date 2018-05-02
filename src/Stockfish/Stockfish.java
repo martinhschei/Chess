@@ -27,7 +27,7 @@ public class Stockfish implements Runnable {
 			Process proc = rt.exec(this.stockfishPath);
 			this.stockFishWriter = new OutputStreamWriter(proc.getOutputStream());
 			this.stockFishReader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-			System.out.println("Stockfish.Stockfish waiting for work");
+			System.out.println("Stockfish waiting for work");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -57,16 +57,9 @@ public class Stockfish implements Runnable {
 		}
 		fen = translateAnswerToFen(fen);
 		newFen = translateAnswerToFen(newFen);
-		if(newFen.equals(fen))
-		{
-			System.out.println("DEBUG: " + newFen + " samsvarer med " + fen + "\n");
-		}
-		else
-		{
-			System.out.println("DEBUG: " + newFen + " samsvarer ikke med " + fen + " og move er dermed valid \n");
+		if(!newFen.equals(fen)) {
 			answer = true;
 		}
-
 		return answer;
 	}
 
@@ -109,8 +102,6 @@ public class Stockfish implements Runnable {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Sender kommando: " + StockfishCommands.SET_POSITION + this.getMovesHistory() + "\n");
-		System.out.println("Sender kommando: " + StockfishCommands.NEXT_MOVE + "\n");
 		return this.sendCommand(StockfishCommands.NEXT_MOVE +"\n", StockfishReturns.BESTMOVE);
 	}
 

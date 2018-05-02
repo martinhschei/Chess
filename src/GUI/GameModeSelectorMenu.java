@@ -14,8 +14,8 @@ class GameModeSelectorMenu extends JFrame{
     public GameModeSelectorMenu(GameSettings settings, MainMenu mainMenu)
     {
         this.mainMenu = mainMenu;
-        multiWindow = "Dobbelt vindu (localhost game)";
-        singleWindow = "Enkelt vindu (network game)";
+        multiWindow = "Double-windowed localhost game";
+        singleWindow = "Single-windowed network game";
         gSettings = settings;
         main = new JPanel();
         FyllPanel(main);
@@ -33,10 +33,7 @@ class GameModeSelectorMenu extends JFrame{
         JButton retur = new JButton(name);
         retur.addActionListener(e -> {
             JButton source = (JButton)e.getSource();
-            System.out.println("debug: " + source.getText());
-            //Here goes the action (method) you want to execute when clicked
             if(source.getText().equalsIgnoreCase(singleWindow)) {
-                System.out.println("debug: SINGLE WINDOW");
                 mainMenu.SwitchToStartMenu();
             }
             if(source.getText().equalsIgnoreCase(multiWindow)) {
