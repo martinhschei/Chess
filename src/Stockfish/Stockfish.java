@@ -116,8 +116,6 @@ public class Stockfish implements Runnable {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Sender kommando: " + StockfishCommands.SET_FEN_POSITION + this.currentFen + "\n");
-		System.out.println("Sender kommando: " + StockfishCommands.NEXT_MOVE + "\n");
 		return this.sendCommand(
 				StockfishCommands.NEXT_MOVE + "\n",
 				StockfishReturns.BESTMOVE);
