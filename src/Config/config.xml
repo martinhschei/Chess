@@ -3,7 +3,7 @@
 <properties>
 <comment/>
 <entry key="localPlayer1">Spiller 1</entry>
-<entry key="nickName">player1</entry>
 <entry key="ip">127.0.0.1</entry>
+<entry key="nickName">player1</entry>
 <entry key="localPlayer2">Spiller 2</entry>
 </properties>

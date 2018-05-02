@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class GameSettings extends Observable {
 
-    private Player player = null;
+    private Player player;
     private String ip;
     private String nickName;
     private String localPlayer1;
